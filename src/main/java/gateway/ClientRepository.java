@@ -13,6 +13,7 @@ import entities.ClientGateway;
 import entities.basic.Client;
 import entities.basic.Contact;
 import entities.security.UserLogin;
+import io.quarkus.security.User;
 
 @Model
 @Dependent
@@ -27,9 +28,9 @@ public class ClientRepository implements ClientGateway {
     // 1 - usernames are the same
     @Override
     @Transactional
-    public boolean createClient(Client client) {
+    public boolean createClient(Client client, UserLogin userLogin) {
         try{
-            UserLogin.add(client.getUsername(), client.getPassword(), "Client");
+            UserLogin.add(userLogin.username, userLogin.password, "Client");
             em.persist(client);
         } catch (Exception e){
             return false;

@@ -9,9 +9,11 @@ import javax.inject.Inject;
 
 import control.DAO.ClientDAO;
 import control.DAO.ContactDAO;
+import control.DAO.CreateClientDAO;
 import entities.ClientGateway;
 import entities.basic.Client;
 import entities.basic.Contact;
+import entities.security.UserLogin;
 import gateway.ClientRepository;
 
 @Model
@@ -24,11 +26,16 @@ public class ClientController implements ClientBoundry {
     EntityConverter entityConverter = new EntityConverter();
 
     @Override
-    public boolean createClient(ClientDAO clientDAO) {
+    public boolean createClient(CreateClientDAO createClientDAO) {
         Client client = new Client();
-        client.setUsername(clientDAO.username);
-        client.setPassword(clientDAO.password);
-        if (clientRepository.createClient(client))
+        client.setUsername(createClientDAO.username);
+
+        UserLogin userLogin = new UserLogin();
+        userLogin.username = createClientDAO.username;
+        userLogin.password = createClientDAO.password;
+        
+        
+        if (clientRepository.createClient(client, userLogin))
             return true;
         return false;
     }

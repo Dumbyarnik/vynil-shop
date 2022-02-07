@@ -9,12 +9,13 @@ import javax.enterprise.inject.Model;
 import control.DAO.ClientDAO;
 import entities.basic.Client;
 import entities.basic.Contact;
+import entities.security.UserLogin;
 
 @Model
 @Dependent
 public interface ClientGateway extends Serializable{
 
-    public boolean createClient(Client client);
+    public boolean createClient(Client client, UserLogin userLogin);
     public Collection<Client> getClients();
     public Client getClient(String username);
     public boolean deleteClient(Long id);

@@ -10,7 +10,6 @@ public class EntityConverter {
     public ClientDAO clientToClientDAO(Client client){
         ClientDAO clientDAO = new ClientDAO();
         clientDAO.username = client.getUsername();
-        clientDAO.password = client.getPassword();
 
         if (client.getContact() != null){
             clientDAO.contactDAO = this.contactToContactDAO(client.getContact());

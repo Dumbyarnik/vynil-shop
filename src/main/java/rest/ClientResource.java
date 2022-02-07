@@ -23,6 +23,7 @@ import control.ClientBoundry;
 import control.ClientController;
 import control.DAO.ClientDAO;
 import control.DAO.ContactDAO;
+import control.DAO.CreateClientDAO;
 import entities.ClientGateway;
 import entities.basic.Client;
 import gateway.ClientRepository;
@@ -51,8 +52,8 @@ public class ClientResource {
 
     // http://localhost:8080/client
     @POST
-    public Response createClient(ClientDAO clientDAO) {
-        if (clientController.createClient(clientDAO))
+    public Response createClient(CreateClientDAO createClientDAO) {
+        if (clientController.createClient(createClientDAO))
             return Response.ok().build();
         return Response.ok("Username existiert").build();
     }
