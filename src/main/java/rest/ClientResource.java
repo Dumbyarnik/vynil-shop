@@ -52,7 +52,7 @@ public class ClientResource {
     public Response createClient(ClientDAO clientDAO) {
         if (clientController.createClient(clientDAO))
             return Response.ok().build();
-        return Response.ok("Username existiert").build();
+        return Response.ok("Dieser Username existiert bereits").build();
     }
 
     // http://localhost:8080/client/{username}
