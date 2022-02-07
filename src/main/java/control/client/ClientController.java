@@ -1,4 +1,4 @@
-package control;
+package control.client;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -7,6 +7,7 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 
+import control.EntityConverter;
 import control.DAO.ClientDAO;
 import control.DAO.ContactDAO;
 import control.DAO.CreateClientDAO;

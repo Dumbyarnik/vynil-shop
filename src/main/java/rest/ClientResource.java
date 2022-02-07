@@ -22,11 +22,11 @@ import javax.ws.rs.core.Response.Status;
 
 import org.eclipse.microprofile.openapi.annotations.Operation;
 
-import control.ClientBoundry;
-import control.ClientController;
 import control.DAO.ClientDAO;
 import control.DAO.ContactDAO;
 import control.DAO.CreateClientDAO;
+import control.client.ClientBoundry;
+import control.client.ClientController;
 import entities.ClientGateway;
 import entities.basic.Client;
 import gateway.ClientRepository;
