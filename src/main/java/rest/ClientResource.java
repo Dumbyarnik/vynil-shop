@@ -29,6 +29,7 @@ import gateway.ClientRepository;
 
 import javax.ws.rs.core.MediaType;
 
+// TODO: do methods for all 4 http methods (405)
 @ApplicationScoped
 @Path("/client")
 @Produces(MediaType.APPLICATION_JSON)
@@ -43,6 +44,7 @@ public class ClientResource {
 
     // http://localhost:8080/client
     @GET
+    @RolesAllowed("Client")
     public Response getKunden() {
         return Response.ok(clientController.getClients()).build();
     }

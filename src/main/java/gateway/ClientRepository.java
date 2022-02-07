@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 import entities.ClientGateway;
 import entities.basic.Client;
 import entities.basic.Contact;
+import entities.security.UserLogin;
 
 @Model
 @Dependent
@@ -28,6 +29,7 @@ public class ClientRepository implements ClientGateway {
     @Transactional
     public boolean createClient(Client client) {
         try{
+            UserLogin.add(client.getUsername(), client.getPassword(), "Client");
             em.persist(client);
         } catch (Exception e){
             return false;
