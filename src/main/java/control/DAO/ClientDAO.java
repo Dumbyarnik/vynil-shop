@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class ClientDAO implements Serializable {
 
     public String username;
-    public ContactDAO contactDAO;
+    public ContactDAO contact;
 
     public ClientDAO(){}
     

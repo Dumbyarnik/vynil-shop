@@ -1,5 +1,7 @@
 package rest;
 
+import java.security.Principal;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
@@ -15,6 +17,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.Response.Status;
 
 import org.eclipse.microprofile.openapi.annotations.Operation;
@@ -28,6 +31,7 @@ import entities.ClientGateway;
 import entities.basic.Client;
 import gateway.ClientRepository;
 
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 // TODO: do methods for all 4 http methods (405)
@@ -45,13 +49,14 @@ public class ClientResource {
 
     // http://localhost:8080/client
     @GET
-    @RolesAllowed("Client")
+    @PermitAll
     public Response getKunden() {
         return Response.ok(clientController.getClients()).build();
     }
 
     // http://localhost:8080/client
     @POST
+    @PermitAll
     public Response createClient(CreateClientDAO createClientDAO) {
         if (clientController.createClient(createClientDAO))
             return Response.ok().build();
@@ -61,6 +66,7 @@ public class ClientResource {
     // http://localhost:8080/client/{username}
     @GET
     @Path("/{username}")
+    @PermitAll
     public Response getKunde(@PathParam("username") String username) {
         ClientDAO clientDAO = clientController.getClient(username);
         if (clientDAO == null)
@@ -71,6 +77,7 @@ public class ClientResource {
     // http://localhost:8080/client/{id}
     @DELETE
     @Path("/{id}")
+    // should me admin function
     public Response deleteClient(@PathParam("id") Long id) {
         if (clientController.deleteClient(id))
             return Response.ok().build();
@@ -80,8 +87,12 @@ public class ClientResource {
     // http://localhost:8080/client/{username}/contact
     @POST
     @Path("/{username}/contact")
-    public Response createContact(@PathParam("username") String username,
+    @RolesAllowed("Client")
+    public Response createContact(@Context SecurityContext sec,
         ContactDAO contactDAO) {
+        Principal user = sec.getUserPrincipal();
+        String username = user.getName();
+        
         if (clientController.createContact(username, contactDAO))
             return Response.ok().build();
         return Response.status(Status.NOT_FOUND).build();
@@ -90,8 +101,12 @@ public class ClientResource {
     // http://localhost:8080/{username}/contact
     @PUT
     @Path("/{username}/contact")
-    public Response updateAdresse(@PathParam("username") String username,
+    @RolesAllowed("Client")
+    public Response updateAdresse(@Context SecurityContext sec,
         ContactDAO contactDAO) {
+        Principal user = sec.getUserPrincipal();
+        String username = user.getName();
+
         if (clientController.updateContact(username, contactDAO))
             return Response.ok().build();
         return Response.status(Status.NOT_FOUND).build();
@@ -100,7 +115,10 @@ public class ClientResource {
     // http://localhost:8080/{username}/contact
     @DELETE
     @Path("/{username}/contact")
-    public Response deleteAdresse(@PathParam("username") String username) {
+    public Response deleteAdresse(@Context SecurityContext sec) {
+        Principal user = sec.getUserPrincipal();
+        String username = user.getName();
+
         if (clientController.deleteContact(username))
             return Response.ok().build();
         return Response.status(Status.NOT_FOUND).build();

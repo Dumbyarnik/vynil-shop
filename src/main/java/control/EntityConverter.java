@@ -12,7 +12,7 @@ public class EntityConverter {
         clientDAO.username = client.getUsername();
 
         if (client.getContact() != null){
-            clientDAO.contactDAO = this.contactToContactDAO(client.getContact());
+            clientDAO.contact = this.contactToContactDAO(client.getContact());
         }
 
         return clientDAO;
