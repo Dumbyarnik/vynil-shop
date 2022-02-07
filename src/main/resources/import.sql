@@ -1,1 +1,0 @@
-insert into client(username, password) values ('user', 'password');
