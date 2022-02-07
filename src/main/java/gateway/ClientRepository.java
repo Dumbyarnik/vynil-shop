@@ -52,5 +52,16 @@ public class ClientRepository implements ClientGateway {
         
         return clients;
     }
+
+    @Override
+    @Transactional
+    public boolean deleteClient(Long id) {
+        Client client = em.find(Client.class, id);
+        if (client != null){
+            em.remove(client);
+            return true;
+        }
+        return false;
+    }
     
 }

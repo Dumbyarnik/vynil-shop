@@ -48,5 +48,10 @@ public class ClientController implements ClientBoundry {
         }
         return clients;
     }
+
+    @Override
+    public boolean deleteCLient(Long id) {
+        return clientRepository.deleteClient(id);
+    }
     
 }

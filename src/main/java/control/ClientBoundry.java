@@ -15,5 +15,6 @@ public interface ClientBoundry {
     public boolean createClient(ClientDAO clientDAO);
     public ClientDAO getClient(String username);
     public Collection<ClientDAO> getClients();
+    public boolean deleteCLient(Long id);
     
 }

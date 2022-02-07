@@ -14,7 +14,8 @@ import entities.basic.Client;
 public interface ClientGateway extends Serializable{
 
     public boolean createClient(Client client);
-    public Client getClient(String username);
     Collection<Client> getClients();
+    public Client getClient(String username);
+    public boolean deleteClient(Long id);
     
 }

@@ -46,7 +46,15 @@ public class ClientResource {
         return Response.ok(clientController.getClients()).build();
     }
 
-    // http://localhost:8080/client/{id}
+    // http://localhost:8080/client
+    @POST
+    public Response createClient(ClientDAO clientDAO) {
+        if (clientController.createClient(clientDAO))
+            return Response.ok().build();
+        return Response.ok("Username existiert").build();
+    }
+
+    // http://localhost:8080/client/{username}
     @GET
     @Path("/{username}")
     public Response getKunde(@PathParam("username") String username) {
@@ -56,11 +64,12 @@ public class ClientResource {
         return Response.ok(clientDAO).build();
     }
 
-    // http://localhost:8080/client
-    @POST
-    public Response createClient(ClientDAO clientDAO) {
-        if (clientController.createClient(clientDAO))
+    // http://localhost:8080/client/{id}
+    @DELETE
+    @Path("/{id}")
+    public Response deleteClient(@PathParam("id") Long id) {
+        if (clientController.deleteCLient(id))
             return Response.ok().build();
-        return Response.ok("Username existiert").build();
-    }
+        return Response.status(Status.NOT_FOUND).build();
+    }    
 }
