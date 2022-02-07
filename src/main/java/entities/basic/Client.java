@@ -32,6 +32,10 @@ public class Client implements Serializable {
     @Column(nullable = false)
     private String password;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "contact_id", referencedColumnName = "id")
+    private Contact contact;
+
     public Client(){}
 
     /**
@@ -67,6 +71,28 @@ public class Client implements Serializable {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    /**
+     * @return Contact return the contact
+     */
+    public Contact getContact() {
+        return contact;
+    }
+
+    /**
+     * @param contact the contact to set
+     */
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
 
 }
