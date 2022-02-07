@@ -8,8 +8,10 @@ import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 
 import control.DAO.ClientDAO;
+import control.DAO.ContactDAO;
 import entities.ClientGateway;
 import entities.basic.Client;
+import entities.basic.Contact;
 import gateway.ClientRepository;
 
 @Model
@@ -50,8 +52,18 @@ public class ClientController implements ClientBoundry {
     }
 
     @Override
-    public boolean deleteCLient(Long id) {
+    public boolean deleteClient(Long id) {
         return clientRepository.deleteClient(id);
+    }
+
+    @Override
+    public boolean createContact(String username, ContactDAO contactDAO) {
+        Contact contact = new Contact();
+        contact.setEmail(contactDAO.email);
+        contact.setPhone(contactDAO.phone);
+
+        return clientRepository.createContact(username, contact);
+
     }
     
 }

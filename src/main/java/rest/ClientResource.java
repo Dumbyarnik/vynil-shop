@@ -22,6 +22,7 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 import control.ClientBoundry;
 import control.ClientController;
 import control.DAO.ClientDAO;
+import control.DAO.ContactDAO;
 import entities.ClientGateway;
 import entities.basic.Client;
 import gateway.ClientRepository;
@@ -40,7 +41,7 @@ public class ClientResource {
     public void init() {  
     }
 
-    // http://localhost:8080/kunden
+    // http://localhost:8080/client
     @GET
     public Response getKunden() {
         return Response.ok(clientController.getClients()).build();
@@ -68,8 +69,18 @@ public class ClientResource {
     @DELETE
     @Path("/{id}")
     public Response deleteClient(@PathParam("id") Long id) {
-        if (clientController.deleteCLient(id))
+        if (clientController.deleteClient(id))
             return Response.ok().build();
         return Response.status(Status.NOT_FOUND).build();
-    }    
+    } 
+    
+    // http://localhost:8080/client/{username}/contact
+    @POST
+    @Path("/{username}/contact")
+    public Response createContact(@PathParam("username") String username,
+        ContactDAO contactDAO) {
+        if (clientController.createContact(username, contactDAO))
+            return Response.ok().build();
+        return Response.status(Status.NOT_FOUND).build();
+    } 
 }
