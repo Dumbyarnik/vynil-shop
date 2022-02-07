@@ -19,5 +19,7 @@ public interface ClientGateway extends Serializable{
     public Client getClient(String username);
     public boolean deleteClient(Long id);
     public boolean createContact(String username, Contact contact);
+    public boolean updateContact(String username,  Contact contact);
+    public boolean deleteContact(String username);
     
 }

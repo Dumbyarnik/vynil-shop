@@ -65,5 +65,21 @@ public class ClientController implements ClientBoundry {
         return clientRepository.createContact(username, contact);
 
     }
+
+    @Override
+    public boolean updateContact(String username, ContactDAO contactDAO) {
+        Contact contact = new Contact();
+        contact.setEmail(contactDAO.email);
+        contact.setPhone(contactDAO.phone);
+
+        return clientRepository.createContact(username, contact);
+    }
+
+    @Override
+    public boolean deleteContact(String username) {
+        if (clientRepository.deleteContact(username))
+            return true;
+        return false;
+    }
     
 }

@@ -95,4 +95,8 @@ public class Client implements Serializable {
         this.contact = contact;
     }
 
+    public void deleteContact(){
+        this.contact = null;
+    }
+
 }

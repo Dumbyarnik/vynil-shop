@@ -83,4 +83,23 @@ public class ClientResource {
             return Response.ok().build();
         return Response.status(Status.NOT_FOUND).build();
     } 
+
+    // http://localhost:8080/{username}/contact
+    @PUT
+    @Path("/{username}/contact")
+    public Response updateAdresse(@PathParam("username") String username,
+        ContactDAO contactDAO) {
+        if (clientController.updateContact(username, contactDAO))
+            return Response.ok().build();
+        return Response.status(Status.NOT_FOUND).build();
+    }
+
+    // http://localhost:8080/{username}/contact
+    @DELETE
+    @Path("/{username}/contact")
+    public Response deleteAdresse(@PathParam("username") String username) {
+        if (clientController.deleteContact(username))
+            return Response.ok().build();
+        return Response.status(Status.NOT_FOUND).build();
+    }
 }

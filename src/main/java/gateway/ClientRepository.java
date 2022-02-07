@@ -77,5 +77,32 @@ public class ClientRepository implements ClientGateway {
         }
         return false;
     }
+
+    @Override
+    @Transactional
+    public boolean updateContact(String username, Contact contact) {
+        Client client = this.getClient(username);
+
+        if (client != null){
+            client.setContact(contact);
+            em.merge(client);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    @Transactional
+    public boolean deleteContact(String username) {
+        Client client = this.getClient(username);
+
+        if (client != null){
+            client.deleteContact();
+            em.merge(client);
+            return true;
+        }
+        return false;
+    }
+    
     
 }
