@@ -21,15 +21,16 @@ public class ClientRepository implements ClientGateway {
     @Inject
     protected EntityManager em;
 
-    // TODO: unserstand what to give back
+    // TODO: specify exceptions
+    // 1 - usernames are the same
     @Override
     @Transactional
-    public boolean createClient(String username, String password) {
-        Client new_client = new Client();
-        new_client.setUsername(username);
-        new_client.setPassword(password);
-        
-        em.persist(new_client);
+    public boolean createClient(Client client) {
+        try{
+            em.persist(client);
+        } catch (Exception e){
+            return false;
+        }
         
         return true; 
     }
@@ -43,6 +44,24 @@ public class ClientRepository implements ClientGateway {
             .getSingleResult();
         
         return client;
+    }
+
+    public Collection<Client> getClients() {
+        Collection <Client> clients = em.createQuery("SELECT c FROM Client c",
+            Client.class).getResultList();
+        
+        return clients;
+    }
+
+    @Override
+    @Transactional
+    public boolean deleteClient(Long id) {
+        Client client = em.find(Client.class, id);
+        if (client != null){
+            em.remove(client);
+            return true;
+        }
+        return false;
     }
     
 }
