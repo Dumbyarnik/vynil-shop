@@ -38,10 +38,9 @@ public class ClientResource {
 
     @PostConstruct
     public void init() {  
-        clientBoundry.createClient("user", "password");
     }
 
-    // http://localhost:8080/kunden/{id}
+    // http://localhost:8080/client/{id}
     @GET
     @Path("/{username}")
     public Response getKunde(@PathParam("username") String username) {
@@ -49,5 +48,13 @@ public class ClientResource {
         if (clientDAO == null)
             return Response.status(Status.NOT_FOUND).build();
         return Response.ok(clientDAO).build();
+    }
+
+    // http://localhost:8080/client
+    @POST
+    public Response createClient(ClientDAO clientDAO) {
+        if (clientBoundry.createClient(clientDAO))
+            return Response.ok().build();
+        return Response.ok("Username existiert").build();
     }
 }

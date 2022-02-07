@@ -10,7 +10,7 @@ import entities.basic.Client;
 @Dependent
 public interface ClientBoundry {
     
-    public void createClient(String username, String password);
+    public boolean createClient(ClientDAO clientDAO);
     public ClientDAO getClient(String username);
     
 }

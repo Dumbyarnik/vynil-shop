@@ -19,8 +19,13 @@ public class ClientController implements ClientBoundry {
     EntityConverter entityConverter = new EntityConverter();
 
     @Override
-    public void createClient(String username, String password) {
-        clientRepository.createClient(username, password);
+    public boolean createClient(ClientDAO clientDAO) {
+        Client client = new Client();
+        client.setUsername(clientDAO.username);
+        client.setPassword(clientDAO.password);
+        if (clientRepository.createClient(client))
+            return true;
+        return false;
     }
 
     @Override

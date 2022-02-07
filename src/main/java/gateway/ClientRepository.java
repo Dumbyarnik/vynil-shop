@@ -21,15 +21,15 @@ public class ClientRepository implements ClientGateway {
     @Inject
     protected EntityManager em;
 
-    // TODO: unserstand what to give back
+    // TODO: specify exceptions
     @Override
     @Transactional
-    public boolean createClient(String username, String password) {
-        Client new_client = new Client();
-        new_client.setUsername(username);
-        new_client.setPassword(password);
-        
-        em.persist(new_client);
+    public boolean createClient(Client client) {
+        try{
+            em.persist(client);
+        } catch (Exception e){
+            return false;
+        }
         
         return true; 
     }

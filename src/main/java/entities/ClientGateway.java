@@ -5,13 +5,14 @@ import java.io.Serializable;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Model;
 
+import control.DAO.ClientDAO;
 import entities.basic.Client;
 
 @Model
 @Dependent
 public interface ClientGateway extends Serializable{
 
-    public boolean createClient(String name, String password);
+    public boolean createClient(Client client);
     public Client getClient(String username);
     
 }
