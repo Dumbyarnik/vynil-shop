@@ -34,17 +34,23 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 public class ClientResource {
     @Inject
-    ClientBoundry clientBoundry = new ClientController();
+    ClientBoundry clientController = new ClientController();
 
     @PostConstruct
     public void init() {  
+    }
+
+    // http://localhost:8080/kunden
+    @GET
+    public Response getKunden() {
+        return Response.ok(clientController.getClients()).build();
     }
 
     // http://localhost:8080/client/{id}
     @GET
     @Path("/{username}")
     public Response getKunde(@PathParam("username") String username) {
-        ClientDAO clientDAO = clientBoundry.getClient(username);
+        ClientDAO clientDAO = clientController.getClient(username);
         if (clientDAO == null)
             return Response.status(Status.NOT_FOUND).build();
         return Response.ok(clientDAO).build();
@@ -53,7 +59,7 @@ public class ClientResource {
     // http://localhost:8080/client
     @POST
     public Response createClient(ClientDAO clientDAO) {
-        if (clientBoundry.createClient(clientDAO))
+        if (clientController.createClient(clientDAO))
             return Response.ok().build();
         return Response.ok("Username existiert").build();
     }

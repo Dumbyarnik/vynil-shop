@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Model;
@@ -14,5 +15,6 @@ public interface ClientGateway extends Serializable{
 
     public boolean createClient(Client client);
     public Client getClient(String username);
+    Collection<Client> getClients();
     
 }

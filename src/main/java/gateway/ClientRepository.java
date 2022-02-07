@@ -22,6 +22,7 @@ public class ClientRepository implements ClientGateway {
     protected EntityManager em;
 
     // TODO: specify exceptions
+    // 1 - usernames are the same
     @Override
     @Transactional
     public boolean createClient(Client client) {
@@ -43,6 +44,13 @@ public class ClientRepository implements ClientGateway {
             .getSingleResult();
         
         return client;
+    }
+
+    public Collection<Client> getClients() {
+        Collection <Client> clients = em.createQuery("SELECT c FROM Client c",
+            Client.class).getResultList();
+        
+        return clients;
     }
     
 }

@@ -1,5 +1,7 @@
 package control;
 
+import java.util.Collection;
+
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Model;
 
@@ -12,5 +14,6 @@ public interface ClientBoundry {
     
     public boolean createClient(ClientDAO clientDAO);
     public ClientDAO getClient(String username);
+    public Collection<ClientDAO> getClients();
     
 }

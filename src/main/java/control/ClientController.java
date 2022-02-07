@@ -1,5 +1,8 @@
 package control;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
@@ -33,6 +36,17 @@ public class ClientController implements ClientBoundry {
         ClientDAO clientDAO = entityConverter
             .clientToClientDAO(clientRepository.getClient(username));
         return clientDAO;
+    }
+
+    @Override
+    public Collection<ClientDAO> getClients() {
+        Collection<ClientDAO> clients = new ArrayList<ClientDAO>();
+        for (Client client : clientRepository.getClients()){
+            ClientDAO clientDAO = entityConverter
+                .clientToClientDAO(client);
+            clients.add(clientDAO);
+        }
+        return clients;
     }
     
 }
