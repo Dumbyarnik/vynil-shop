@@ -3,6 +3,7 @@ package control;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Model;
 
+import control.DAO.ClientDAO;
 import entities.basic.Client;
 
 @Model
@@ -10,6 +11,6 @@ import entities.basic.Client;
 public interface ClientBoundry {
     
     public void createClient(String username, String password);
-    public Client getClient(String username);
+    public ClientDAO getClient(String username);
     
 }

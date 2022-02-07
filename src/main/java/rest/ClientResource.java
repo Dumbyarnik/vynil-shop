@@ -21,6 +21,7 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 
 import control.ClientBoundry;
 import control.ClientController;
+import control.DAO.ClientDAO;
 import entities.ClientGateway;
 import entities.basic.Client;
 import gateway.ClientRepository;
@@ -44,9 +45,9 @@ public class ClientResource {
     @GET
     @Path("/{username}")
     public Response getKunde(@PathParam("username") String username) {
-        Client client = clientBoundry.getClient(username);
-        if (client == null)
+        ClientDAO clientDAO = clientBoundry.getClient(username);
+        if (clientDAO == null)
             return Response.status(Status.NOT_FOUND).build();
-        return Response.ok(client).build();
+        return Response.ok(clientDAO).build();
     }
 }
