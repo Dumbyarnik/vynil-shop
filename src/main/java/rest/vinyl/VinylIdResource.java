@@ -71,6 +71,9 @@ public class VinylIdResource {
         }
     )
     public Response getVinyl(@PathParam("id") Long id) {
+        VinylDTO vinylDTO = vinylController.getVinyl(id);
+        if (vinylDTO == null)
+            return Response.status(406).entity("Vinyl doesn't exist").build();
         return Response.ok(vinylController.getVinyl(id)).build();
     }
 
@@ -82,14 +85,15 @@ public class VinylIdResource {
             description = "Success",
             content = @Content(mediaType = "application/json")),
         @APIResponse(responseCode = "406", 
-            description = "Client or vinyl doesn't exist",
+            description = "Vinyl doesn't exist",
             content = @Content(mediaType = "text/plain"))
         }
     )
     public Response updateVinyl(@PathParam("id") Long id,
         VinylDTO vinylDTO) {
-        vinylController.updateVinyl(id, vinylDTO);
-        return Response.ok().build();
+        if (vinylController.updateVinyl(id, vinylDTO))
+            return Response.ok().build();
+        return Response.status(406).entity("Vinyl doesn't exist").build();
     }
 
     @DELETE
@@ -100,14 +104,14 @@ public class VinylIdResource {
             description = "Success",
             content = @Content(mediaType = "application/json")),
         @APIResponse(responseCode = "406", 
-            description = "Client or vinyl doesn't exist",
+            description = "Vinyl doesn't exist",
             content = @Content(mediaType = "text/plain"))
         }
     )
     public Response deleteVinyl(@PathParam("id") Long id) {
         if (vinylController.deleteVinyl(id))
             return Response.ok().build();
-        return Response.status(406).entity("Client or vinyl doesn't exist").build();
+        return Response.status(406).entity("Vinyl doesn't exist").build();
     }
 
     //////////////////// NOT AVAILABLE ///////////////////////////////////

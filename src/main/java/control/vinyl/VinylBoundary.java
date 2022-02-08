@@ -16,10 +16,10 @@ import control.DTO.VinylDTO;
 public interface VinylBoundary {
     // vinyl
     public Collection<VinylDTO> getVinyls();
-    public void createVinyl(String username, CreateVinylDTO createVinylDTO);
+    public boolean createVinyl(String username, CreateVinylDTO createVinylDTO);
 
     // vinyl/{id}
     public VinylDTO getVinyl(Long id);
-    public void updateVinyl(Long id, VinylDTO vinylDTO);
+    public boolean updateVinyl(Long id, VinylDTO vinylDTO);
     public boolean deleteVinyl(Long id);
 }

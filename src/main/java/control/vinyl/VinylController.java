@@ -43,13 +43,15 @@ public class VinylController implements VinylBoundary {
     }
 
     @Override
-    public void createVinyl(String username, CreateVinylDTO createVinylDTO) {
+    public boolean createVinyl(String username, CreateVinylDTO createVinylDTO) {
         // Converting VinylDTO to Vinyl
         Client client = clientRepository.getClientByName(username);
-        Vinyl vinyl = entityConverter.vinylDTOToVinyl(createVinylDTO, client);
+        if (client == null)
+            return false;
 
+        Vinyl vinyl = entityConverter.vinylDTOToVinyl(createVinylDTO, client);
         vinylRepository.createVinyl(vinyl);
-        
+        return true;
     }
 
     @Override
@@ -59,8 +61,8 @@ public class VinylController implements VinylBoundary {
     }
 
     @Override
-    public void updateVinyl(Long id, VinylDTO vinylDTO) {
-        vinylRepository.updateVinyl(id, vinylDTO);
+    public boolean updateVinyl(Long id, VinylDTO vinylDTO) {
+        return vinylRepository.updateVinyl(id, vinylDTO);
     }
 
     @Override

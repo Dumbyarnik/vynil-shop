@@ -24,6 +24,6 @@ public interface VinylGateway extends Serializable {
 
     // vinyl/{id}
     public Vinyl getVinyl(Long id);
-    public void updateVinyl(Long id, VinylDTO vinylDTO);
+    public boolean updateVinyl(Long id, VinylDTO vinylDTO);
     public boolean deleteVinyl(Long id);
 }

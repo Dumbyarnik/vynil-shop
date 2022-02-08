@@ -52,9 +52,12 @@ public class VinylRepository implements VinylGateway {
 
     @Override
     @Transactional
-    public void updateVinyl(Long id, VinylDTO vinylDTO) {
+    public boolean updateVinyl(Long id, VinylDTO vinylDTO) {
         Vinyl vinyl = em.find(Vinyl.class, id);
         Client client = em.find(Client.class, vinyl.getClient().getId());
+
+        if (vinyl == null)
+            return false;
 
         // going through all the vinyls and find the one we
         // need to update
@@ -68,7 +71,9 @@ public class VinylRepository implements VinylGateway {
                 
                 em.merge(client);        
             }
-        }
+
+        return true;
+    }
 
     @Override
     @Transactional

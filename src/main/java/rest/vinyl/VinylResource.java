@@ -87,9 +87,9 @@ public class VinylResource {
         Principal user = sec.getUserPrincipal();
         String username = user.getName();
 
-        vinylController.createVinyl(username, createVinylDTO);
-            
-        return Response.ok().build();
+        if (vinylController.createVinyl(username, createVinylDTO))
+            return Response.ok().build();
+        return Response.status(406).entity("Client doesn't exist").build();
     }
 
     //////////////////// NOT AVAILABLE ///////////////////////////////////
