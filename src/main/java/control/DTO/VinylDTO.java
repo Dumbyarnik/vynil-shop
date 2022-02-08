@@ -1,10 +1,5 @@
 package control.DTO;
 
-public class VinylDTO {
+public class VinylDTO extends CreateVinylDTO{
     public Long id;
-    public String title;
-    public String artist;
-    public String genre;
-    public String description;
-    public Long price;
 }

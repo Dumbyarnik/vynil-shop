@@ -25,6 +25,7 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 import control.DTO.ClientDTO;
 import control.DTO.ContactDTO;
 import control.DTO.CreateClientDTO;
+import control.DTO.CreateVinylDTO;
 import control.DTO.VinylDTO;
 import control.client.ClientBoundry;
 import control.client.ClientController;
@@ -82,11 +83,11 @@ public class VinylResource {
         }
     )
     public Response createVinyl(@Context SecurityContext sec,
-        VinylDTO vinylDTO) {
+        CreateVinylDTO createVinylDTO) {
         Principal user = sec.getUserPrincipal();
         String username = user.getName();
 
-        vinylController.createVinyl(username, vinylDTO);
+        vinylController.createVinyl(username, createVinylDTO);
             
         return Response.ok().build();
     }

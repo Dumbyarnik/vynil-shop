@@ -8,6 +8,7 @@ import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 
 import control.EntityConverter;
+import control.DTO.CreateVinylDTO;
 import control.DTO.VinylDTO;
 import entities.ClientGateway;
 import entities.VinylGateway;
@@ -42,10 +43,10 @@ public class VinylController implements VinylBoundary {
     }
 
     @Override
-    public void createVinyl(String username, VinylDTO vinylDTO) {
+    public void createVinyl(String username, CreateVinylDTO createVinylDTO) {
         // Converting VinylDTO to Vinyl
         Client client = clientRepository.getClientByName(username);
-        Vinyl vinyl = entityConverter.vinylDTOToVinyl(vinylDTO, client);
+        Vinyl vinyl = entityConverter.vinylDTOToVinyl(createVinylDTO, client);
 
         vinylRepository.createVinyl(vinyl);
         

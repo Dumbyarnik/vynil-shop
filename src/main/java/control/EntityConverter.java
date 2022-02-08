@@ -2,6 +2,7 @@ package control;
 
 import control.DTO.ClientDTO;
 import control.DTO.ContactDTO;
+import control.DTO.CreateVinylDTO;
 import control.DTO.VinylDTO;
 import entities.basic.Client;
 import entities.basic.Contact;
@@ -54,7 +55,7 @@ public class EntityConverter {
         return vinyl;
     }
 
-    public Vinyl vinylDTOToVinyl(VinylDTO vinylDTO, Client client){
+    public Vinyl vinylDTOToVinyl(CreateVinylDTO vinylDTO, Client client){
         // putting attributes of the vinyl
         Vinyl vinyl = new Vinyl();
         vinyl.setTitle(vinylDTO.title);
