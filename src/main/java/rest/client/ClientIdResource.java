@@ -52,7 +52,8 @@ public class ClientIdResource {
     @APIResponses(value = {
         @APIResponse(responseCode = "200", 
             description = "Success",
-            content = @Content(mediaType = "application/json")),
+            content = @Content(mediaType = "application/json",
+            schema = @Schema(implementation = ClientDAO.class))),
         @APIResponse(responseCode = "406", 
             description = "Client doesn't exist",
             content = @Content(mediaType = "text/plain"))
