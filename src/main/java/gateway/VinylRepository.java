@@ -9,9 +9,11 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import control.DAO.VinylDTO;
 import entities.ClientGateway;
 import entities.basic.Client;
 import entities.basic.Contact;
+import entities.basic.Genre;
 import entities.security.UserLogin;
 import io.quarkus.security.User;
 
@@ -41,6 +43,37 @@ public class VinylRepository implements VinylGateway {
     @Transactional
     public void createVinyl(Vinyl vinyl) {
         em.persist(vinyl);
+    }
+
+    @Override
+    public Vinyl getVinyl(Long id) {
+        return em.find(Vinyl.class, id);
+    }
+
+    @Override
+    @Transactional
+    public void updateVinyl(Long id, VinylDTO vinylDTO) {
+        Vinyl vinyl = em.find(Vinyl.class, id);
+        Client client = em.find(Client.class, vinyl.getClient().getId());
+
+        // going through all the vinyls and find the one we
+        // need to update
+        for (Vinyl tmp : client.getVinyls())
+            if (tmp.getId().equals(vinyl.getId())){
+                tmp.setTitle(vinylDTO.title);
+                tmp.setArtist(vinylDTO.artist);
+                tmp.setDescription(vinylDTO.description);
+                tmp.setPrice(vinylDTO.price);
+                tmp.setGenre(Genre.valueOf(vinylDTO.genre.toUpperCase()));
+                
+                em.merge(client);        
+            }
+        }
+
+    @Override
+    public boolean deleteVinyl(Long id) {
+        // TODO Auto-generated method stub
+        return false;
     }
     
 }

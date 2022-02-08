@@ -22,6 +22,7 @@ public class EntityConverter {
 
     public VinylDTO vinylToVinylDTO(Vinyl vinyl){
         VinylDTO vinylDTO = new VinylDTO();
+        vinylDTO.id = vinyl.getId();
         vinylDTO.title = vinyl.getTitle();
         vinylDTO.artist = vinyl.getArtist();
         vinylDTO.description = vinyl.getDescription();

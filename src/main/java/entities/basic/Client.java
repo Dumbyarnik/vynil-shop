@@ -85,4 +85,19 @@ public class Client implements Serializable {
         this.contact = null;
     }
 
+
+    /**
+     * @return Collection<Vinyl> return the vinyls
+     */
+    public Collection<Vinyl> getVinyls() {
+        return vinyls;
+    }
+
+    /**
+     * @param vinyls the vinyls to set
+     */
+    public void setVinyls(Collection<Vinyl> vinyls) {
+        this.vinyls = vinyls;
+    }
+
 }

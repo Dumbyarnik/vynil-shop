@@ -15,4 +15,5 @@ import control.DAO.VinylDTO;
 public interface VinylBoundary {
     public Collection<VinylDTO> getVinyls();
     public void createVinyl(String username, VinylDTO vinylDTO);
+    public void updateVinyl(Long id, VinylDTO vinylDTO);
 }
