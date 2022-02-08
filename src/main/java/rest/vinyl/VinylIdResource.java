@@ -1,4 +1,4 @@
-package rest;
+package rest.vinyl;
 
 import java.security.Principal;
 
@@ -37,11 +37,12 @@ import gateway.ClientRepository;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+// http://localhost:8080/vinyl/{id}
 @ApplicationScoped
-@Path("/vinyl")
+@Path("/vinyl/{id}")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class VinylResource {
+public class VinylIdResource {
     @Inject
     VinylBoundary vinylController = new VinylController();
 
@@ -49,24 +50,28 @@ public class VinylResource {
     public void init() {  
     }
 
-    // http://localhost:8080/vinyl
     @GET
     @PermitAll
-    public Response getVinyls() {
-        return Response.ok(vinylController.getVinyls()).build();
+    public Response getVinyl(@PathParam("id") Long id) {
+        return Response.ok(vinylController.getVinyl(id)).build();
     }
 
-    // http://localhost:8080/vinyl
-    @POST
+    @PUT
     @RolesAllowed("Client")
-    public Response createVinyl(@Context SecurityContext sec,
+    public Response updateVinyl(@PathParam("id") Long id,
         VinylDTO vinylDTO) {
-        Principal user = sec.getUserPrincipal();
-        String username = user.getName();
-
-        vinylController.createVinyl(username, vinylDTO);
-            
+        vinylController.updateVinyl(id, vinylDTO);
         return Response.ok().build();
     }
+
+    @DELETE
+    @RolesAllowed("Client")
+    public Response deleteVinyl(@PathParam("id") Long id) {
+        if (vinylController.deleteVinyl(id))
+            return Response.ok().build();
+        return Response.ok("Vinyl doesn't exist").build();
+    }
+
+
     
 }

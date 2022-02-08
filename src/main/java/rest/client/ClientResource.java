@@ -19,6 +19,11 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.Response.Status;
 
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 import control.DAO.ClientDAO;
 import control.DAO.ContactDAO;
@@ -42,8 +47,13 @@ public class ClientResource {
     public void init() {  
     }
 
-    // http://localhost:8080/client
     @GET
+    @Operation(summary = "Shows all the clients")
+    @APIResponses(value = 
+        @APIResponse(responseCode = "200", 
+            description = "Success",
+            content = @Content(mediaType = "application/json", 
+            schema = @Schema(implementation = ClientDAO.class))))
     @PermitAll
     public Response getClients() {
         return Response.ok(clientController.getClients()).build();
@@ -51,12 +61,39 @@ public class ClientResource {
 
     @POST
     @PermitAll
+    @Operation(summary = "Creates new client")
+    @APIResponses(value = {
+        @APIResponse(responseCode = "200", 
+            description = "Success",
+            content = @Content(mediaType = "application/json")),
+        @APIResponse(responseCode = "406", 
+            description = "Username already exists",
+            content = @Content(mediaType = "text/plain"))
+        }
+    )
     public Response createClient(CreateClientDAO createClientDAO) {
         if (clientController.createClient(createClientDAO))
             return Response.ok().build();
-        return Response.ok("This username already exists").build();
+        return Response.status(406).entity("Username already exists").build();
     }
 
+    @PUT
+    @PermitAll
+    @Operation(summary = "Doesn't exist")
+    @APIResponses(value = @APIResponse(responseCode = "404", 
+            description = "Not Found",
+            content = @Content(mediaType = "text/plain")))
+    public Response updateClient() {
+        return Response.status(404).entity("Method doesn't exist").build();
+    }
 
-    //TODO: add put and delet
+    @DELETE
+    @PermitAll
+    @Operation(summary = "Doesn't exist")
+    @APIResponses(value = @APIResponse(responseCode = "404", 
+            description = "Not Found",
+            content = @Content(mediaType = "text/plain")))
+    public Response deleteClient() {
+        return Response.status(404).entity("Method doesn't exist").build();
+    }
 }
