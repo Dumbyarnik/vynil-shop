@@ -79,7 +79,7 @@ public class VinylIdResource {
 
     @PUT
     @RolesAllowed("Client")
-    @Operation(summary = "Gets the profile")
+    @Operation(summary = "Updates the vinyl")
     @APIResponses(value = {
         @APIResponse(responseCode = "200", 
             description = "Success",
@@ -98,7 +98,7 @@ public class VinylIdResource {
 
     @DELETE
     @RolesAllowed("Client")
-    @Operation(summary = "Gets the profile")
+    @Operation(summary = "Deletes the vinyl")
     @APIResponses(value = {
         @APIResponse(responseCode = "200", 
             description = "Success",

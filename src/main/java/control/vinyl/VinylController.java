@@ -57,6 +57,8 @@ public class VinylController implements VinylBoundary {
     @Override
     public VinylDTO getVinyl(Long id) {
         Vinyl vinyl = vinylRepository.getVinyl(id);
+        if (vinyl == null)
+            return null;
         return entityConverter.vinylToVinylDTO(vinyl);
     }
 
