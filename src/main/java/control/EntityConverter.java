@@ -1,25 +1,36 @@
 package control;
 
-import control.DAO.ClientDAO;
-import control.DAO.ContactDAO;
-import control.DAO.VinylDTO;
+import control.DTO.ClientDTO;
+import control.DTO.ContactDTO;
+import control.DTO.CreateVinylDTO;
+import control.DTO.VinylDTO;
 import entities.basic.Client;
 import entities.basic.Contact;
+import entities.basic.Genre;
 import entities.basic.Vinyl;
 
 public class EntityConverter {
 
-    public ClientDAO clientToClientDAO(Client client){
-        ClientDAO clientDAO = new ClientDAO();
-        clientDAO.username = client.getUsername();
-
+    public ClientDTO clientToClientDTO(Client client){
+        ClientDTO clientDTO = new ClientDTO();
+        clientDTO.id = client.getId();
+        clientDTO.username = client.getUsername();
+        
         if (client.getContact() != null){
-            clientDAO.contact = this.contactToContactDAO(client.getContact());
+            clientDTO.contact = this.contactToContactDTO(client.getContact());
         }
 
-        return clientDAO;
+        return clientDTO;
     }
 
+    private ContactDTO contactToContactDTO(Contact contact){
+        ContactDTO clientDTO = new ContactDTO();
+        clientDTO.email = contact.getEmail();
+        clientDTO.phone = contact.getPhone();
+
+        return clientDTO;
+    }
+    
     public VinylDTO vinylToVinylDTO(Vinyl vinyl){
         VinylDTO vinylDTO = new VinylDTO();
         vinylDTO.id = vinyl.getId();
@@ -32,12 +43,32 @@ public class EntityConverter {
         return vinylDTO;
     }
 
-    private ContactDAO contactToContactDAO(Contact contact){
-        ContactDAO contactDAO = new ContactDAO();
-        contactDAO.email = contact.getEmail();
-        contactDAO.phone = contact.getPhone();
+    public Vinyl vinylDTOToVinyl(VinylDTO vinylDTO){
+        // putting attributes of the vinyl
+        Vinyl vinyl = new Vinyl();
+        vinyl.setTitle(vinylDTO.title);
+        vinyl.setArtist(vinylDTO.artist);
+        vinyl.setDescription(vinylDTO.description);
+        vinyl.setPrice(vinylDTO.price);
+        vinyl.setGenre(Genre.valueOf(vinylDTO.genre.toUpperCase()));
 
-        return contactDAO;
+        return vinyl;
     }
+
+    public Vinyl vinylDTOToVinyl(CreateVinylDTO vinylDTO, Client client){
+        // putting attributes of the vinyl
+        Vinyl vinyl = new Vinyl();
+        vinyl.setTitle(vinylDTO.title);
+        vinyl.setArtist(vinylDTO.artist);
+        vinyl.setDescription(vinylDTO.description);
+        vinyl.setPrice(vinylDTO.price);
+        vinyl.setGenre(Genre.valueOf(vinylDTO.genre.toUpperCase()));
+        // setting relationship with client
+        vinyl.setClient(client);
+
+        return vinyl;
+    }
+
+    
     
 }

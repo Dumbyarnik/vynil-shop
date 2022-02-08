@@ -8,7 +8,8 @@ import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 
 import control.EntityConverter;
-import control.DAO.VinylDTO;
+import control.DTO.CreateVinylDTO;
+import control.DTO.VinylDTO;
 import entities.ClientGateway;
 import entities.VinylGateway;
 import entities.basic.Client;
@@ -32,41 +33,38 @@ public class VinylController implements VinylBoundary {
     @Override
     public Collection<VinylDTO> getVinyls() {
         Collection<VinylDTO> vinylDTOs = new ArrayList<>();
-
+        // converting vinyl to vinylDTO
         for (Vinyl vinyl : vinylRepository.getVinyls()){
             VinylDTO vinylDTO = entityConverter.vinylToVinylDTO(vinyl);
             vinylDTOs.add(vinylDTO);
         }
 
         return vinylDTOs;
-            
     }
 
     @Override
-    public void createVinyl(String username, VinylDTO vinylDTO) {
+    public boolean createVinyl(String username, CreateVinylDTO createVinylDTO) {
         // Converting VinylDTO to Vinyl
-        Client client = clientRepository.getClient(username);
-        Vinyl vinyl = new Vinyl();
-        vinyl.setTitle(vinylDTO.title);
-        vinyl.setArtist(vinylDTO.artist);
-        vinyl.setDescription(vinylDTO.description);
-        vinyl.setPrice(vinylDTO.price);
-        vinyl.setGenre(Genre.valueOf(vinylDTO.genre.toUpperCase()));
-        vinyl.setClient(client);
+        Client client = clientRepository.getClientByName(username);
+        if (client == null)
+            return false;
 
+        Vinyl vinyl = entityConverter.vinylDTOToVinyl(createVinylDTO, client);
         vinylRepository.createVinyl(vinyl);
-        
-    }
-
-    @Override
-    public void updateVinyl(Long id, VinylDTO vinylDTO) {
-        vinylRepository.updateVinyl(id, vinylDTO);
+        return true;
     }
 
     @Override
     public VinylDTO getVinyl(Long id) {
         Vinyl vinyl = vinylRepository.getVinyl(id);
+        if (vinyl == null)
+            return null;
         return entityConverter.vinylToVinylDTO(vinyl);
+    }
+
+    @Override
+    public boolean updateVinyl(Long id, VinylDTO vinylDTO) {
+        return vinylRepository.updateVinyl(id, vinylDTO);
     }
 
     @Override

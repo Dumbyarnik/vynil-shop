@@ -1,7 +1,6 @@
-package control.DAO;
+package control.DTO;
 
-public class VinylDTO {
-    public Long id;
+public class CreateVinylDTO {
     public String title;
     public String artist;
     public String genre;

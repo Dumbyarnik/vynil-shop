@@ -1,0 +1,5 @@
+package control.DTO;
+
+public class VinylDTO extends CreateVinylDTO{
+    public Long id;
+}

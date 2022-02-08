@@ -8,9 +8,9 @@ import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 
 import control.EntityConverter;
-import control.DAO.ClientDAO;
-import control.DAO.ContactDAO;
-import control.DAO.CreateClientDAO;
+import control.DTO.ClientDTO;
+import control.DTO.ContactDTO;
+import control.DTO.CreateClientDTO;
 import entities.ClientGateway;
 import entities.basic.Client;
 import entities.basic.Contact;
@@ -27,14 +27,27 @@ public class ClientController implements ClientBoundry {
     EntityConverter entityConverter = new EntityConverter();
 
     @Override
-    public boolean createClient(CreateClientDAO createClientDAO) {
+    public Collection<ClientDTO> getClients() {
+        Collection<ClientDTO> clients = new ArrayList<ClientDTO>();
+        // converting all the clients into clientDTO
+        for (Client client : clientRepository.getClients()){
+            ClientDTO clientDTO = entityConverter
+                .clientToClientDTO(client);
+            clients.add(clientDTO);
+        }
+        return clients;
+    }
+
+    @Override
+    public boolean createClient(CreateClientDTO createClientDTO) {
+        // Converting CreateClientDTO into Client
+        // And creating UserLogin object
         Client client = new Client();
-        client.setUsername(createClientDAO.username);
+        client.setUsername(createClientDTO.username);
 
         UserLogin userLogin = new UserLogin();
-        userLogin.username = createClientDAO.username;
-        userLogin.password = createClientDAO.password;
-        
+        userLogin.username = createClientDTO.username;
+        userLogin.password = createClientDTO.password;
         
         if (clientRepository.createClient(client, userLogin))
             return true;
@@ -42,21 +55,10 @@ public class ClientController implements ClientBoundry {
     }
 
     @Override
-    public ClientDAO getClient(String username) {
-        ClientDAO clientDAO = entityConverter
-            .clientToClientDAO(clientRepository.getClient(username));
-        return clientDAO;
-    }
-
-    @Override
-    public Collection<ClientDAO> getClients() {
-        Collection<ClientDAO> clients = new ArrayList<ClientDAO>();
-        for (Client client : clientRepository.getClients()){
-            ClientDAO clientDAO = entityConverter
-                .clientToClientDAO(client);
-            clients.add(clientDAO);
-        }
-        return clients;
+    public ClientDTO getClient(Long id) {
+        ClientDTO clientDTO = entityConverter
+            .clientToClientDTO(clientRepository.getClient(id));
+        return clientDTO;
     }
 
     @Override
@@ -65,17 +67,19 @@ public class ClientController implements ClientBoundry {
     }
 
     @Override
-    public boolean createContact(String username, ContactDAO contactDAO) {
+    public boolean createContact(String username, ContactDTO contactDTO) {
+        // Converting contactDTO to contact
         Contact contact = new Contact();
-        contact.setEmail(contactDAO.email);
-        contact.setPhone(contactDAO.phone);
+        contact.setEmail(contactDTO.email);
+        contact.setPhone(contactDTO.phone);
 
         return clientRepository.createContact(username, contact);
 
     }
 
     @Override
-    public boolean updateContact(String username, ContactDAO contactDAO) {
+    public boolean updateContact(String username, ContactDTO contactDAO) {
+        // Converting contactDTO to contact
         Contact contact = new Contact();
         contact.setEmail(contactDAO.email);
         contact.setPhone(contactDAO.phone);

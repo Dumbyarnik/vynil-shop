@@ -1,6 +1,6 @@
-package control.DAO;
+package control.DTO;
 
-public class ContactDAO {
+public class ContactDTO {
     public String email;
     public String phone;
     
