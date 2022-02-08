@@ -18,6 +18,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+
 
 import control.DAO.ClientDAO;
 import control.client.ClientBoundry;
@@ -42,20 +48,61 @@ public class ClientIdResource {
     @GET
     @Path("/{username}")
     @PermitAll
-    public Response getKunde(@PathParam("username") String username) {
+    @Operation(summary = "Gets the profile")
+    @APIResponses(value = {
+        @APIResponse(responseCode = "200", 
+            description = "Success",
+            content = @Content(mediaType = "application/json")),
+        @APIResponse(responseCode = "406", 
+            description = "Client doesn't exist",
+            content = @Content(mediaType = "text/plain"))
+        }
+    )
+    public Response getClient(@PathParam("username") String username) {
         ClientDAO clientDAO = clientController.getClient(username);
         if (clientDAO == null)
-            return Response.status(Status.NOT_FOUND).build();
+            return Response.status(406).entity("Client doesn't exist").build();
         return Response.ok(clientDAO).build();
     }
 
     @DELETE
-    @Path("/{id}")
     // should me admin function
+    @Operation(summary = "Deletes the client")
+    @APIResponses(value = {
+        @APIResponse(responseCode = "200", 
+            description = "Success",
+            content = @Content(mediaType = "application/json")),
+        @APIResponse(responseCode = "406", 
+            description = "Client doesn't exist",
+            content = @Content(mediaType = "text/plain"))
+        }
+    )
     public Response deleteClient(@PathParam("id") Long id) {
         if (clientController.deleteClient(id))
             return Response.ok().build();
-        return Response.status(Status.NOT_FOUND).build();
+            return Response.status(406).entity("Client doesn't exist").build();
     } 
+
+    //////////////////// NOT AVAILABLE ///////////////////////////////////
+
+    @POST
+    @PermitAll
+    @Operation(summary = "Doesn't exist")
+    @APIResponses(value = @APIResponse(responseCode = "404", 
+            description = "Not Found",
+            content = @Content(mediaType = "text/plain")))
+    public Response createClient() {
+        return Response.status(404).entity("Method doesn't exist").build();
+    }
+
+    @PUT
+    @PermitAll
+    @Operation(summary = "Doesn't exist")
+    @APIResponses(value = @APIResponse(responseCode = "404", 
+            description = "Not Found",
+            content = @Content(mediaType = "text/plain")))
+    public Response updateClient() {
+        return Response.status(404).entity("Method doesn't exist").build();
+    }
     
 }

@@ -77,6 +77,8 @@ public class ClientResource {
         return Response.status(406).entity("Username already exists").build();
     }
 
+    //////////////////// NOT AVAILABLE ///////////////////////////////////
+
     @PUT
     @PermitAll
     @Operation(summary = "Doesn't exist")
