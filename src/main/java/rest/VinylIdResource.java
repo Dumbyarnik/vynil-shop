@@ -50,6 +50,13 @@ public class VinylIdResource {
     }
 
     // http://localhost:8080/{id}
+    @GET
+    @PermitAll
+    public Response getVinyl(@PathParam("id") Long id) {
+        return Response.ok(vinylController.getVinyl(id)).build();
+    }
+
+    // http://localhost:8080/{id}
     @PUT
     @RolesAllowed("Client")
     public Response updateVinyl(@PathParam("id") Long id,
@@ -57,5 +64,16 @@ public class VinylIdResource {
         vinylController.updateVinyl(id, vinylDTO);
         return Response.ok().build();
     }
+
+    // http://localhost:8080/{id}
+    @DELETE
+    @RolesAllowed("Client")
+    public Response deleteVinyl(@PathParam("id") Long id) {
+        if (vinylController.deleteVinyl(id))
+            return Response.ok().build();
+        return Response.ok("Vinyl doesn't exist").build();
+    }
+
+
     
 }

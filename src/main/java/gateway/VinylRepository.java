@@ -71,9 +71,28 @@ public class VinylRepository implements VinylGateway {
         }
 
     @Override
+    @Transactional
     public boolean deleteVinyl(Long id) {
-        // TODO Auto-generated method stub
+        Vinyl vinyl = this.getVinyl(id);
+        Client client = vinyl.getClient();
+
+        if (vinyl == null)
+            return false;
+        
+        // going through all the vinyls and find the one we
+        // need to delete
+        for (Vinyl tmp : client.getVinyls())
+            if (tmp.getId().equals(vinyl.getId())){
+                tmp.deleteClient();
+                client.getVinyls().remove(tmp);
+
+                em.merge(client);
+                em.remove(vinyl);
+                return true;        
+            }
+        
         return false;
+        
     }
     
 }

@@ -16,4 +16,6 @@ public interface VinylBoundary {
     public Collection<VinylDTO> getVinyls();
     public void createVinyl(String username, VinylDTO vinylDTO);
     public void updateVinyl(Long id, VinylDTO vinylDTO);
+    public VinylDTO getVinyl(Long id);
+    public boolean deleteVinyl(Long id);
 }

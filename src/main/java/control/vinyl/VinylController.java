@@ -62,5 +62,16 @@ public class VinylController implements VinylBoundary {
     public void updateVinyl(Long id, VinylDTO vinylDTO) {
         vinylRepository.updateVinyl(id, vinylDTO);
     }
+
+    @Override
+    public VinylDTO getVinyl(Long id) {
+        Vinyl vinyl = vinylRepository.getVinyl(id);
+        return entityConverter.vinylToVinylDTO(vinyl);
+    }
+
+    @Override
+    public boolean deleteVinyl(Long id) {
+        return vinylRepository.deleteVinyl(id);
+    }
     
 }

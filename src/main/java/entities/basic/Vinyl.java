@@ -148,4 +148,8 @@ public class Vinyl implements Serializable {
         this.client = client;
     }
 
+    public void deleteClient(){
+        this.client = null;
+    }
+
 }
