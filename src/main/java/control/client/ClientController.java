@@ -32,7 +32,7 @@ public class ClientController implements ClientBoundry {
         // converting all the clients into clientDTO
         for (Client client : clientRepository.getClients()){
             ClientDTO clientDTO = entityConverter
-                .clientToClientDAO(client);
+                .clientToClientDTO(client);
             clients.add(clientDTO);
         }
         return clients;
@@ -57,7 +57,7 @@ public class ClientController implements ClientBoundry {
     @Override
     public ClientDTO getClient(Long id) {
         ClientDTO clientDTO = entityConverter
-            .clientToClientDAO(clientRepository.getClient(id));
+            .clientToClientDTO(clientRepository.getClient(id));
         return clientDTO;
     }
 

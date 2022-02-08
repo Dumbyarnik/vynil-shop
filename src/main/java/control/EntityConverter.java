@@ -10,17 +10,26 @@ import entities.basic.Vinyl;
 
 public class EntityConverter {
 
-    public ClientDTO clientToClientDAO(Client client){
-        ClientDTO clientDAO = new ClientDTO();
-        clientDAO.username = client.getUsername();
-
+    public ClientDTO clientToClientDTO(Client client){
+        ClientDTO clientDTO = new ClientDTO();
+        clientDTO.id = client.getId();
+        clientDTO.username = client.getUsername();
+        
         if (client.getContact() != null){
-            clientDAO.contact = this.contactToContactDAO(client.getContact());
+            clientDTO.contact = this.contactToContactDTO(client.getContact());
         }
 
-        return clientDAO;
+        return clientDTO;
     }
 
+    private ContactDTO contactToContactDTO(Contact contact){
+        ContactDTO clientDTO = new ContactDTO();
+        clientDTO.email = contact.getEmail();
+        clientDTO.phone = contact.getPhone();
+
+        return clientDTO;
+    }
+    
     public VinylDTO vinylToVinylDTO(Vinyl vinyl){
         VinylDTO vinylDTO = new VinylDTO();
         vinylDTO.id = vinyl.getId();
@@ -59,12 +68,6 @@ public class EntityConverter {
         return vinyl;
     }
 
-    private ContactDTO contactToContactDAO(Contact contact){
-        ContactDTO contactDAO = new ContactDTO();
-        contactDAO.email = contact.getEmail();
-        contactDAO.phone = contact.getPhone();
-
-        return contactDAO;
-    }
+    
     
 }
