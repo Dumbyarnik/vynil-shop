@@ -48,13 +48,13 @@ public class ClientResource {
     }
 
     @GET
+    @PermitAll
     @Operation(summary = "Shows all the clients")
     @APIResponses(value = 
         @APIResponse(responseCode = "200", 
             description = "Success",
             content = @Content(mediaType = "application/json", 
             schema = @Schema(implementation = ClientDAO.class))))
-    @PermitAll
     public Response getClients() {
         return Response.ok(clientController.getClients()).build();
     }

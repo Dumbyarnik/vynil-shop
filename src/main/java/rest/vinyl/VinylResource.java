@@ -34,6 +34,12 @@ import entities.ClientGateway;
 import entities.basic.Client;
 import gateway.ClientRepository;
 
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
@@ -53,12 +59,28 @@ public class VinylResource {
 
     @GET
     @PermitAll
+    @Operation(summary = "Gets all the vinyls")
+    @APIResponses(value = 
+        @APIResponse(responseCode = "200", 
+            description = "Success",
+            content = @Content(mediaType = "application/json", 
+            schema = @Schema(implementation = ClientDAO.class))))
     public Response getVinyls() {
         return Response.ok(vinylController.getVinyls()).build();
     }
 
     @POST
     @RolesAllowed("Client")
+    @Operation(summary = "Creates new vinyl")
+    @APIResponses(value = {
+        @APIResponse(responseCode = "200", 
+            description = "Success",
+            content = @Content(mediaType = "application/json")),
+        @APIResponse(responseCode = "406", 
+            description = "Client doesn't exist",
+            content = @Content(mediaType = "text/plain"))
+        }
+    )
     public Response createVinyl(@Context SecurityContext sec,
         VinylDTO vinylDTO) {
         Principal user = sec.getUserPrincipal();
@@ -67,6 +89,28 @@ public class VinylResource {
         vinylController.createVinyl(username, vinylDTO);
             
         return Response.ok().build();
+    }
+
+    //////////////////// NOT AVAILABLE ///////////////////////////////////
+
+    @PUT
+    @PermitAll
+    @Operation(summary = "Doesn't exist")
+    @APIResponses(value = @APIResponse(responseCode = "404", 
+            description = "Not Found",
+            content = @Content(mediaType = "text/plain")))
+    public Response updateVinyl() {
+        return Response.status(404).entity("Method doesn't exist").build();
+    }
+
+    @DELETE
+    @PermitAll
+    @Operation(summary = "Doesn't exist")
+    @APIResponses(value = @APIResponse(responseCode = "404", 
+            description = "Not Found",
+            content = @Content(mediaType = "text/plain")))
+    public Response deleteVinyl() {
+        return Response.status(404).entity("Method doesn't exist").build();
     }
     
 }
