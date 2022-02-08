@@ -17,8 +17,12 @@ import entities.security.UserLogin;
 @Model
 @Dependent
 public interface VinylGateway extends Serializable {
+
+    // vinyl
     public Collection<Vinyl> getVinyls();
     public void createVinyl(Vinyl vinyl);
+
+    // vinyl/{id}
     public Vinyl getVinyl(Long id);
     public void updateVinyl(Long id, VinylDTO vinylDTO);
     public boolean deleteVinyl(Long id);

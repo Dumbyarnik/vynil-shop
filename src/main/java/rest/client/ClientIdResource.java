@@ -45,7 +45,6 @@ public class ClientIdResource {
     }
 
     @GET
-    @Path("/{username}")
     @PermitAll
     @Operation(summary = "Gets the profile")
     @APIResponses(value = {
@@ -58,8 +57,8 @@ public class ClientIdResource {
             content = @Content(mediaType = "text/plain"))
         }
     )
-    public Response getClient(@PathParam("username") String username) {
-        ClientDTO clientDTO = clientController.getClient(username);
+    public Response getClient(@PathParam("id") Long id) {
+        ClientDTO clientDTO = clientController.getClient(id);
         if (clientDTO == null)
             return Response.status(406).entity("Client doesn't exist").build();
         return Response.ok(clientDTO).build();

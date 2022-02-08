@@ -55,9 +55,9 @@ public class ClientController implements ClientBoundry {
     }
 
     @Override
-    public ClientDTO getClient(String username) {
+    public ClientDTO getClient(Long id) {
         ClientDTO clientDTO = entityConverter
-            .clientToClientDAO(clientRepository.getClient(username));
+            .clientToClientDAO(clientRepository.getClient(id));
         return clientDTO;
     }
 

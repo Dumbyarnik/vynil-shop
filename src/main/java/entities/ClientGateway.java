@@ -20,12 +20,15 @@ public interface ClientGateway extends Serializable{
     public boolean createClient(Client client, UserLogin userLogin);
 
     // client/{id}
-    public Client getClient(String username);
+    public Client getClient(Long id);
     public boolean deleteClient(Long id);
 
     // client/contact
     public boolean createContact(String username, Contact contact);
     public boolean updateContact(String username,  Contact contact);
     public boolean deleteContact(String username);
+
+    // additional
+    public Client getClientByName(String username);
     
 }

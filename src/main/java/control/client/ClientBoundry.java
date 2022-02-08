@@ -18,7 +18,7 @@ public interface ClientBoundry {
     public boolean createClient(CreateClientDTO createClientDTO);
 
     // client/{id}
-    public ClientDTO getClient(String username);
+    public ClientDTO getClient(Long id);
     public boolean deleteClient(Long id);
 
     // client/contact

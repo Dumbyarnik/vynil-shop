@@ -5,6 +5,7 @@ import control.DTO.ContactDTO;
 import control.DTO.VinylDTO;
 import entities.basic.Client;
 import entities.basic.Contact;
+import entities.basic.Genre;
 import entities.basic.Vinyl;
 
 public class EntityConverter {
@@ -30,6 +31,32 @@ public class EntityConverter {
         vinylDTO.genre = vinyl.getGenre().name();
 
         return vinylDTO;
+    }
+
+    public Vinyl vinylDTOToVinyl(VinylDTO vinylDTO){
+        // putting attributes of the vinyl
+        Vinyl vinyl = new Vinyl();
+        vinyl.setTitle(vinylDTO.title);
+        vinyl.setArtist(vinylDTO.artist);
+        vinyl.setDescription(vinylDTO.description);
+        vinyl.setPrice(vinylDTO.price);
+        vinyl.setGenre(Genre.valueOf(vinylDTO.genre.toUpperCase()));
+
+        return vinyl;
+    }
+
+    public Vinyl vinylDTOToVinyl(VinylDTO vinylDTO, Client client){
+        // putting attributes of the vinyl
+        Vinyl vinyl = new Vinyl();
+        vinyl.setTitle(vinylDTO.title);
+        vinyl.setArtist(vinylDTO.artist);
+        vinyl.setDescription(vinylDTO.description);
+        vinyl.setPrice(vinylDTO.price);
+        vinyl.setGenre(Genre.valueOf(vinylDTO.genre.toUpperCase()));
+        // setting relationship with client
+        vinyl.setClient(client);
+
+        return vinyl;
     }
 
     private ContactDTO contactToContactDAO(Contact contact){

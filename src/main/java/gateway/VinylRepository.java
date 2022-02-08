@@ -76,7 +76,7 @@ public class VinylRepository implements VinylGateway {
         Vinyl vinyl = this.getVinyl(id);
         Client client = vinyl.getClient();
 
-        if (vinyl == null)
+        if (vinyl == null || client == null)
             return false;
         
         // going through all the vinyls and find the one we

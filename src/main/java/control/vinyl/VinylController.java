@@ -32,41 +32,34 @@ public class VinylController implements VinylBoundary {
     @Override
     public Collection<VinylDTO> getVinyls() {
         Collection<VinylDTO> vinylDTOs = new ArrayList<>();
-
+        // converting vinyl to vinylDTO
         for (Vinyl vinyl : vinylRepository.getVinyls()){
             VinylDTO vinylDTO = entityConverter.vinylToVinylDTO(vinyl);
             vinylDTOs.add(vinylDTO);
         }
 
         return vinylDTOs;
-            
     }
 
     @Override
     public void createVinyl(String username, VinylDTO vinylDTO) {
         // Converting VinylDTO to Vinyl
-        Client client = clientRepository.getClient(username);
-        Vinyl vinyl = new Vinyl();
-        vinyl.setTitle(vinylDTO.title);
-        vinyl.setArtist(vinylDTO.artist);
-        vinyl.setDescription(vinylDTO.description);
-        vinyl.setPrice(vinylDTO.price);
-        vinyl.setGenre(Genre.valueOf(vinylDTO.genre.toUpperCase()));
-        vinyl.setClient(client);
+        Client client = clientRepository.getClientByName(username);
+        Vinyl vinyl = entityConverter.vinylDTOToVinyl(vinylDTO, client);
 
         vinylRepository.createVinyl(vinyl);
         
     }
 
     @Override
-    public void updateVinyl(Long id, VinylDTO vinylDTO) {
-        vinylRepository.updateVinyl(id, vinylDTO);
-    }
-
-    @Override
     public VinylDTO getVinyl(Long id) {
         Vinyl vinyl = vinylRepository.getVinyl(id);
         return entityConverter.vinylToVinylDTO(vinyl);
+    }
+
+    @Override
+    public void updateVinyl(Long id, VinylDTO vinylDTO) {
+        vinylRepository.updateVinyl(id, vinylDTO);
     }
 
     @Override
