@@ -50,7 +50,7 @@ public class ClientResource {
     // http://localhost:8080/client
     @GET
     @PermitAll
-    public Response getKunden() {
+    public Response getClients() {
         return Response.ok(clientController.getClients()).build();
     }
 

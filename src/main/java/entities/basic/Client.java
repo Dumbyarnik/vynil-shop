@@ -33,6 +33,10 @@ public class Client implements Serializable {
     @JoinColumn(name = "contact_id", referencedColumnName = "id")
     private Contact contact;
 
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY,
+        cascade = CascadeType.ALL)
+    private Collection<Vinyl> vinyls = new ArrayList<Vinyl>();
+
     public Client(){}
 
     /**
@@ -79,6 +83,21 @@ public class Client implements Serializable {
 
     public void deleteContact(){
         this.contact = null;
+    }
+
+
+    /**
+     * @return Collection<Vinyl> return the vinyls
+     */
+    public Collection<Vinyl> getVinyls() {
+        return vinyls;
+    }
+
+    /**
+     * @param vinyls the vinyls to set
+     */
+    public void setVinyls(Collection<Vinyl> vinyls) {
+        this.vinyls = vinyls;
     }
 
 }
