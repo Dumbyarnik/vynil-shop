@@ -7,9 +7,8 @@ import java.io.Serializable;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Model;
 
-
-import control.DAO.ClientDAO;
-import control.DAO.VinylDTO;
+import control.DTO.ClientDTO;
+import control.DTO.VinylDTO;
 import entities.basic.Client;
 import entities.basic.Contact;
 import entities.basic.Vinyl;

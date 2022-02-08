@@ -25,9 +25,9 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
-import control.DAO.ClientDAO;
-import control.DAO.ContactDAO;
-import control.DAO.CreateClientDAO;
+import control.DTO.ClientDTO;
+import control.DTO.ContactDTO;
+import control.DTO.CreateClientDTO;
 import control.client.ClientBoundry;
 import control.client.ClientController;
 
@@ -54,7 +54,7 @@ public class ClientResource {
         @APIResponse(responseCode = "200", 
             description = "Success",
             content = @Content(mediaType = "application/json", 
-            schema = @Schema(implementation = ClientDAO.class))))
+            schema = @Schema(implementation = ClientDTO.class))))
     public Response getClients() {
         return Response.ok(clientController.getClients()).build();
     }
@@ -71,8 +71,8 @@ public class ClientResource {
             content = @Content(mediaType = "text/plain"))
         }
     )
-    public Response createClient(CreateClientDAO createClientDAO) {
-        if (clientController.createClient(createClientDAO))
+    public Response createClient(CreateClientDTO createClientDTO) {
+        if (clientController.createClient(createClientDTO))
             return Response.ok().build();
         return Response.status(406).entity("Username already exists").build();
     }

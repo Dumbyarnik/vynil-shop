@@ -5,7 +5,7 @@ import javax.inject.Singleton;
 import javax.enterprise.event.Observes;
 import javax.transaction.Transactional;
 
-import control.DAO.CreateClientDAO;
+import control.DTO.CreateClientDTO;
 import control.client.ClientBoundry;
 import control.client.ClientController;
 import entities.ClientGateway;
@@ -24,7 +24,7 @@ public class CreateSecInitials {
     public void loadUsers(@Observes StartupEvent event){
         UserLogin.deleteAll();
 
-        CreateClientDAO createClientDAO = new CreateClientDAO();
+        CreateClientDTO createClientDAO = new CreateClientDTO();
         createClientDAO.username = "user";
         createClientDAO.password = "password";
         clientController.createClient(createClientDAO);

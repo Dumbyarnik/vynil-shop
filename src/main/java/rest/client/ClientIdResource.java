@@ -24,8 +24,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
-
-import control.DAO.ClientDAO;
+import control.DTO.ClientDTO;
 import control.client.ClientBoundry;
 import control.client.ClientController;
 
@@ -53,17 +52,17 @@ public class ClientIdResource {
         @APIResponse(responseCode = "200", 
             description = "Success",
             content = @Content(mediaType = "application/json",
-            schema = @Schema(implementation = ClientDAO.class))),
+            schema = @Schema(implementation = ClientDTO.class))),
         @APIResponse(responseCode = "406", 
             description = "Client doesn't exist",
             content = @Content(mediaType = "text/plain"))
         }
     )
     public Response getClient(@PathParam("username") String username) {
-        ClientDAO clientDAO = clientController.getClient(username);
-        if (clientDAO == null)
+        ClientDTO clientDTO = clientController.getClient(username);
+        if (clientDTO == null)
             return Response.status(406).entity("Client doesn't exist").build();
-        return Response.ok(clientDAO).build();
+        return Response.ok(clientDTO).build();
     }
 
     @DELETE

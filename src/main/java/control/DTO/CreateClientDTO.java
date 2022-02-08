@@ -1,6 +1,6 @@
-package control.DAO;
+package control.DTO;
 
-public class CreateClientDAO {
+public class CreateClientDTO {
     public String username;
     public String password;
 }

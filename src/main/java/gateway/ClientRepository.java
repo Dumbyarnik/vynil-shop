@@ -24,11 +24,18 @@ public class ClientRepository implements ClientGateway {
     @Inject
     protected EntityManager em;
 
-    // TODO: specify exceptions
-    // 1 - usernames are the same
+    @Override
+    public Collection<Client> getClients() {
+        Collection <Client> clients = em.createQuery("SELECT c FROM Client c",
+            Client.class).getResultList();
+        
+        return clients;
+    }
+
     @Override
     @Transactional
     public boolean createClient(Client client, UserLogin userLogin) {
+        // persisting UserLogin & client
         try{
             UserLogin.add(userLogin.username, userLogin.password, "Client");
             em.persist(client);
@@ -48,13 +55,6 @@ public class ClientRepository implements ClientGateway {
             .getSingleResult();
         
         return client;
-    }
-
-    public Collection<Client> getClients() {
-        Collection <Client> clients = em.createQuery("SELECT c FROM Client c",
-            Client.class).getResultList();
-        
-        return clients;
     }
 
     @Override

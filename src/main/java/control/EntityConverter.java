@@ -1,16 +1,16 @@
 package control;
 
-import control.DAO.ClientDAO;
-import control.DAO.ContactDAO;
-import control.DAO.VinylDTO;
+import control.DTO.ClientDTO;
+import control.DTO.ContactDTO;
+import control.DTO.VinylDTO;
 import entities.basic.Client;
 import entities.basic.Contact;
 import entities.basic.Vinyl;
 
 public class EntityConverter {
 
-    public ClientDAO clientToClientDAO(Client client){
-        ClientDAO clientDAO = new ClientDAO();
+    public ClientDTO clientToClientDAO(Client client){
+        ClientDTO clientDAO = new ClientDTO();
         clientDAO.username = client.getUsername();
 
         if (client.getContact() != null){
@@ -32,8 +32,8 @@ public class EntityConverter {
         return vinylDTO;
     }
 
-    private ContactDAO contactToContactDAO(Contact contact){
-        ContactDAO contactDAO = new ContactDAO();
+    private ContactDTO contactToContactDAO(Contact contact){
+        ContactDTO contactDAO = new ContactDTO();
         contactDAO.email = contact.getEmail();
         contactDAO.phone = contact.getPhone();
 

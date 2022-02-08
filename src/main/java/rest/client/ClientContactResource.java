@@ -25,9 +25,8 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
-
-import control.DAO.ClientDAO;
-import control.DAO.ContactDAO;
+import control.DTO.ClientDTO;
+import control.DTO.ContactDTO;
 import control.client.ClientBoundry;
 import control.client.ClientController;
 
@@ -61,11 +60,11 @@ public class ClientContactResource {
         }
     )
     public Response createContact(@Context SecurityContext sec,
-        ContactDAO contactDAO) {
+        ContactDTO contactDTO) {
         Principal user = sec.getUserPrincipal();
         String username = user.getName();
         
-        if (clientController.createContact(username, contactDAO))
+        if (clientController.createContact(username, contactDTO))
             return Response.ok().build();
         return Response.status(406).entity("Client doesn't exist").build();
     } 
@@ -83,11 +82,11 @@ public class ClientContactResource {
         }
     )
     public Response updateAdresse(@Context SecurityContext sec,
-        ContactDAO contactDAO) {
+        ContactDTO contactDTO) {
         Principal user = sec.getUserPrincipal();
         String username = user.getName();
 
-        if (clientController.updateContact(username, contactDAO))
+        if (clientController.updateContact(username, contactDTO))
             return Response.ok().build();
         return Response.status(406).entity("Client or contact doesn't exist").build();
     }

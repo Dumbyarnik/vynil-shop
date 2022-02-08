@@ -22,10 +22,10 @@ import javax.ws.rs.core.Response.Status;
 
 import org.eclipse.microprofile.openapi.annotations.Operation;
 
-import control.DAO.ClientDAO;
-import control.DAO.ContactDAO;
-import control.DAO.CreateClientDAO;
-import control.DAO.VinylDTO;
+import control.DTO.ClientDTO;
+import control.DTO.ContactDTO;
+import control.DTO.CreateClientDTO;
+import control.DTO.VinylDTO;
 import control.client.ClientBoundry;
 import control.client.ClientController;
 import control.vinyl.VinylBoundary;
@@ -64,7 +64,7 @@ public class VinylResource {
         @APIResponse(responseCode = "200", 
             description = "Success",
             content = @Content(mediaType = "application/json", 
-            schema = @Schema(implementation = ClientDAO.class))))
+            schema = @Schema(implementation = ClientDTO.class))))
     public Response getVinyls() {
         return Response.ok(vinylController.getVinyls()).build();
     }

@@ -5,10 +5,10 @@ import java.util.Collection;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Model;
 
-import control.DAO.ClientDAO;
-import control.DAO.ContactDAO;
-import control.DAO.CreateClientDAO;
-import control.DAO.VinylDTO;
+import control.DTO.ClientDTO;
+import control.DTO.ContactDTO;
+import control.DTO.CreateClientDTO;
+import control.DTO.VinylDTO;
 
 @Model
 @Dependent

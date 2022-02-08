@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
-import control.DAO.VinylDTO;
+import control.DTO.VinylDTO;
 import entities.ClientGateway;
 import entities.basic.Client;
 import entities.basic.Contact;

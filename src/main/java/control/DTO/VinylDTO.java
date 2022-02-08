@@ -1,4 +1,4 @@
-package control.DAO;
+package control.DTO;
 
 public class VinylDTO {
     public Long id;

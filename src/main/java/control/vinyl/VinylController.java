@@ -8,7 +8,7 @@ import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 
 import control.EntityConverter;
-import control.DAO.VinylDTO;
+import control.DTO.VinylDTO;
 import entities.ClientGateway;
 import entities.VinylGateway;
 import entities.basic.Client;

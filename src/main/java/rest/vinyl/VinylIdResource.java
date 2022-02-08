@@ -28,10 +28,10 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
-import control.DAO.ClientDAO;
-import control.DAO.ContactDAO;
-import control.DAO.CreateClientDAO;
-import control.DAO.VinylDTO;
+import control.DTO.ClientDTO;
+import control.DTO.ContactDTO;
+import control.DTO.CreateClientDTO;
+import control.DTO.VinylDTO;
 import control.client.ClientBoundry;
 import control.client.ClientController;
 import control.vinyl.VinylBoundary;
