@@ -1,9 +1,9 @@
-package rest.vinyl;
+package rest.review;
 
 import java.security.Principal;
+import java.util.Collection;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
@@ -32,106 +32,85 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import control.DTO.ClientDTO;
 import control.DTO.ContactDTO;
 import control.DTO.CreateClientDTO;
+import control.DTO.CreateReviewDTO;
 import control.DTO.VinylDTO;
 import control.client.ClientBoundry;
 import control.client.ClientController;
+import control.review.ReviewBoundary;
+import control.review.ReviewController;
 import control.vinyl.VinylBoundary;
 import control.vinyl.VinylController;
 import entities.ClientGateway;
 import entities.basic.Client;
 import gateway.ClientRepository;
-import io.quarkus.qute.Template;
-import io.quarkus.qute.TemplateInstance;
 
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-
-
-
-// http://localhost:8080/vinyl/{id}
+// http://localhost:8080/client/{id}/review
 @ApplicationScoped
-@Path("/vinyl/{id}")
+@Path("/client/{id}/review")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class VinylIdResource {
-
+public class ReviewResource {
     @Inject
-    VinylBoundary vinylController = new VinylController();
+    ReviewBoundary reviewController = new ReviewController();
 
     @PostConstruct
     public void init() {  
     }
 
-    @GET
-    @PermitAll
-    @Operation(summary = "Gets the vinyl")
+    @POST
+    @RolesAllowed("Client")
+    @Operation(summary = "Creates the review for the customer")
     @APIResponses(value = {
         @APIResponse(responseCode = "200", 
             description = "Success",
             content = @Content(mediaType = "application/json",
             schema = @Schema(implementation = VinylDTO.class))),
         @APIResponse(responseCode = "406", 
-            description = "Vinyl doesn't exist",
+            description = "One of the clients doesn't exist",
             content = @Content(mediaType = "text/plain"))
         }
     )
-    public Response getVinyl(@PathParam("id") Long id) {
-        VinylDTO vinylDTO = vinylController.getVinyl(id);
-        if (vinylDTO == null)
-            return Response.status(406).entity("Vinyl doesn't exist").build(); 
-        return Response.ok(vinylController.getVinyl(id)).build();
-    }
+    public Response createReview(@PathParam("id") Long id,
+        CreateReviewDTO createReviewDTO, @Context SecurityContext sec) {
+        Principal user = sec.getUserPrincipal();
+        String username = user.getName();
 
-    @PUT
-    @RolesAllowed("Client")
-    @Operation(summary = "Updates the vinyl")
-    @APIResponses(value = {
-        @APIResponse(responseCode = "200", 
-            description = "Success",
-            content = @Content(mediaType = "application/json")),
-        @APIResponse(responseCode = "406", 
-            description = "Vinyl doesn't exist",
-            content = @Content(mediaType = "text/plain"))
-        }
-    )
-    public Response updateVinyl(@PathParam("id") Long id,
-        VinylDTO vinylDTO) {
-        if (vinylController.updateVinyl(id, vinylDTO))
+        if (reviewController.createReview(username, createReviewDTO, id))
             return Response.ok().build();
-        return Response.status(406).entity("Vinyl doesn't exist").build();
-    }
-
-    @DELETE
-    @RolesAllowed("Client")
-    @Operation(summary = "Deletes the vinyl")
-    @APIResponses(value = {
-        @APIResponse(responseCode = "200", 
-            description = "Success",
-            content = @Content(mediaType = "application/json")),
-        @APIResponse(responseCode = "406", 
-            description = "Vinyl doesn't exist",
-            content = @Content(mediaType = "text/plain"))
-        }
-    )
-    public Response deleteVinyl(@PathParam("id") Long id) {
-        if (vinylController.deleteVinyl(id))
-            return Response.ok().build();
-        return Response.status(406).entity("Vinyl doesn't exist").build();
+        return Response.status(406).entity("One of the clients doesn't exist").build();
     }
 
     //////////////////// NOT AVAILABLE ///////////////////////////////////
-
-    @POST
+    @PUT
     @PermitAll
     @Operation(summary = "Doesn't exist")
     @APIResponses(value = @APIResponse(responseCode = "404", 
             description = "Not Found",
             content = @Content(mediaType = "text/plain")))
-    public Response createVinyl() {
+    public Response getReview(@PathParam("id") Long id) {
         return Response.status(404).entity("Method doesn't exist").build();
     }
 
+    @PUT
+    @PermitAll
+    @Operation(summary = "Doesn't exist")
+    @APIResponses(value = @APIResponse(responseCode = "404", 
+            description = "Not Found",
+            content = @Content(mediaType = "text/plain")))
+    public Response updateReview(@PathParam("id") Long id) {
+        return Response.status(404).entity("Method doesn't exist").build();
+    }
 
-    
+    @DELETE
+    @PermitAll
+    @Operation(summary = "Doesn't exist")
+    @APIResponses(value = @APIResponse(responseCode = "404", 
+            description = "Not Found",
+            content = @Content(mediaType = "text/plain")))
+    public Response deleteReview(@PathParam("id") Long id) {
+        return Response.status(404).entity("Method doesn't exist").build();
+    }
 }

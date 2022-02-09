@@ -24,11 +24,9 @@ public class Contact implements Serializable{
     private String email;
     private String phone;
 
-    //@OneToOne(mappedBy = "contact", optional = false)
-    //@NotNull
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "client_id", nullable = false)
-    private Client Client;
+    private Client client;
 
     /**
      * @return String return the email
@@ -62,14 +60,14 @@ public class Contact implements Serializable{
      * @return Client return the Client
      */
     public Client getClient() {
-        return Client;
+        return client;
     }
 
     /**
      * @param Client the Client to set
      */
     public void setClient(Client Client) {
-        this.Client = Client;
+        this.client = Client;
     }
 
 }

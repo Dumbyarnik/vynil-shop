@@ -30,15 +30,21 @@ public class Client implements Serializable {
     @Column(nullable = false, unique = true)
     private String username;
 
-    //@OneToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "contact_id", referencedColumnName = "id")
-    @OneToOne(mappedBy = "Client", fetch = FetchType.LAZY,
+    @OneToOne(mappedBy = "client", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private Contact contact;
 
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY,
         cascade = CascadeType.ALL)
     private Collection<Vinyl> vinyls = new ArrayList<Vinyl>();
+
+    @OneToMany(mappedBy = "creator", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Collection<Review> reviews_from_client;
+
+    @OneToMany(mappedBy = "reviewed_client", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Collection<Review> reviews_about_client;
 
     public Client(){}
 
@@ -101,6 +107,35 @@ public class Client implements Serializable {
      */
     public void setVinyls(Collection<Vinyl> vinyls) {
         this.vinyls = vinyls;
+    }
+
+
+    /**
+     * @return Collection<Review> return the reviews_from_client
+     */
+    public Collection<Review> getReviews_from_client() {
+        return reviews_from_client;
+    }
+
+    /**
+     * @param reviews_from_client the reviews_from_client to set
+     */
+    public void setReviews_from_client(Collection<Review> reviews_from_client) {
+        this.reviews_from_client = reviews_from_client;
+    }
+
+    /**
+     * @return Collection<Review> return the reviews_about_client
+     */
+    public Collection<Review> getReviews_about_client() {
+        return reviews_about_client;
+    }
+
+    /**
+     * @param reviews_about_client the reviews_about_client to set
+     */
+    public void setReviews_about_client(Collection<Review> reviews_about_client) {
+        this.reviews_about_client = reviews_about_client;
     }
 
 }
