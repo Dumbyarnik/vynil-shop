@@ -3,6 +3,7 @@ package rest.vinyl;
 import java.security.Principal;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
@@ -39,9 +40,14 @@ import control.vinyl.VinylController;
 import entities.ClientGateway;
 import entities.basic.Client;
 import gateway.ClientRepository;
+import io.quarkus.qute.Template;
+import io.quarkus.qute.TemplateInstance;
 
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+
+
+
 
 // http://localhost:8080/vinyl/{id}
 @ApplicationScoped
@@ -52,6 +58,8 @@ public class VinylIdResource {
 
     @Inject
     VinylBoundary vinylController = new VinylController();
+
+   
 
     @PostConstruct
     public void init() {  
@@ -73,9 +81,12 @@ public class VinylIdResource {
     public Response getVinyl(@PathParam("id") Long id) {
         VinylDTO vinylDTO = vinylController.getVinyl(id);
         if (vinylDTO == null)
-            return Response.status(406).entity("Vinyl doesn't exist").build();
+            return Response.status(406).entity("Vinyl doesn't exist").build(); 
         return Response.ok(vinylController.getVinyl(id)).build();
     }
+    
+
+ 
 
     @PUT
     @RolesAllowed("Client")

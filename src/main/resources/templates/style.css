@@ -1,0 +1,73 @@
+/*
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+.navbar{
+    background-color: #1C00CE;
+    color: #1C00CE;
+}
+*/
+
+
+.vinylshop{
+ margin-left: 4%; 
+ display: inline-block;
+}
+
+.user_component{
+margin-top: 4%;    
+border-radius: 25px;
+  border: 2px solid black;
+}
+
+
+.contact_details{
+    background-color:lightgray;
+   border-radius: 25px;
+  border: 2px solid black;
+  width: 25%;
+    height:30%;
+    margin-left: 35%;
+}
+
+.card{
+    margin-top: 5%;
+}
+
+.artist{
+font-style: italic;
+font-size: 1.8em;    
+}
+.title{
+    text-align: center;
+    font-size: 75px;
+}
+
+.vinyl_component{
+  border-radius: 25px;
+  border: 2px solid black;
+  padding: 20px;
+  width:50%;
+  height: 20%;    
+}
+
+.album{
+      border-radius: 50%;
+}
+.user_profilepic{
+    border-radius: 50%;
+    transform:translateX(-100px)
+}
+
+.user_review_component{
+    width:50%;
+    height: 50%;
+      border-radius: 25px;
+  border: 2px solid black;
+  padding: 20px;
+}
+
+.dropdown-item{
+float:right;
+}
+
