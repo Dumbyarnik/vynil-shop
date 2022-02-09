@@ -1,5 +1,7 @@
 package control.DTO;
 
 public class ReviewDTO extends CreateReviewDTO {
-    Long id;    
+    public Long id;
+    public Long creator_id;   
+    public Long reviewed_client_id; 
 }

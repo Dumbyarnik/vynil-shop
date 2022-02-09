@@ -2,11 +2,14 @@ package control;
 
 import control.DTO.ClientDTO;
 import control.DTO.ContactDTO;
+import control.DTO.CreateReviewDTO;
 import control.DTO.CreateVinylDTO;
+import control.DTO.ReviewDTO;
 import control.DTO.VinylDTO;
 import entities.basic.Client;
 import entities.basic.Contact;
 import entities.basic.Genre;
+import entities.basic.Review;
 import entities.basic.Vinyl;
 
 public class EntityConverter {
@@ -70,6 +73,15 @@ public class EntityConverter {
         return vinyl;
     }
 
-    
+    public Review createReviewDTOtoReview(CreateReviewDTO createReviewDTO,
+        Client review_from_client, Client reviewed_client){
+            Review review = new Review();
+            review.setReview(createReviewDTO.review);
+            review.setStars(createReviewDTO.stars);
+            review.setCreator(review_from_client);
+            review.setReviewed_client(reviewed_client);
+
+            return review;
+        }
     
 }

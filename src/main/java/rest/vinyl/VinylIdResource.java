@@ -59,8 +59,6 @@ public class VinylIdResource {
     @Inject
     VinylBoundary vinylController = new VinylController();
 
-   
-
     @PostConstruct
     public void init() {  
     }
@@ -84,9 +82,6 @@ public class VinylIdResource {
             return Response.status(406).entity("Vinyl doesn't exist").build(); 
         return Response.ok(vinylController.getVinyl(id)).build();
     }
-    
-
- 
 
     @PUT
     @RolesAllowed("Client")

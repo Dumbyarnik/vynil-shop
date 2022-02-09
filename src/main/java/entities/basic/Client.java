@@ -40,11 +40,11 @@ public class Client implements Serializable {
 
     @OneToMany(mappedBy = "creator", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    private Collection<Review> reviews_from_user;
+    private Collection<Review> reviews_from_client;
 
     @OneToMany(mappedBy = "reviewed_client", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    private Collection<Review> reviews_about_user;
+    private Collection<Review> reviews_about_client;
 
     public Client(){}
 
