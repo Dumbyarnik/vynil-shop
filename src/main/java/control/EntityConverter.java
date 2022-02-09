@@ -39,6 +39,7 @@ public class EntityConverter {
         vinylDTO.description = vinyl.getDescription();
         vinylDTO.price = vinyl.getPrice();
         vinylDTO.genre = vinyl.getGenre().name();
+        vinylDTO.creator_id = vinyl.getClient().getId();
 
         return vinylDTO;
     }

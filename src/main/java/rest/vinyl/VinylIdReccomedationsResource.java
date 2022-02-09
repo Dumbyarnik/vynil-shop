@@ -48,7 +48,7 @@ import javax.ws.rs.core.MediaType;
 @Path("/vinyl/{id}/reccomedations")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class VinylIdReccomedations {
+public class VinylIdReccomedationsResource {
 
     @Inject
     VinylBoundary vinylController = new VinylController();

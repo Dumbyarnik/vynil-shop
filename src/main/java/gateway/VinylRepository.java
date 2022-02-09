@@ -105,7 +105,6 @@ public class VinylRepository implements VinylGateway {
     public Collection<Vinyl> getVinylReccomendations(Long id) {
         Vinyl vinyl = this.getVinyl(id);
         
-
         Collection<Vinyl> tmp_list = em.createQuery("Select v FROM Vinyl v where " + 
             "v.genre LIKE :genre",
             Vinyl.class)
@@ -127,6 +126,15 @@ public class VinylRepository implements VinylGateway {
         }
 
         return reccomendations;
+    }
+
+    @Override
+    public Collection<Vinyl> getVinylGenre(String genre) {
+        return em.createQuery("Select v FROM Vinyl v where " + 
+            "v.genre LIKE :genre",
+            Vinyl.class)
+            .setParameter("genre", Genre.valueOf(genre))
+            .getResultList();
     }
     
 }
