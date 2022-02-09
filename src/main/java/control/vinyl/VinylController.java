@@ -87,5 +87,18 @@ public class VinylController implements VinylBoundary {
         return reccomedations;
 
     }
+
+    @Override
+    public Collection<VinylDTO> getVinylGenre(String genre) {
+        Collection<VinylDTO> vinyls = new ArrayList<VinylDTO>();
+
+        // making genre upper case for the enum
+        for (Vinyl vinyl : vinylRepository.getVinylGenre(genre.toUpperCase())){
+            VinylDTO tmp = entityConverter.vinylToVinylDTO(vinyl);
+            vinyls.add(tmp);
+        }
+
+        return vinyls;
+    }
     
 }

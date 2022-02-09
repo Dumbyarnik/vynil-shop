@@ -29,4 +29,8 @@ public interface VinylGateway extends Serializable {
 
     // vinyl/{id}/reccomendations
     public Collection<Vinyl> getVinylReccomendations(Long id);
+
+    // vinyl/{genre}/search
+    public Collection<Vinyl> getVinylGenre(String genre); 
+
 }

@@ -25,4 +25,7 @@ public interface VinylBoundary {
 
     // vinyl/{id}/reccomendations
     public Collection<VinylDTO> getVinylReccomedations(Long id);
+
+    // vinyl/{genre}/search
+    public Collection<VinylDTO> getVinylGenre(String genre);
 }
