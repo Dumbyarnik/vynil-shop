@@ -4,10 +4,14 @@ import java.io.Serializable;
 
 import javax.enterprise.context.Dependent;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+
+import io.smallrye.common.constraint.NotNull;
 
 @Entity
 @Dependent
@@ -20,7 +24,10 @@ public class Contact implements Serializable{
     private String email;
     private String phone;
 
-    @OneToOne(mappedBy = "contact")
+    //@OneToOne(mappedBy = "contact", optional = false)
+    //@NotNull
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "client_id", nullable = false)
     private Client Client;
 
     /**

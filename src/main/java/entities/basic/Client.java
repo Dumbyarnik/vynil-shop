@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
 @Dependent
@@ -29,8 +30,10 @@ public class Client implements Serializable {
     @Column(nullable = false, unique = true)
     private String username;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "contact_id", referencedColumnName = "id")
+    //@OneToOne(cascade = CascadeType.ALL)
+    //@JoinColumn(name = "contact_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "Client", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
     private Contact contact;
 
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY,

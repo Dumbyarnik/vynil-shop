@@ -71,5 +71,21 @@ public class VinylController implements VinylBoundary {
     public boolean deleteVinyl(Long id) {
         return vinylRepository.deleteVinyl(id);
     }
+
+    @Override
+    public Collection<VinylDTO> getVinylReccomedations(Long id) {
+        Collection<VinylDTO> reccomedations = new ArrayList<VinylDTO>();
+
+        for (Vinyl vinyl : vinylRepository.getVinylReccomendations(id)){
+            VinylDTO tmp = entityConverter.vinylToVinylDTO(vinyl);
+            reccomedations.add(tmp);
+        }
+
+        if (reccomedations.size() == 0)
+            return null;
+
+        return reccomedations;
+
+    }
     
 }

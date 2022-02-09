@@ -22,4 +22,7 @@ public interface VinylBoundary {
     public VinylDTO getVinyl(Long id);
     public boolean updateVinyl(Long id, VinylDTO vinylDTO);
     public boolean deleteVinyl(Long id);
+
+    // vinyl/{id}/reccomendations
+    public Collection<VinylDTO> getVinylReccomedations(Long id);
 }
