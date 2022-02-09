@@ -1,6 +1,7 @@
 package gateway;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.enterprise.context.Dependent;
@@ -98,6 +99,33 @@ public class VinylRepository implements VinylGateway {
         
         return false;
         
+    }
+
+    @Override
+    public Collection<Vinyl> getVinylReccomendations(Long id) {
+        Vinyl vinyl = this.getVinyl(id);
+
+        Collection<Vinyl> tmp_list = em.createQuery("Select v FROM Vinyl v where " + 
+            "v.genre LIKE :genre",
+            Vinyl.class)
+            .setParameter("genre", vinyl.getGenre().toString())
+            .getResultList();
+
+        if (tmp_list.size() == 0)
+            return null;
+
+        // the first four are needed
+        Collection<Vinyl> reccomendations = new ArrayList<Vinyl>();
+        int i = 0;
+        for (Vinyl tmp : tmp_list){
+            if (i == 4 )
+                break;
+            if (tmp != vinyl){
+                reccomendations.add(tmp);
+            }
+        }
+
+        return reccomendations;
     }
     
 }

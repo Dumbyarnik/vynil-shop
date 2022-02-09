@@ -3,5 +3,6 @@ package entities.basic;
 public enum Genre {
     ROCK,
     CLASSIC,
-    ELECTRO
+    ELECTRO,
+    DISCO
 }

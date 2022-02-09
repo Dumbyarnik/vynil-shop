@@ -24,9 +24,8 @@ public class CreateSecInitials {
     public void loadUsers(@Observes StartupEvent event){
         UserLogin.deleteAll();
 
-        CreateClientDTO createClientDAO = new CreateClientDTO();
-        createClientDAO.username = "user";
-        createClientDAO.password = "password";
-        clientController.createClient(createClientDAO);
+        UserLogin.add("ringo", "ringo", "Client");
+        UserLogin.add("bingo", "bingo", "Client");
+        UserLogin.add("shmingo", "shmingo", "Client");
     }
 }
