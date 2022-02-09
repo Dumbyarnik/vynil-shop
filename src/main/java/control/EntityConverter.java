@@ -1,5 +1,9 @@
 package control;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import antlr.collections.List;
 import control.DTO.ClientDTO;
 import control.DTO.ContactDTO;
 import control.DTO.CreateReviewDTO;
@@ -22,6 +26,15 @@ public class EntityConverter {
         if (client.getContact() != null){
             clientDTO.contact = this.contactToContactDTO(client.getContact());
         }
+
+        // putting reviews into DTO
+        Collection<ReviewDTO> reviews = new ArrayList();
+
+        for (Review review : client.getReviews_about_client()){
+            ReviewDTO tmp = this.reviewToReviewDTO(review);
+            reviews.add(tmp);
+        }
+        clientDTO.reviews = reviews;
 
         return clientDTO;
     }
@@ -84,4 +97,15 @@ public class EntityConverter {
             return review;
         }
     
+    public ReviewDTO reviewToReviewDTO(Review review){
+        ReviewDTO reviewDTO = new ReviewDTO();
+
+        reviewDTO.id = review.getId();
+        reviewDTO.review = review.getReview();
+        reviewDTO.stars = review.getStars();
+        reviewDTO.creator_id = review.getCreator().getId();
+        reviewDTO.reviewed_client_id = review.getReviewed_client().getId();
+
+        return reviewDTO;
+    }
 }

@@ -82,4 +82,35 @@ public class ReviewResource {
             return Response.ok().build();
         return Response.status(406).entity("One of the clients doesn't exist").build();
     }
+
+    //////////////////// NOT AVAILABLE ///////////////////////////////////
+    @PUT
+    @PermitAll
+    @Operation(summary = "Doesn't exist")
+    @APIResponses(value = @APIResponse(responseCode = "404", 
+            description = "Not Found",
+            content = @Content(mediaType = "text/plain")))
+    public Response getReview(@PathParam("id") Long id) {
+        return Response.status(404).entity("Method doesn't exist").build();
+    }
+
+    @PUT
+    @PermitAll
+    @Operation(summary = "Doesn't exist")
+    @APIResponses(value = @APIResponse(responseCode = "404", 
+            description = "Not Found",
+            content = @Content(mediaType = "text/plain")))
+    public Response updateReview(@PathParam("id") Long id) {
+        return Response.status(404).entity("Method doesn't exist").build();
+    }
+
+    @DELETE
+    @PermitAll
+    @Operation(summary = "Doesn't exist")
+    @APIResponses(value = @APIResponse(responseCode = "404", 
+            description = "Not Found",
+            content = @Content(mediaType = "text/plain")))
+    public Response deleteReview(@PathParam("id") Long id) {
+        return Response.status(404).entity("Method doesn't exist").build();
+    }
 }
