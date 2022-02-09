@@ -70,11 +70,42 @@ public class VinylIdReccomedations {
             content = @Content(mediaType = "text/plain"))
         }
     )
-    public Response getVinyl(@PathParam("id") Long id) {
+    public Response getReccomedations(@PathParam("id") Long id) {
         Collection<VinylDTO> vinylDTO = vinylController
             .getVinylReccomedations(id);
         if (vinylDTO == null)
             return Response.status(406).entity("Vinyl doesn't exist").build();
         return Response.ok(vinylDTO).build();
+    }
+
+    //////////////////// NOT AVAILABLE ///////////////////////////////////
+    @POST
+    @PermitAll
+    @Operation(summary = "Doesn't exist")
+    @APIResponses(value = @APIResponse(responseCode = "404", 
+            description = "Not Found",
+            content = @Content(mediaType = "text/plain")))
+    public Response createReccomedation() {
+        return Response.status(404).entity("Method doesn't exist").build();
+    }
+
+    @PUT
+    @PermitAll
+    @Operation(summary = "Doesn't exist")
+    @APIResponses(value = @APIResponse(responseCode = "404", 
+            description = "Not Found",
+            content = @Content(mediaType = "text/plain")))
+    public Response updateReccomendation() {
+        return Response.status(404).entity("Method doesn't exist").build();
+    }
+
+    @DELETE
+    @PermitAll
+    @Operation(summary = "Doesn't exist")
+    @APIResponses(value = @APIResponse(responseCode = "404", 
+            description = "Not Found",
+            content = @Content(mediaType = "text/plain")))
+    public Response deleteReccomendation() {
+        return Response.status(404).entity("Method doesn't exist").build();
     }
 }

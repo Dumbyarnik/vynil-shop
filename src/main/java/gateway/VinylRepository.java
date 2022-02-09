@@ -104,21 +104,22 @@ public class VinylRepository implements VinylGateway {
     @Override
     public Collection<Vinyl> getVinylReccomendations(Long id) {
         Vinyl vinyl = this.getVinyl(id);
+        
 
         Collection<Vinyl> tmp_list = em.createQuery("Select v FROM Vinyl v where " + 
             "v.genre LIKE :genre",
             Vinyl.class)
-            .setParameter("genre", vinyl.getGenre().toString())
+            .setParameter("genre", (vinyl.getGenre()))
             .getResultList();
 
         if (tmp_list.size() == 0)
             return null;
 
-        // the first four are needed
+        // retrieve first 3 results
         Collection<Vinyl> reccomendations = new ArrayList<Vinyl>();
         int i = 0;
         for (Vinyl tmp : tmp_list){
-            if (i == 4 )
+            if (i == 3)
                 break;
             if (tmp != vinyl){
                 reccomendations.add(tmp);
