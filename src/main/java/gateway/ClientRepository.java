@@ -69,8 +69,14 @@ public class ClientRepository implements ClientGateway {
 
     @Override
     @Transactional
-    public boolean createContact(String username, Contact contact) {
+    public boolean createContact(String username, String email, String phone) {
+        // getting client
         Client client = this.getClientByName(username);
+        // creating contact
+        Contact contact = new Contact();
+        contact.setEmail(email);
+        contact.setPhone(phone);
+        contact.setClient(client);
         
         if (client != null){
             client.setContact(contact);
@@ -82,8 +88,14 @@ public class ClientRepository implements ClientGateway {
 
     @Override
     @Transactional
-    public boolean updateContact(String username, Contact contact) {
+    public boolean updateContact(String username, String email, String phone) {
+        // getting client
         Client client = this.getClientByName(username);
+        // creating contact
+        Contact contact = new Contact();
+        contact.setEmail(email);
+        contact.setPhone(phone);
+        contact.setClient(client);
 
         if (client != null){
             client.setContact(contact);

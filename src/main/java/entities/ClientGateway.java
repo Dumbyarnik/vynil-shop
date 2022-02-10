@@ -7,7 +7,6 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Model;
     
 import entities.basic.Client;
-import entities.basic.Contact;
 
 @Model
 @Dependent
@@ -22,8 +21,8 @@ public interface ClientGateway extends Serializable{
     public boolean deleteClient(Long id);
 
     // client/contact
-    public boolean createContact(String username, Contact contact);
-    public boolean updateContact(String username,  Contact contact);
+    public boolean createContact(String username, String email, String phone);
+    public boolean updateContact(String username,  String email, String phone);
     public boolean deleteContact(String username);
 
     // additional
