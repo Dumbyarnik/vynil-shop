@@ -46,6 +46,10 @@ public class Client implements Serializable {
             cascade = CascadeType.ALL)
     private Collection<Review> reviews_about_client;
 
+    @OneToMany(fetch = FetchType.LAZY,
+        cascade = CascadeType.ALL)
+    private Collection<Vinyl> favourites = new ArrayList<Vinyl>();
+
     public Client(){}
 
     /**
@@ -136,6 +140,21 @@ public class Client implements Serializable {
      */
     public void setReviews_about_client(Collection<Review> reviews_about_client) {
         this.reviews_about_client = reviews_about_client;
+    }
+
+
+    /**
+     * @return Collection<Vinyl> return the favourites
+     */
+    public Collection<Vinyl> getFavourites() {
+        return favourites;
+    }
+
+    /**
+     * @param favourites the favourites to set
+     */
+    public void setFavourites(Collection<Vinyl> favourites) {
+        this.favourites = favourites;
     }
 
 }
