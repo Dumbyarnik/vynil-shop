@@ -111,4 +111,10 @@ public class ClientRepository implements ClientGateway {
         
         return client;
     }
+
+    @Override
+    @Transactional
+    public void saveClient(Client client) {
+        em.merge(client);
+    }
 }

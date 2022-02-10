@@ -11,13 +11,11 @@ import control.EntityConverter;
 import control.DTO.CreateVinylDTO;
 import control.DTO.VinylDTO;
 import entities.ClientGateway;
-import entities.FavouritesGateway;
 import entities.VinylGateway;
 import entities.basic.Client;
 import entities.basic.Genre;
 import entities.basic.Vinyl;
 import gateway.ClientRepository;
-import gateway.FavouritesRepository;
 import gateway.VinylRepository;
 
 @Model
@@ -30,9 +28,6 @@ public class FavouritesController implements FavouritesBoundary {
     @Inject
     ClientGateway clientRepository = new ClientRepository();
 
-    @Inject
-    FavouritesGateway favouritesRepository = new FavouritesRepository();
-
     EntityConverter entityConverter = new EntityConverter();
 
     @Override
@@ -41,7 +36,7 @@ public class FavouritesController implements FavouritesBoundary {
 
         Collection<VinylDTO> favourites = new ArrayList<>();
 
-        for (Vinyl vinyl : favouritesRepository.getFavourites(client)){
+        for (Vinyl vinyl : client.getFavourites()){
             VinylDTO vinylDTO = entityConverter.vinylToVinylDTO(vinyl);
             favourites.add(vinylDTO);
         }
@@ -59,15 +54,24 @@ public class FavouritesController implements FavouritesBoundary {
         
         client.getFavourites().add(vinyl);
 
-        favouritesRepository.createFavourite(client);
+        clientRepository.saveClient(client);
 
         return true;
     }
 
     @Override
     public boolean deleteFavourite(String username, Long vinyl_id) {
-        // TODO Auto-generated method stub
-        return false;
+        Client client = clientRepository.getClientByName(username);
+        Vinyl vinyl = vinylRepository.getVinyl(vinyl_id);
+
+        if (client == null || vinyl == null)
+            return false;
+
+        client.getFavourites().remove(vinyl);
+
+        clientRepository.saveClient(client);
+
+        return true;
     }
     
 }

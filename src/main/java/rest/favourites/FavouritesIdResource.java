@@ -84,6 +84,28 @@ public class FavouritesIdResource {
         return Response.status(406).entity("Vinyl doesn't exist").build(); 
     }
 
+    @DELETE
+    @RolesAllowed("Client")
+    @Operation(summary = "Deletes the vinyl")
+    @APIResponses(value = {
+        @APIResponse(responseCode = "200", 
+            description = "Success",
+            content = @Content(mediaType = "application/json")),
+        @APIResponse(responseCode = "406", 
+            description = "Vinyl doesn't exist",
+            content = @Content(mediaType = "text/plain"))
+        }
+    )
+    public Response deleteVinyl(@Context SecurityContext sec,
+    @PathParam("vinyl_id") Long vinyl_id) {
+        Principal user = sec.getUserPrincipal();
+        String username = user.getName();
+
+        if (favouritesController.deleteFavourite(username, vinyl_id ))
+            return Response.ok().build();
+        return Response.status(406).entity("Vinyl doesn't exist").build();
+    }
+
 
 
 
@@ -128,23 +150,7 @@ public class FavouritesIdResource {
         return Response.status(406).entity("Vinyl doesn't exist").build();
     }
 
-    @DELETE
-    @RolesAllowed("Client")
-    @Operation(summary = "Deletes the vinyl")
-    @APIResponses(value = {
-        @APIResponse(responseCode = "200", 
-            description = "Success",
-            content = @Content(mediaType = "application/json")),
-        @APIResponse(responseCode = "406", 
-            description = "Vinyl doesn't exist",
-            content = @Content(mediaType = "text/plain"))
-        }
-    )
-    public Response deleteVinyl(@PathParam("id") Long id) {
-        if (vinylController.deleteVinyl(id))
-            return Response.ok().build();
-        return Response.status(406).entity("Vinyl doesn't exist").build();
-    }
+    
 
     //////////////////// NOT AVAILABLE ///////////////////////////////////
 

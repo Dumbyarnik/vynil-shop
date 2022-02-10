@@ -30,5 +30,6 @@ public interface ClientGateway extends Serializable{
 
     // additional
     public Client getClientByName(String username);
+    public void saveClient(Client client);
     
 }
