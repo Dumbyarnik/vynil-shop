@@ -1,6 +1,5 @@
 package gateway;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -11,14 +10,8 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import control.DTO.VinylDTO;
-import entities.ClientGateway;
 import entities.basic.Client;
-import entities.basic.Contact;
 import entities.basic.Genre;
-import entities.security.UserLogin;
-import io.quarkus.security.User;
-
-import java.util.Collection;
 
 import entities.VinylGateway;
 import entities.basic.Vinyl;

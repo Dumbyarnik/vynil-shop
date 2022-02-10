@@ -2,17 +2,12 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.io.Serializable;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Model;
 
-import control.DTO.ClientDTO;
 import control.DTO.VinylDTO;
-import entities.basic.Client;
-import entities.basic.Contact;
 import entities.basic.Vinyl;
-import entities.security.UserLogin;
 
 @Model
 @Dependent
