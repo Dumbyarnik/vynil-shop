@@ -1,4 +1,4 @@
-package control.favourites;
+package control.client.favourites;
 
 import java.io.Serializable;
 import java.util.Collection;

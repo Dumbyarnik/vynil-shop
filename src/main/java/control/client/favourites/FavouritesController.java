@@ -1,4 +1,4 @@
-package control.favourites;
+package control.client.favourites;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -8,12 +8,10 @@ import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 
 import control.EntityConverter;
-import control.DTO.CreateVinylDTO;
 import control.DTO.VinylDTO;
 import entities.ClientGateway;
 import entities.VinylGateway;
 import entities.basic.Client;
-import entities.basic.Genre;
 import entities.basic.Vinyl;
 import gateway.ClientRepository;
 import gateway.VinylRepository;
@@ -34,14 +32,8 @@ public class FavouritesController implements FavouritesBoundary {
     public Collection<VinylDTO> getFavourites(String username) {
         Client client = clientRepository.getClientByName(username);
 
-        Collection<VinylDTO> favourites = new ArrayList<>();
-
-        for (Vinyl vinyl : client.getFavourites()){
-            VinylDTO vinylDTO = entityConverter.vinylToVinylDTO(vinyl);
-            favourites.add(vinylDTO);
-        }
-
-        return favourites;
+        return entityConverter
+            .vinylCollectionToVinylDTCollection(client.getFavourites());
     }
 
     @Override

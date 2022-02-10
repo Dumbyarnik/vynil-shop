@@ -1,6 +1,5 @@
 package control.vinyl;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.enterprise.context.Dependent;
@@ -13,7 +12,6 @@ import control.DTO.VinylDTO;
 import entities.ClientGateway;
 import entities.VinylGateway;
 import entities.basic.Client;
-import entities.basic.Genre;
 import entities.basic.Vinyl;
 import gateway.ClientRepository;
 import gateway.VinylRepository;
@@ -32,14 +30,9 @@ public class VinylController implements VinylBoundary {
 
     @Override
     public Collection<VinylDTO> getVinyls() {
-        Collection<VinylDTO> vinylDTOs = new ArrayList<>();
-        // converting vinyl to vinylDTO
-        for (Vinyl vinyl : vinylRepository.getVinyls()){
-            VinylDTO vinylDTO = entityConverter.vinylToVinylDTO(vinyl);
-            vinylDTOs.add(vinylDTO);
-        }
-
-        return vinylDTOs;
+        return entityConverter.vinylCollectionToVinylDTCollection(
+            vinylRepository.getVinyls()
+        );
     }
 
     @Override
@@ -51,6 +44,7 @@ public class VinylController implements VinylBoundary {
 
         Vinyl vinyl = entityConverter.vinylDTOToVinyl(createVinylDTO, client);
         vinylRepository.createVinyl(vinyl);
+
         return true;
     }
 
@@ -74,15 +68,9 @@ public class VinylController implements VinylBoundary {
 
     @Override
     public Collection<VinylDTO> getVinylReccomedations(Long id) {
-        Collection<VinylDTO> reccomedations = new ArrayList<VinylDTO>();
-
-        for (Vinyl vinyl : vinylRepository.getVinylReccomendations(id)){
-            VinylDTO tmp = entityConverter.vinylToVinylDTO(vinyl);
-            reccomedations.add(tmp);
-        }
-
-        if (reccomedations.size() == 0)
-            return null;
+        Collection<VinylDTO> reccomedations = 
+            entityConverter.vinylCollectionToVinylDTCollection(
+                vinylRepository.getVinylReccomendations(id));
 
         return reccomedations;
 
@@ -90,15 +78,9 @@ public class VinylController implements VinylBoundary {
 
     @Override
     public Collection<VinylDTO> getVinylGenre(String genre) {
-        Collection<VinylDTO> vinyls = new ArrayList<VinylDTO>();
-
-        // making genre upper case for the enum
-        for (Vinyl vinyl : vinylRepository.getVinylGenre(genre.toUpperCase())){
-            VinylDTO tmp = entityConverter.vinylToVinylDTO(vinyl);
-            vinyls.add(tmp);
-        }
-
-        return vinyls;
+        return entityConverter.vinylCollectionToVinylDTCollection(
+            vinylRepository.getVinylGenre(genre)
+        );
     }
     
 }

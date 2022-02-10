@@ -1,26 +1,17 @@
 package control.review;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 
 import control.EntityConverter;
 import control.DTO.CreateReviewDTO;
-import control.DTO.CreateVinylDTO;
-import control.DTO.VinylDTO;
 import entities.ClientGateway;
 import entities.ReviewGateway;
-import entities.VinylGateway;
 import entities.basic.Client;
-import entities.basic.Genre;
 import entities.basic.Review;
-import entities.basic.Vinyl;
 import gateway.ClientRepository;
 import gateway.ReviewRepository;
-import gateway.VinylRepository;
 
 @Model
 @Dependent

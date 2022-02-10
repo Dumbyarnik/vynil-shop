@@ -13,8 +13,6 @@ import control.DTO.ContactDTO;
 import control.DTO.CreateClientDTO;
 import entities.ClientGateway;
 import entities.basic.Client;
-import entities.basic.Contact;
-import entities.security.UserLogin;
 import gateway.ClientRepository;
 
 @Model
@@ -40,16 +38,8 @@ public class ClientController implements ClientBoundry {
 
     @Override
     public boolean createClient(CreateClientDTO createClientDTO) {
-        // Converting CreateClientDTO into Client
-        // And creating UserLogin object
-        Client client = new Client();
-        client.setUsername(createClientDTO.username);
-
-        UserLogin userLogin = new UserLogin();
-        userLogin.username = createClientDTO.username;
-        userLogin.password = createClientDTO.password;
-        
-        if (clientRepository.createClient(client, userLogin))
+        if (clientRepository.createClient(createClientDTO.username,
+            createClientDTO.password))
             return true;
         return false;
     }
@@ -68,23 +58,15 @@ public class ClientController implements ClientBoundry {
 
     @Override
     public boolean createContact(String username, ContactDTO contactDTO) {
-        // Converting contactDTO to contact
-        Contact contact = new Contact();
-        contact.setEmail(contactDTO.email);
-        contact.setPhone(contactDTO.phone);
-
-        return clientRepository.createContact(username, contact);
+        return clientRepository.createContact(username, 
+            contactDTO.email, contactDTO.phone);
 
     }
 
     @Override
-    public boolean updateContact(String username, ContactDTO contactDAO) {
-        // Converting contactDTO to contact
-        Contact contact = new Contact();
-        contact.setEmail(contactDAO.email);
-        contact.setPhone(contactDAO.phone);
-
-        return clientRepository.createContact(username, contact);
+    public boolean updateContact(String username, ContactDTO contactDTO) {
+        return clientRepository.createContact(username, 
+            contactDTO.email, contactDTO.phone);
     }
 
     @Override

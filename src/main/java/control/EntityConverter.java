@@ -3,7 +3,6 @@ package control;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import antlr.collections.List;
 import control.DTO.ClientDTO;
 import control.DTO.ContactDTO;
 import control.DTO.CreateReviewDTO;
@@ -18,6 +17,7 @@ import entities.basic.Vinyl;
 
 public class EntityConverter {
 
+    // client
     public ClientDTO clientToClientDTO(Client client){
         ClientDTO clientDTO = new ClientDTO();
         clientDTO.id = client.getId();
@@ -28,7 +28,7 @@ public class EntityConverter {
         }
 
         // putting reviews into DTO
-        Collection<ReviewDTO> reviews = new ArrayList();
+        Collection<ReviewDTO> reviews = new ArrayList<>();
 
         for (Review review : client.getReviews_about_client()){
             ReviewDTO tmp = this.reviewToReviewDTO(review);
@@ -47,6 +47,7 @@ public class EntityConverter {
         return clientDTO;
     }
     
+    // vinyl
     public VinylDTO vinylToVinylDTO(Vinyl vinyl){
         VinylDTO vinylDTO = new VinylDTO();
         vinylDTO.id = vinyl.getId();
@@ -86,6 +87,18 @@ public class EntityConverter {
         return vinyl;
     }
 
+    public Collection<VinylDTO> vinylCollectionToVinylDTCollection(Collection<Vinyl> vinyls){
+        Collection<VinylDTO> vinylDTOs = new ArrayList<>();
+
+        for (Vinyl vinyl : vinyls){
+            VinylDTO vinylDTO = this.vinylToVinylDTO(vinyl);
+            vinylDTOs.add(vinylDTO);
+        }
+
+        return vinylDTOs;
+    }
+
+    // review
     public Review createReviewDTOtoReview(CreateReviewDTO createReviewDTO,
         Client review_from_client, Client reviewed_client){
             Review review = new Review();
