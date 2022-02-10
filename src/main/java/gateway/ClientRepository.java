@@ -1,6 +1,5 @@
 package gateway;
 
-import java.io.Serializable;
 import java.util.Collection;
 
 import javax.enterprise.context.Dependent;
@@ -13,7 +12,7 @@ import entities.ClientGateway;
 import entities.basic.Client;
 import entities.basic.Contact;
 import entities.security.UserLogin;
-import io.quarkus.security.User;
+import io.quarkus.elytron.security.common.BcryptUtil;
 
 @Model
 @Dependent
@@ -34,11 +33,17 @@ public class ClientRepository implements ClientGateway {
 
     @Override
     @Transactional
-    public boolean createClient(Client client, UserLogin userLogin) {
+    public boolean createClient(String username, String password) {
         // persisting UserLogin & client
         try{
-            UserLogin.add(userLogin.username, userLogin.password, "Client");
+            // creating client
+            Client client = new Client();
+            client.setUsername(username);
+            // creating UserLogin
+            UserLogin userLogin = this.createSecurityIdentityClient(username, password);
+
             em.persist(client);
+            em.persist(userLogin);
         } catch (Exception e){
             return false;
         }
@@ -116,5 +121,14 @@ public class ClientRepository implements ClientGateway {
     @Transactional
     public void saveClient(Client client) {
         em.merge(client);
+    }
+
+    private UserLogin createSecurityIdentityClient(String username, String password){
+        UserLogin user = new UserLogin();
+        user.username = username;
+        user.password = BcryptUtil.bcryptHash(password);
+        user.role = "Client";
+
+        return user;
     }
 }

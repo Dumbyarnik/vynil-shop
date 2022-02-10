@@ -5,11 +5,9 @@ import java.util.Collection;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Model;
-
-import control.DTO.ClientDTO;
+    
 import entities.basic.Client;
 import entities.basic.Contact;
-import entities.security.UserLogin;
 
 @Model
 @Dependent
@@ -17,7 +15,7 @@ public interface ClientGateway extends Serializable{
 
     // client
     public Collection<Client> getClients();
-    public boolean createClient(Client client, UserLogin userLogin);
+    public boolean createClient(String username, String password);
 
     // client/{id}
     public Client getClient(Long id);

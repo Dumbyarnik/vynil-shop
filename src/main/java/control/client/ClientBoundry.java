@@ -8,7 +8,6 @@ import javax.enterprise.inject.Model;
 import control.DTO.ClientDTO;
 import control.DTO.ContactDTO;
 import control.DTO.CreateClientDTO;
-import entities.basic.Client;
 
 @Model
 @Dependent

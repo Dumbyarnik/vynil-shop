@@ -14,7 +14,6 @@ import control.DTO.CreateClientDTO;
 import entities.ClientGateway;
 import entities.basic.Client;
 import entities.basic.Contact;
-import entities.security.UserLogin;
 import gateway.ClientRepository;
 
 @Model
@@ -40,16 +39,8 @@ public class ClientController implements ClientBoundry {
 
     @Override
     public boolean createClient(CreateClientDTO createClientDTO) {
-        // Converting CreateClientDTO into Client
-        // And creating UserLogin object
-        Client client = new Client();
-        client.setUsername(createClientDTO.username);
-
-        UserLogin userLogin = new UserLogin();
-        userLogin.username = createClientDTO.username;
-        userLogin.password = createClientDTO.password;
-        
-        if (clientRepository.createClient(client, userLogin))
+        if (clientRepository.createClient(createClientDTO.username,
+            createClientDTO.password))
             return true;
         return false;
     }
