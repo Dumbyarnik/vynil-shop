@@ -19,7 +19,6 @@ import io.quarkus.qute.*;
 @Path("/userpage/{id}")
 
 
-
 public class UserPage {
 
     @Inject
