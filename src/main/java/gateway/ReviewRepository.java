@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import entities.ReviewGateway;
+import entities.basic.Client;
 import entities.basic.Review;
 
 @Model
@@ -18,10 +19,30 @@ public class ReviewRepository implements ReviewGateway {
     @Inject
     protected EntityManager em;
 
+    private DatabaseService databaseService;
+
     @Override
     @Transactional
-    public void createReview(Review review) {
+    public boolean createReview(String username, String review,
+        int stars, Long reviewed_client_id) {
+
+        Client creator = databaseService.getClientByName(username);
+        Client reviewed_client = em.find(Client.class, reviewed_client_id);
+
+        if(creator == null || reviewed_client == null)
+            return false;
+
+        Review review_obj = new Review();
+        // setting up relationships
+        review_obj.setCreator(creator);
+        review_obj.setReviewed_client(reviewed_client);
+        // setting values
+        review_obj.setReview(review);
+        review_obj.setStars(stars);
+
         em.persist(review);
+
+        return true;
     }
     
 }

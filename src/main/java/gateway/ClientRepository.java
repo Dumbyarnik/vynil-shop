@@ -23,6 +23,8 @@ public class ClientRepository implements ClientGateway {
     @Inject
     protected EntityManager em;
 
+    private DatabaseService databaseService;
+
     @Override
     public Collection<Client> getClients() {
         Collection <Client> clients = em.createQuery("SELECT c FROM Client c",
@@ -71,7 +73,7 @@ public class ClientRepository implements ClientGateway {
     @Transactional
     public boolean createContact(String username, String email, String phone) {
         // getting client
-        Client client = this.getClientByName(username);
+        Client client = databaseService.getClientByName(username);
         // creating contact
         Contact contact = new Contact();
         contact.setEmail(email);
@@ -90,7 +92,7 @@ public class ClientRepository implements ClientGateway {
     @Transactional
     public boolean updateContact(String username, String email, String phone) {
         // getting client
-        Client client = this.getClientByName(username);
+        Client client = databaseService.getClientByName(username);
         // creating contact
         Contact contact = new Contact();
         contact.setEmail(email);
@@ -108,7 +110,7 @@ public class ClientRepository implements ClientGateway {
     @Override
     @Transactional
     public boolean deleteContact(String username) {
-        Client client = this.getClientByName(username);
+        Client client = databaseService.getClientByName(username);
 
         if (client != null){
             client.deleteContact();
@@ -116,23 +118,6 @@ public class ClientRepository implements ClientGateway {
             return true;
         }
         return false;
-    }
-    
-    @Override
-    public Client getClientByName(String username) {
-        Client client = em.createQuery("Select c FROM Client c where " + 
-            "c.username LIKE :username",
-            Client.class)
-            .setParameter("username", username)
-            .getSingleResult();
-        
-        return client;
-    }
-
-    @Override
-    @Transactional
-    public void saveClient(Client client) {
-        em.merge(client);
     }
 
     private UserLogin createSecurityIdentityClient(String username, String password){
