@@ -10,10 +10,12 @@ import javax.inject.Inject;
 import control.EntityConverter;
 import control.DTO.VinylDTO;
 import entities.ClientGateway;
+import entities.FavouritesGateway;
 import entities.VinylGateway;
 import entities.basic.Client;
 import entities.basic.Vinyl;
 import gateway.ClientRepository;
+import gateway.FavouritesRepository;
 import gateway.VinylRepository;
 
 @Model
@@ -21,49 +23,25 @@ import gateway.VinylRepository;
 public class FavouritesController implements FavouritesBoundary {
 
     @Inject
-    VinylGateway vinylRepository = new VinylRepository();
-
-    @Inject
-    ClientGateway clientRepository = new ClientRepository();
+    FavouritesGateway favouritesRepository = new FavouritesRepository();
 
     EntityConverter entityConverter = new EntityConverter();
 
     @Override
     public Collection<VinylDTO> getFavourites(String username) {
-        Client client = clientRepository.getClientByName(username);
-
         return entityConverter
-            .vinylCollectionToVinylDTCollection(client.getFavourites());
+            .vinylCollectionToVinylDTCollection(favouritesRepository
+            .getFavourites(username));
     }
 
     @Override
     public boolean createFavourite(String username, Long vinyl_id) {
-        Client client = clientRepository.getClientByName(username);
-        Vinyl vinyl = vinylRepository.getVinyl(vinyl_id);
-
-        if (client == null || vinyl == null)
-            return false;
-        
-        client.getFavourites().add(vinyl);
-
-        clientRepository.saveClient(client);
-
-        return true;
+        return favouritesRepository.createFavourite(username, vinyl_id);
     }
 
     @Override
     public boolean deleteFavourite(String username, Long vinyl_id) {
-        Client client = clientRepository.getClientByName(username);
-        Vinyl vinyl = vinylRepository.getVinyl(vinyl_id);
-
-        if (client == null || vinyl == null)
-            return false;
-
-        client.getFavourites().remove(vinyl);
-
-        clientRepository.saveClient(client);
-
-        return true;
+        return favouritesRepository.deleteFavourite(username, vinyl_id);
     }
     
 }
