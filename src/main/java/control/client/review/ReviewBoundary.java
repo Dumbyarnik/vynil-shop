@@ -1,4 +1,4 @@
-package control.review;
+package control.client.review;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Model;
