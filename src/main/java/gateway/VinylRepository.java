@@ -9,7 +9,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
-import control.DTO.VinylDTO;
 import entities.basic.Client;
 import entities.basic.Genre;
 
@@ -25,6 +24,8 @@ public class VinylRepository implements VinylGateway {
     @Inject
     protected EntityManager em;
 
+    private DatabaseService databaseService;
+
     @Override
     public Collection<Vinyl> getVinyls() {
         Collection <Vinyl> vinyls = em.createQuery("SELECT v FROM Vinyl v",
@@ -35,8 +36,24 @@ public class VinylRepository implements VinylGateway {
 
     @Override
     @Transactional
-    public void createVinyl(Vinyl vinyl) {
+    public boolean createVinyl(String username, String title, String artist,
+    String description, Long price, Genre genre) {
+        Client client = databaseService.getClientByName(username);
+
+        if (client == null)
+            return false;
+
+        Vinyl vinyl = new Vinyl();
+        vinyl.setTitle(title);
+        vinyl.setArtist(artist);
+        vinyl.setDescription(description);
+        vinyl.setPrice(price);
+        vinyl.setGenre(genre);
+        vinyl.setClient(client);
+
         em.persist(vinyl);
+
+        return true;
     }
 
     @Override
@@ -46,7 +63,8 @@ public class VinylRepository implements VinylGateway {
 
     @Override
     @Transactional
-    public boolean updateVinyl(Long id, VinylDTO vinylDTO) {
+    public boolean updateVinyl(Long id, String title, String artist,
+        String description, Long price, Genre genre) {
         Vinyl vinyl = em.find(Vinyl.class, id);
         Client client = em.find(Client.class, vinyl.getClient().getId());
 
@@ -57,11 +75,11 @@ public class VinylRepository implements VinylGateway {
         // need to update
         for (Vinyl tmp : client.getVinyls())
             if (tmp.getId().equals(vinyl.getId())){
-                tmp.setTitle(vinylDTO.title);
-                tmp.setArtist(vinylDTO.artist);
-                tmp.setDescription(vinylDTO.description);
-                tmp.setPrice(vinylDTO.price);
-                tmp.setGenre(Genre.valueOf(vinylDTO.genre.toUpperCase()));
+                tmp.setTitle(title);
+                tmp.setArtist(artist);
+                tmp.setDescription(description);
+                tmp.setPrice(price);
+                tmp.setGenre(genre);
                 
                 em.merge(client);        
             }

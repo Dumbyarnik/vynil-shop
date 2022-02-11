@@ -6,7 +6,7 @@ import java.util.Collection;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Model;
 
-import control.DTO.VinylDTO;
+import entities.basic.Genre;
 import entities.basic.Vinyl;
 
 @Model
@@ -15,11 +15,13 @@ public interface VinylGateway extends Serializable {
 
     // vinyl
     public Collection<Vinyl> getVinyls();
-    public void createVinyl(Vinyl vinyl);
+    public boolean createVinyl(String username, String title, String artist,
+        String description, Long price, Genre genre);
 
     // vinyl/{id}
     public Vinyl getVinyl(Long id);
-    public boolean updateVinyl(Long id, VinylDTO vinylDTO);
+    public boolean updateVinyl(Long id, String title, String artist,
+        String description, Long price, Genre genre);
     public boolean deleteVinyl(Long id);
 
     // vinyl/{id}/reccomendations

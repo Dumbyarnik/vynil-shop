@@ -9,11 +9,9 @@ import javax.inject.Inject;
 import control.EntityConverter;
 import control.DTO.CreateVinylDTO;
 import control.DTO.VinylDTO;
-import entities.ClientGateway;
 import entities.VinylGateway;
-import entities.basic.Client;
+import entities.basic.Genre;
 import entities.basic.Vinyl;
-import gateway.ClientRepository;
 import gateway.VinylRepository;
 
 @Model
@@ -22,9 +20,6 @@ public class VinylController implements VinylBoundary {
 
     @Inject
     VinylGateway vinylRepository = new VinylRepository();
-
-    @Inject
-    ClientGateway clientRepository = new ClientRepository();
 
     EntityConverter entityConverter = new EntityConverter();
 
@@ -37,15 +32,9 @@ public class VinylController implements VinylBoundary {
 
     @Override
     public boolean createVinyl(String username, CreateVinylDTO createVinylDTO) {
-        // Converting VinylDTO to Vinyl
-        Client client = clientRepository.getClientByName(username);
-        if (client == null)
-            return false;
-
-        Vinyl vinyl = entityConverter.vinylDTOToVinyl(createVinylDTO, client);
-        vinylRepository.createVinyl(vinyl);
-
-        return true;
+        return vinylRepository.createVinyl(username, createVinylDTO.title,
+            createVinylDTO.artist, createVinylDTO.description, 
+            createVinylDTO.price, Genre.valueOf(createVinylDTO.genre));
     }
 
     @Override
@@ -58,7 +47,9 @@ public class VinylController implements VinylBoundary {
 
     @Override
     public boolean updateVinyl(Long id, VinylDTO vinylDTO) {
-        return vinylRepository.updateVinyl(id, vinylDTO);
+        return vinylRepository.updateVinyl(id, vinylDTO.title,
+            vinylDTO.artist, vinylDTO.description, 
+            vinylDTO.price, Genre.valueOf(vinylDTO.genre));
     }
 
     @Override
