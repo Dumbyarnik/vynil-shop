@@ -94,10 +94,10 @@ public class ClientContactResource {
             content = @Content(mediaType = "text/plain"))
         }
     )
+
     public Response deleteContact(@Context SecurityContext sec) {
         Principal user = sec.getUserPrincipal();
         String username = user.getName();
-
         if (clientController.deleteContact(username))
             return Response.ok().build();
         return Response.status(406).entity("Client or contact doesn't exist").build();
