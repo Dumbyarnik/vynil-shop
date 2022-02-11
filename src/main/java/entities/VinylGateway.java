@@ -20,9 +20,9 @@ public interface VinylGateway extends Serializable {
 
     // vinyl/{id}
     public Vinyl getVinyl(Long id);
-    public boolean updateVinyl(Long id, String title, String artist,
+    public boolean updateVinyl(String username, Long id, String title, String artist,
         String description, Long price, Genre genre);
-    public boolean deleteVinyl(Long id);
+    public boolean deleteVinyl(String username, Long id);
 
     // vinyl/{id}/reccomendations
     public Collection<Vinyl> getVinylReccomendations(Long id);

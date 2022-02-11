@@ -3,8 +3,13 @@ package control.client.favourites;
 import java.io.Serializable;
 import java.util.Collection;
 
+import javax.enterprise.context.Dependent;
+import javax.enterprise.inject.Model;
+
 import control.DTO.VinylDTO;
 
+@Model
+@Dependent
 public interface FavouritesBoundary extends Serializable {
 
     // client/favourites

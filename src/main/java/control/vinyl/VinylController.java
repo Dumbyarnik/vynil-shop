@@ -32,9 +32,11 @@ public class VinylController implements VinylBoundary {
 
     @Override
     public boolean createVinyl(String username, CreateVinylDTO createVinylDTO) {
+        // TODO: check for the genre constant
+
         return vinylRepository.createVinyl(username, createVinylDTO.title,
             createVinylDTO.artist, createVinylDTO.description, 
-            createVinylDTO.price, Genre.valueOf(createVinylDTO.genre));
+            createVinylDTO.price, Genre.valueOf(createVinylDTO.genre.toUpperCase()));
     }
 
     @Override
@@ -46,15 +48,15 @@ public class VinylController implements VinylBoundary {
     }
 
     @Override
-    public boolean updateVinyl(Long id, VinylDTO vinylDTO) {
-        return vinylRepository.updateVinyl(id, vinylDTO.title,
+    public boolean updateVinyl(String username, Long id, VinylDTO vinylDTO) {
+        return vinylRepository.updateVinyl(username, id, vinylDTO.title,
             vinylDTO.artist, vinylDTO.description, 
             vinylDTO.price, Genre.valueOf(vinylDTO.genre));
     }
 
     @Override
-    public boolean deleteVinyl(Long id) {
-        return vinylRepository.deleteVinyl(id);
+    public boolean deleteVinyl(String username, Long id) {
+        return vinylRepository.deleteVinyl(username, id);
     }
 
     @Override
@@ -70,7 +72,7 @@ public class VinylController implements VinylBoundary {
     @Override
     public Collection<VinylDTO> getVinylGenre(String genre) {
         return entityConverter.vinylCollectionToVinylDTCollection(
-            vinylRepository.getVinylGenre(genre)
+            vinylRepository.getVinylGenre(genre.toUpperCase())
         );
     }
     

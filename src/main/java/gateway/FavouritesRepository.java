@@ -2,18 +2,24 @@ package gateway;
 
 import java.util.Collection;
 
+import javax.enterprise.context.Dependent;
+import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import entities.FavouritesGateway;
 import entities.basic.Client;
 import entities.basic.Vinyl;
 
+@Model
+@Dependent
 public class FavouritesRepository implements FavouritesGateway {
 
     @Inject
     protected EntityManager em;
 
+    @Inject
     private DatabaseService databaseService;
 
     @Override
@@ -22,6 +28,7 @@ public class FavouritesRepository implements FavouritesGateway {
     }
 
     @Override
+    @Transactional
     public boolean createFavourite(String username, Long vinyl_id) {
         Client client = databaseService.getClientByName(username);
         Vinyl vinyl = em.find(Vinyl.class, vinyl_id);
@@ -37,11 +44,15 @@ public class FavouritesRepository implements FavouritesGateway {
     }
 
     @Override
+    @Transactional
     public boolean deleteFavourite(String username, Long vinyl_id) {
         Client client = databaseService.getClientByName(username);
         Vinyl vinyl = em.find(Vinyl.class, vinyl_id);
 
         if (client == null || vinyl == null)
+            return false;
+
+        if (!client.getFavourites().contains(vinyl))
             return false;
 
         client.getFavourites().remove(vinyl);

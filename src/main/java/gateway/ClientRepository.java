@@ -23,14 +23,13 @@ public class ClientRepository implements ClientGateway {
     @Inject
     protected EntityManager em;
 
+    @Inject
     private DatabaseService databaseService;
 
     @Override
     public Collection<Client> getClients() {
-        Collection <Client> clients = em.createQuery("SELECT c FROM Client c",
+        return em.createQuery("SELECT c FROM Client c",
             Client.class).getResultList();
-        
-        return clients;
     }
 
     @Override
@@ -74,13 +73,17 @@ public class ClientRepository implements ClientGateway {
     public boolean createContact(String username, String email, String phone) {
         // getting client
         Client client = databaseService.getClientByName(username);
+
+        if (client.getContact() != null)
+            return this.updateContact(username, email, phone);
+
         // creating contact
         Contact contact = new Contact();
         contact.setEmail(email);
         contact.setPhone(phone);
-        contact.setClient(client);
         
         if (client != null){
+            contact.setClient(client);
             client.setContact(contact);
             em.merge(client);
             return true;
@@ -93,14 +96,13 @@ public class ClientRepository implements ClientGateway {
     public boolean updateContact(String username, String email, String phone) {
         // getting client
         Client client = databaseService.getClientByName(username);
-        // creating contact
-        Contact contact = new Contact();
-        contact.setEmail(email);
-        contact.setPhone(phone);
-        contact.setClient(client);
+        
+        if (client.getContact() == null)
+            return false;
 
         if (client != null){
-            client.setContact(contact);
+            client.getContact().setEmail(email);
+            client.getContact().setPhone(phone);
             em.merge(client);
             return true;
         }
@@ -112,9 +114,16 @@ public class ClientRepository implements ClientGateway {
     public boolean deleteContact(String username) {
         Client client = databaseService.getClientByName(username);
 
+        if (client.getContact() == null)
+            return false;
+
         if (client != null){
+            client.getContact().deleteClient();
+            em.remove(client.getContact());
+
             client.deleteContact();
             em.merge(client);
+            
             return true;
         }
         return false;

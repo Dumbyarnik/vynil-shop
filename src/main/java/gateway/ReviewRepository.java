@@ -19,6 +19,7 @@ public class ReviewRepository implements ReviewGateway {
     @Inject
     protected EntityManager em;
 
+    @Inject
     private DatabaseService databaseService;
 
     @Override

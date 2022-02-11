@@ -24,6 +24,7 @@ public class VinylRepository implements VinylGateway {
     @Inject
     protected EntityManager em;
 
+    @Inject
     private DatabaseService databaseService;
 
     @Override
@@ -63,14 +64,18 @@ public class VinylRepository implements VinylGateway {
 
     @Override
     @Transactional
-    public boolean updateVinyl(Long id, String title, String artist,
+    public boolean updateVinyl(String username, Long id, String title, String artist,
         String description, Long price, Genre genre) {
         Vinyl vinyl = em.find(Vinyl.class, id);
-        Client client = em.find(Client.class, vinyl.getClient().getId());
-
         if (vinyl == null)
             return false;
 
+        Client client = em.find(Client.class, vinyl.getClient().getId());
+        if (client == null)
+            return false;
+        if (client.getUsername().equals(username))
+            return false;
+            
         // going through all the vinyls and find the one we
         // need to update
         for (Vinyl tmp : client.getVinyls())
@@ -89,13 +94,20 @@ public class VinylRepository implements VinylGateway {
 
     @Override
     @Transactional
-    public boolean deleteVinyl(Long id) {
-        Vinyl vinyl = this.getVinyl(id);
-        Client client = vinyl.getClient();
+    public boolean deleteVinyl(String username, Long id) {
+        // TODO: anyone shouldnt delete vinyl!
 
-        if (vinyl == null || client == null)
+        Vinyl vinyl = this.getVinyl(id);
+        if (vinyl == null)
             return false;
-        
+
+        Client client = vinyl.getClient();
+        if (client == null)
+            return false;
+            
+        if (!client.getUsername().equals(username))
+            return false;
+            
         // going through all the vinyls and find the one we
         // need to delete
         for (Vinyl tmp : client.getVinyls())
@@ -115,6 +127,9 @@ public class VinylRepository implements VinylGateway {
     @Override
     public Collection<Vinyl> getVinylReccomendations(Long id) {
         Vinyl vinyl = this.getVinyl(id);
+
+        if (vinyl == null)
+            return new ArrayList<Vinyl>();
         
         Collection<Vinyl> tmp_list = em.createQuery("Select v FROM Vinyl v where " + 
             "v.genre LIKE :genre",
