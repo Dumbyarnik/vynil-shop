@@ -17,8 +17,8 @@ public interface VinylBoundary {
 
     // vinyl/{id}
     public VinylDTO getVinyl(Long id);
-    public boolean updateVinyl(Long id, VinylDTO vinylDTO);
-    public boolean deleteVinyl(Long id);
+    public boolean updateVinyl(String username, Long id, VinylDTO vinylDTO);
+    public boolean deleteVinyl(String username, Long id);
 
     // vinyl/{id}/reccomendations
     public Collection<VinylDTO> getVinylReccomedations(Long id);

@@ -1,4 +1,4 @@
-package rest.review;
+package rest.client.review;
 
 import java.security.Principal;
 
@@ -23,8 +23,8 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 
 import control.DTO.CreateReviewDTO;
-import control.review.ReviewBoundary;
-import control.review.ReviewController;
+import control.client.review.ReviewBoundary;
+import control.client.review.ReviewController;
 
 import javax.ws.rs.core.Context;
 
