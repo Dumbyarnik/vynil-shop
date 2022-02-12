@@ -16,6 +16,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
+import org.eclipse.microprofile.faulttolerance.Fallback;
+import org.eclipse.microprofile.faulttolerance.Retry;
+import org.eclipse.microprofile.faulttolerance.Timeout;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 
@@ -51,6 +54,9 @@ public class FavouritesIdResource {
             content = @Content(mediaType = "text/plain"))
         }
     )
+    @Retry(maxRetries = 3)
+    @Timeout(250)
+    @Fallback(fallbackMethod = "notAvailable")
     public Response createFavourite(@Context SecurityContext sec,
         @PathParam("vinyl_id") Long vinyl_id) {
         Principal user = sec.getUserPrincipal();
@@ -73,8 +79,11 @@ public class FavouritesIdResource {
             content = @Content(mediaType = "text/plain"))
         }
     )
+    @Retry(maxRetries = 3)
+    @Timeout(250)
+    @Fallback(fallbackMethod = "notAvailable")
     public Response deleteVinyl(@Context SecurityContext sec,
-    @PathParam("vinyl_id") Long vinyl_id) {
+        @PathParam("vinyl_id") Long vinyl_id) {
         Principal user = sec.getUserPrincipal();
         String username = user.getName();
 
@@ -106,6 +115,9 @@ public class FavouritesIdResource {
         return Response.status(404).entity("Method doesn't exist").build();
     }
 
-    
+    public Response notAvailable(@Context SecurityContext sec,
+        @PathParam("vinyl_id") Long vinyl_id){
+        return Response.status(408).build();
+    }  
     
 }
