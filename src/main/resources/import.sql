@@ -2,6 +2,8 @@
 insert into client(username) values ('ringo');
 insert into client(username) values ('bingo');
 insert into client(username) values ('shmingo');
+/* admin */
+insert into client(username) values ('admin');
 
 /* contacts */
 insert into contact(email, phone, client_id) 

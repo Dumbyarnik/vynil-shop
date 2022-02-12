@@ -18,9 +18,11 @@ public class CreateSecInitials {
     @Transactional
     public void loadUsers(@Observes StartupEvent event){
         UserLogin.deleteAll();
-
+        // clients
         UserLogin.add("ringo", "ringo", "Client");
         UserLogin.add("bingo", "bingo", "Client");
         UserLogin.add("shmingo", "shmingo", "Client");
+        // admin
+        UserLogin.add("admin", "admin", "Admin");
     }
 }
