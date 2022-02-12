@@ -7,41 +7,53 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-     <link rel="stylesheet" href="style.css">
+     <link rel="stylesheet" href="/style.css">
     <title>Hello, world!</title>
   </head>
   <body>
       <!-- Image and text -->
 <nav class="navbar" style="background-color: #1C00CE">
-  <a class="navbar-brand" href="genres.html">
+  <a class="navbar-brand" href="user.html">
     <img src="/vinyl.svg" width="50" height="50" class="d-inline-block align-top" alt=""
-         >    <h1 class="vinylshop" style="color:whitesmoke"> Vinyl Shop </h1> 
+         >    <p class="vinylshop" style="color:whitesmoke"> Vinyl Shop </p> 
   </a>
 
 </nav>
 
-      <h1 class="title"> Rock </h1>
+<h1 style="margin-top: 5%">Write a review </h1>  
       
-   <div class="vinyl_component" style="margin-top: 6%">
-  <div class="row">
-    <div class="col-sm">
-  <img  class="album" src="/beatles.jpg" width="150" height="150">
-</div>
- <div class="col-md">
-      
-      <h1> Abbey Road </h1>
-      
-         <a href="vinyl.html" class="btn btn-primary">Mehr erfahren</a>
-      </div>
-    </div>
+
+
+     <form action="/reviewpage/{user.id}/edit" method="POST" style="margin-left: 4%; margin-right: 4%">
+  <div class="form-group">
+    <label for="title"> Title</label>
+    <input type="text" id="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Write Review..">
   </div>
+  <div class="form-group" >
+    <label for="exampleInputPassword1">Review</label>
+    <input type="text" maxlength="4" size="4" class="form-control" id="exampleInputPassword1" placeholder="Review">
+  </div>
+  <button style="display: inline-block" type="submit" class="btn btn-primary">Send Review</button>
+
+<div class="dropdown" style="display: inline-block" >
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+   Choose Stars
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">1</a>
+    <a class="dropdown-item" href="#">2</a>
+    <a class="dropdown-item" href="#">3</a>
+    <a class="dropdown-item" nhref="#">4</a>
+    <a class="dropdown-item" href="#">5</a>
+  </div>
+</div>
+</form>
+    
+      
 
       
-      
-      
-      
-      
 
+      
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

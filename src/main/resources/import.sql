@@ -11,13 +11,13 @@ insert into contact(email, phone, client_id)
 
 /* vinyls */
 insert into vinyl(title, artist, genre, description, price, client_id) 
-    values ('Black Death', 'Metallica', 'ROCK', 'Cool', 12, 1);
+    values ('Abbey Road', 'The Beatles', 'ROCK', 'Cool', 12, 1);
 insert into vinyl(title, artist, genre, description, price, client_id) 
-    values ('Apokalypse', 'Metallica', 'ROCK', 'Cool', 20, 1);
+    values ('Pet Sounds', 'The Beach Boys', 'ROCK', 'Cool', 20, 1);
 insert into vinyl(title, artist, genre, description, price, client_id) 
-    values ('Brown Death', 'Metallica', 'ROCK', 'Cool', 5, 1);
+    values ('Random Access Memories', 'Daft Punk', 'ELECTRO', 'Cool', 5, 1);
 insert into vinyl(title, artist, genre, description, price, client_id) 
-    values ('Black Greatness', 'Metallica', 'ROCK', 'Cool', 12, 1);
+    values ('Graduation', 'Kanye West', 'HIPHOP', 'Cool', 12, 1);
 
 insert into vinyl(title, artist, genre, description, price, client_id) 
     values ('4 Seasons', 'Vivaldi', 'CLASSIC', 'Great', 12, 2);

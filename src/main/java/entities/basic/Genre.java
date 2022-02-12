@@ -4,5 +4,5 @@ public enum Genre {
     ROCK,
     CLASSIC,
     ELECTRO,
-    DISCO
+    HIPHOP
 }

@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Response;
 
 import control.DTO.ClientDTO;
 import control.DTO.VinylDTO;
@@ -25,7 +26,9 @@ public class VinylPage {
     @Inject
     Template vinyl;
 
-    
+    @Inject
+    Template error;
+
     @Inject
     VinylBoundary vinylController = new VinylController();
 
@@ -42,7 +45,7 @@ public class VinylPage {
      if (vinylDTO != null)  
       return vinyl.data("vinyl",vinylDTO).data("user",clientDTO);
       
-      return null;
+      return error.data(null);
     }
  
 
