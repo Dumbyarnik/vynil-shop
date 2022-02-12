@@ -12,6 +12,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
+import org.eclipse.microprofile.faulttolerance.Fallback;
+import org.eclipse.microprofile.faulttolerance.Retry;
+import org.eclipse.microprofile.faulttolerance.Timeout;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
@@ -19,6 +22,8 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 import control.DTO.ClientDTO;
+import control.DTO.ContactDTO;
+import control.DTO.ReviewDTO;
 import control.client.ClientBoundry;
 import control.client.ClientController;
 
@@ -47,6 +52,9 @@ public class ClientIdResource {
             content = @Content(mediaType = "text/plain"))
         }
     )
+    @Retry(maxRetries = 3)
+    @Timeout(250)
+    @Fallback(fallbackMethod = "fallbackClient")
     public Response getClient(@PathParam("id") Long id) {
         ClientDTO clientDTO = clientController.getClient(id);
         if (clientDTO == null)
@@ -66,6 +74,9 @@ public class ClientIdResource {
             content = @Content(mediaType = "text/plain"))
         }
     )
+    @Retry(maxRetries = 1)
+    @Timeout(250)
+    @Fallback(fallbackMethod = "notAvailable")
     public Response deleteClient(@PathParam("id") Long id) {
         if (clientController.deleteClient(id))
             return Response.ok().build();
@@ -93,5 +104,30 @@ public class ClientIdResource {
     public Response updateClient() {
         return Response.status(404).entity("Method doesn't exist").build();
     }
+
+    // Fallback methods
+    public Response fallbackClient(@PathParam("id") Long id){
+        ClientDTO clientDTO = new ClientDTO();
+        clientDTO.id = 0L;
+        clientDTO.username = "client";
+
+        ContactDTO contactDTO = new ContactDTO();
+        contactDTO.email = "client@mail.com";
+        contactDTO.phone = "012345678";
+        clientDTO.contact = contactDTO;
+
+        ReviewDTO reviewDTO = new ReviewDTO();
+        reviewDTO.id = 0L;
+        reviewDTO.review = "Great client";
+        reviewDTO.stars = 5;
+        reviewDTO.reviewed_client_id = 0L;
+        reviewDTO.creator_id = 1L;
+        clientDTO.reviews.add(reviewDTO);
+
+        return Response.status(408).entity(clientDTO).build();
+    }
     
+    public Response notAvailable(@PathParam("id") Long id){
+        return Response.status(408).build();
+    }
 }

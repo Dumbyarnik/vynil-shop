@@ -15,6 +15,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
+import org.eclipse.microprofile.faulttolerance.Fallback;
+import org.eclipse.microprofile.faulttolerance.Retry;
+import org.eclipse.microprofile.faulttolerance.Timeout;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 
 import control.DTO.VinylDTO;
@@ -48,6 +51,9 @@ public class FavouritesResource {
             description = "Success",
             content = @Content(mediaType = "application/json", 
             schema = @Schema(implementation = VinylDTO.class))))
+    @Retry(maxRetries = 3)
+    @Timeout(250)
+    @Fallback(fallbackMethod = "fallbackFavourites")
     public Response getFavourites(@Context SecurityContext sec) {
         Principal user = sec.getUserPrincipal();
         String username = user.getName();
@@ -85,6 +91,19 @@ public class FavouritesResource {
             content = @Content(mediaType = "text/plain")))
     public Response deleteFavourites() {
         return Response.status(404).entity("Method doesn't exist").build();
+    }
+
+    // Fallback methods
+    public Response fallbackFavourites(@Context SecurityContext sec){
+        VinylDTO vinylDTO = new VinylDTO();
+        vinylDTO.id = 0L;
+        vinylDTO.title = "Example Vinyl";
+        vinylDTO.description = "Cool Vinyl";
+        vinylDTO.price = 0L;
+        vinylDTO.genre = "ROCK";
+        vinylDTO.creator_id = 0L;
+
+        return Response.status(408).entity(vinylDTO).build();
     }
     
 }

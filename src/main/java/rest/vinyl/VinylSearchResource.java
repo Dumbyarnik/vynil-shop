@@ -11,6 +11,10 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
+
+import org.eclipse.microprofile.faulttolerance.Fallback;
+import org.eclipse.microprofile.faulttolerance.Retry;
+import org.eclipse.microprofile.faulttolerance.Timeout;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
@@ -43,6 +47,9 @@ public class VinylSearchResource {
             content = @Content(mediaType = "application/json",
             schema = @Schema(implementation = VinylDTO.class)))
     )
+    @Retry(maxRetries = 3)
+    @Timeout(250)
+    @Fallback(fallbackMethod = "fallbackGenreSearch")
     public Response getGenreSearch(@PathParam("genre") String genre) {
         return Response.ok(vinylController.getVinylGenre(genre)).build();
     }
@@ -76,5 +83,18 @@ public class VinylSearchResource {
             content = @Content(mediaType = "text/plain")))
     public Response deleteGenreSearch(@PathParam("genre") String genre) {
         return Response.status(404).entity("Method doesn't exist").build();
+    }
+
+    // Fallback methods
+    public Response fallbackGenreSearch(@PathParam("genre") String genre){
+        VinylDTO vinylDTO = new VinylDTO();
+        vinylDTO.id = 0L;
+        vinylDTO.title = "Example Vinyl";
+        vinylDTO.description = "Cool Vinyl";
+        vinylDTO.price = 0L;
+        vinylDTO.genre = genre.toUpperCase();
+        vinylDTO.creator_id = 0L;
+
+        return Response.status(408).entity(vinylDTO).build();
     }
 }

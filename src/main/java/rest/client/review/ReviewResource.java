@@ -16,6 +16,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
+import org.eclipse.microprofile.faulttolerance.Fallback;
+import org.eclipse.microprofile.faulttolerance.Retry;
+import org.eclipse.microprofile.faulttolerance.Timeout;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
@@ -51,6 +54,9 @@ public class ReviewResource {
             content = @Content(mediaType = "text/plain"))
         }
     )
+    @Retry(maxRetries = 1)
+    @Timeout(250)
+    @Fallback(fallbackMethod = "notAvailable")
     public Response createReview(@PathParam("id") Long id,
         CreateReviewDTO createReviewDTO, @Context SecurityContext sec) {
         // the customer who creates the review
@@ -91,5 +97,10 @@ public class ReviewResource {
             content = @Content(mediaType = "text/plain")))
     public Response deleteReview(@PathParam("id") Long id) {
         return Response.status(404).entity("Method doesn't exist").build();
+    }
+
+    public Response notAvailable(@PathParam("id") Long id,
+        CreateReviewDTO createReviewDTO, @Context SecurityContext sec){
+        return Response.status(408).build();
     }
 }
