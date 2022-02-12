@@ -17,9 +17,7 @@ import io.quarkus.qute.*;
 
 // http://localhost:8080/vinylpage/{id}
 @ApplicationScoped
-@Path("/vinylpage/{id}")
-
-
+@Path("/template/vinyl")
 
 public class VinylPage {
 
@@ -35,18 +33,14 @@ public class VinylPage {
     @Inject
     ClientBoundry clientController = new ClientController();
 
-
-
-
     @GET
-    public TemplateInstance getVinylHTML(@PathParam("id") Long id){
-     VinylDTO vinylDTO = vinylController.getVinyl(id);
-     ClientDTO clientDTO = clientController.getClient(id);
-     if (vinylDTO != null)  
-      return vinyl.data("vinyl",vinylDTO).data("user",clientDTO);
-      
-      return error.data(null);
+    public TemplateInstance getVinylHTML(@PathParam("id") Long id) {
+        VinylDTO vinylDTO = vinylController.getVinyl(id);
+        ClientDTO clientDTO = clientController.getClient(id);
+        if (vinylDTO != null)
+            return vinyl.data("vinyl", vinylDTO).data("user", clientDTO);
+
+        return error.data(null);
     }
- 
 
 }

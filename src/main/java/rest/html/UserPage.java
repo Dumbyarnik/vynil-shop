@@ -22,7 +22,6 @@ import io.quarkus.qute.*;
 @ApplicationScoped
 @Path("template/client")
 
-
 public class UserPage {
 
     @Inject
@@ -42,34 +41,33 @@ public class UserPage {
 
     @GET
     @Path("/create")
-    public TemplateInstance getCreateUserHTML(){      
+    public TemplateInstance getCreateUserHTML() {
         return this.createUser.instance();
     }
 
     @POST
     @Path("/create")
     public TemplateInstance postCreateUserHTML(
-        @FormParam("username") String username,
-        @FormParam("password") String password){
-            
+            @FormParam("username") String username,
+            @FormParam("password") String password) {
+
         CreateClientDTO createClientDTO = new CreateClientDTO();
         createClientDTO.username = username;
         createClientDTO.password = password;
-        
+
         if (clientController.createClient(createClientDTO))
             return this.genres.instance();
-        return this.notAllowed.instance();   
+        return this.notAllowed.instance();
     }
 
     @GET
     @PathParam("/{id}")
-    public TemplateInstance getUserlHTML(@PathParam("id") Long id){
-     ClientDTO clientDTO = clientController.getClient(id);
-     if (clientDTO != null)  
-      return user.data("user",clientDTO);
-      
-      return null;
+    public TemplateInstance getUserlHTML(@PathParam("id") Long id) {
+        ClientDTO clientDTO = clientController.getClient(id);
+        if (clientDTO != null)
+            return user.data("user", clientDTO);
+
+        return null;
     }
- 
 
 }
