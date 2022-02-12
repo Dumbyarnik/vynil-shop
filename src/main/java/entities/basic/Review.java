@@ -102,4 +102,9 @@ public class Review implements Serializable {
         this.reviewed_client = reviewed_client;
     }
 
+    @Override
+    public String toString(){
+        return "review: " + this.review + ", stars: " + this.stars;
+    }
+
 }
