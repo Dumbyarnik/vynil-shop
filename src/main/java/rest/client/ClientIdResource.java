@@ -2,6 +2,7 @@ package rest.client;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;
@@ -63,7 +64,7 @@ public class ClientIdResource {
     }
 
     @DELETE
-    // should me admin function
+    @RolesAllowed("Admin")
     @Operation(summary = "Deletes the client")
     @APIResponses(value = {
         @APIResponse(responseCode = "200", 
