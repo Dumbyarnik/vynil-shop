@@ -34,13 +34,16 @@ public class VinylPage {
     ClientBoundry clientController = new ClientController();
 
     @GET
+    @Path("/{id}")
     public TemplateInstance getVinylHTML(@PathParam("id") Long id) {
         VinylDTO vinylDTO = vinylController.getVinyl(id);
-        ClientDTO clientDTO = clientController.getClient(id);
-        if (vinylDTO != null)
-            return vinyl.data("vinyl", vinylDTO).data("user", clientDTO);
 
-        return error.data(null);
+        if (vinylDTO != null){
+            ClientDTO clientDTO = clientController.getClient(vinylDTO.creator_id);
+            return vinyl.data("vinyl", vinylDTO).data("user", clientDTO);
+        }
+            
+        return error.instance();
     }
 
 }

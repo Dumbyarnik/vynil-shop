@@ -39,8 +39,9 @@ public class GenrePage {
 
     @GET
     @Path("/{genre}")
-    public TemplateInstance getGenreHTML(@PathParam("genre") String genre){      
+    public TemplateInstance getGenreHTML(@PathParam("genre") String genre){  
+        genre = genre.toUpperCase();    
         return this.genre.data("vinyls", vinylController.getVinylGenre(genre),
-        "genre", genre);
+            "genre", genre);
     }
 }
