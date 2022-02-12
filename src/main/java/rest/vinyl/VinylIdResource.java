@@ -1,5 +1,7 @@
 package rest.vinyl;
 
+import java.security.Principal;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
@@ -11,7 +13,9 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 
 import org.eclipse.microprofile.openapi.annotations.Operation;
 
@@ -68,9 +72,13 @@ public class VinylIdResource {
             content = @Content(mediaType = "text/plain"))
         }
     )
-    public Response updateVinyl(@PathParam("id") Long id,
+    public Response updateVinyl(@Context SecurityContext sec, 
+        @PathParam("id") Long id,
         VinylDTO vinylDTO) {
-        if (vinylController.updateVinyl(id, vinylDTO))
+        Principal user = sec.getUserPrincipal();
+        String username = user.getName();
+
+        if (vinylController.updateVinyl(username, id, vinylDTO))
             return Response.ok().build();
         return Response.status(406).entity("Vinyl doesn't exist").build();
     }
@@ -86,8 +94,12 @@ public class VinylIdResource {
             content = @Content(mediaType = "text/plain"))
         }
     )
-    public Response deleteVinyl(@PathParam("id") Long id) {
-        if (vinylController.deleteVinyl(id))
+    public Response deleteVinyl(@Context SecurityContext sec, 
+        @PathParam("id") Long id) {
+        Principal user = sec.getUserPrincipal();
+        String username = user.getName();
+
+        if (vinylController.deleteVinyl(username, id))
             return Response.ok().build();
         return Response.status(406).entity("Vinyl doesn't exist").build();
     }

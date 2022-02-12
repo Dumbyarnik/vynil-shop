@@ -64,8 +64,12 @@ public class Contact implements Serializable{
     /**
      * @param Client the Client to set
      */
-    public void setClient(Client Client) {
-        this.client = Client;
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public void deleteClient() {
+        this.client = null;
     }
 
 }
