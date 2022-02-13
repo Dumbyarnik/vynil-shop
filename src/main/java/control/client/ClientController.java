@@ -40,7 +40,8 @@ public class ClientController implements ClientBoundry {
     public boolean createClient(CreateClientDTO createClientDTO) {
 
         // if username or password are null
-        if (createClientDTO.username == "" || createClientDTO.password == "")
+        if (createClientDTO.username.length()== 0 || 
+            createClientDTO.password.length() == 0)
             return false;
 
         if (clientRepository.createClient(createClientDTO.username,
@@ -68,7 +69,7 @@ public class ClientController implements ClientBoundry {
 
     @Override
     public boolean createContact(String username, ContactDTO contactDTO) {
-        if (contactDTO.email == "" || contactDTO.phone == "")
+        if (contactDTO.email.length() == 0 || contactDTO.phone.length() == 0)
             return false;
 
         return clientRepository.createContact(username, 
@@ -78,7 +79,7 @@ public class ClientController implements ClientBoundry {
 
     @Override
     public boolean updateContact(String username, ContactDTO contactDTO) {
-        if (contactDTO.email == "" || contactDTO.phone == "")
+        if (contactDTO.email.length() == 0 || contactDTO.phone.length() == 0)
             return false;
 
         return clientRepository.createContact(username, 
