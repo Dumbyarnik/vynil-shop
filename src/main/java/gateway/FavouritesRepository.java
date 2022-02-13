@@ -1,5 +1,6 @@
 package gateway;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.enterprise.context.Dependent;
@@ -24,6 +25,10 @@ public class FavouritesRepository implements FavouritesGateway {
 
     @Override
     public Collection<Vinyl> getFavourites(String username) {
+        Client client = databaseService.getClientByName(username);
+        if (client == null)
+            return new ArrayList<Vinyl>();
+
         return databaseService.getClientByName(username).getFavourites();
     }
 
@@ -35,6 +40,16 @@ public class FavouritesRepository implements FavouritesGateway {
 
         if (client == null || vinyl == null)
             return false;
+        
+        // if client has this favourite
+        for (Vinyl tmp : client.getFavourites())
+            if (tmp.getId().equals(vinyl_id))
+                return false;
+        
+        // if client put his vinyl into favourites
+        for (Vinyl tmp : client.getVinyls())
+            if (tmp.getId().equals(vinyl_id))
+                return false;
         
         client.getFavourites().add(vinyl);
 

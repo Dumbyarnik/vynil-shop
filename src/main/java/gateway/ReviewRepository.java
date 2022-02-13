@@ -33,6 +33,16 @@ public class ReviewRepository implements ReviewGateway {
         if(creator == null || reviewed_client == null)
             return false;
 
+        // if the client writes review about himself
+        if (creator.getUsername().equals(reviewed_client.getUsername()))
+            return false;
+        
+        // if the client writes interview the second time 
+        for (Review review_tmp : creator.getReviews_from_client()){
+            if (review_tmp.getReviewed_client().getId() == reviewed_client_id)
+                return false;
+        }
+
         Review review_obj = new Review();
         // setting up relationships
         review_obj.setCreator(creator);
@@ -40,8 +50,6 @@ public class ReviewRepository implements ReviewGateway {
         // setting values
         review_obj.setReview(review);
         review_obj.setStars(stars);
-
-        System.out.println(review_obj.toString());
 
         em.persist(review_obj);
 

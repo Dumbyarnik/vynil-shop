@@ -21,21 +21,21 @@ insert into vinyl(title, artist, genre, description, price, client_id)
 insert into vinyl(title, artist, genre, description, price, client_id) 
     values ('Rubber Soul', 'The Beatles', 'ROCK', 'Cool', 20, 1);             
 insert into vinyl(title, artist, genre, description, price, client_id) 
-    values ('Random Access Memories', 'Daft Punk', 'ELECTRO', 'Cool', 5, 1);
+    values ('Random Access Memories', 'Daft Punk', 'ELECTRO', 'Cool', 5, 2);
 insert into vinyl(title, artist, genre, description, price, client_id) 
-    values ('Cross', 'JUSTICE', 'ELECTRO', 'Cool', 5, 1);
+    values ('Cross', 'JUSTICE', 'ELECTRO', 'Cool', 5, 2);
  insert into vinyl(title, artist, genre, description, price, client_id) 
-    values ('Alive', 'Daft Punk', 'ELECTRO', 'Cool', 5, 1);   
+    values ('Alive', 'Daft Punk', 'ELECTRO', 'Cool', 5, 2);   
 insert into vinyl(title, artist, genre, description, price, client_id) 
-    values ('Homework', 'Daft Punk', 'ELECTRO', 'Cool', 5, 1);   
+    values ('Homework', 'Daft Punk', 'ELECTRO', 'Cool', 5, 2);   
 insert into vinyl(title, artist, genre, description, price, client_id) 
-    values ('Graduation', 'Kanye West', 'HIPHOP', 'Cool', 12, 1);
+    values ('Graduation', 'Kanye West', 'HIPHOP', 'Cool', 12, 3);
 insert into vinyl(title, artist, genre, description, price, client_id) 
-    values ('The Blueprint', 'Jay Z', 'HIPHOP', 'Cool', 12, 1);
+    values ('The Blueprint', 'Jay Z', 'HIPHOP', 'Cool', 12, 3);
 insert into vinyl(title, artist, genre, description, price, client_id) 
-    values ('The Eminem Show', 'Eminem', 'HIPHOP', 'Cool', 12, 1);
+    values ('The Eminem Show', 'Eminem', 'HIPHOP', 'Cool', 12, 3);
 insert into vinyl(title, artist, genre, description, price, client_id) 
-    values ('Lincense to Ill', 'The Beastie Boys', 'HIPHOP', 'Cool', 12, 1);        
+    values ('Lincense to Ill', 'The Beastie Boys', 'HIPHOP', 'Cool', 12, 3);        
 
 insert into vinyl(title, artist, genre, description, price, client_id) 
     values ('4 Seasons', 'Vivaldi', 'CLASSIC', 'Great', 12, 2);
