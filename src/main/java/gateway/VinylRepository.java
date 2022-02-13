@@ -95,7 +95,6 @@ public class VinylRepository implements VinylGateway {
     @Override
     @Transactional
     public boolean deleteVinyl(String username, Long id) {
-        // TODO: anyone shouldnt delete vinyl!
 
         Vinyl vinyl = this.getVinyl(id);
         if (vinyl == null)
@@ -141,6 +140,7 @@ public class VinylRepository implements VinylGateway {
             return null;
 
         // retrieve first 3 results
+        //todo randomize recommendations
         Collection<Vinyl> reccomendations = new ArrayList<Vinyl>();
         int i = 0;
         for (Vinyl tmp : tmp_list){
