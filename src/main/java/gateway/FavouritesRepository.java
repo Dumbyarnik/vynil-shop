@@ -36,6 +36,16 @@ public class FavouritesRepository implements FavouritesGateway {
         if (client == null || vinyl == null)
             return false;
         
+        // if client has this favourite
+        for (Vinyl tmp : client.getFavourites())
+            if (tmp.getId().equals(vinyl_id))
+                return false;
+        
+        // if client put his vinyl into favourites
+        for (Vinyl tmp : client.getVinyls())
+            if (tmp.getId().equals(vinyl_id))
+                return false;
+        
         client.getFavourites().add(vinyl);
 
         em.merge(client);
