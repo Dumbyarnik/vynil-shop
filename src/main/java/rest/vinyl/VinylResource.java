@@ -71,9 +71,6 @@ public class VinylResource {
             content = @Content(mediaType = "text/plain"))
         }
     )
-    @Retry(maxRetries = 10)
-    @Timeout(10000)
-    @Fallback(fallbackMethod = "notAvailable")
     public Response createVinyl(@Context SecurityContext sec,
         CreateVinylDTO createVinylDTO) {
         Principal user = sec.getUserPrincipal();

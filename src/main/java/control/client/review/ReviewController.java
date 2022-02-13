@@ -27,9 +27,13 @@ public class ReviewController implements ReviewBoundary {
     public boolean createReview(String username, 
         CreateReviewDTO createReviewDTO, Long reviewed_client_id) {
 
-        System.out.println("review: " + createReviewDTO.review);
-        System.out.println("username: " + username);
-        System.out.println("id: " + reviewed_client_id);
+        // checking if the stars are from 1 to 5
+        if (createReviewDTO.stars < 1 || createReviewDTO.stars > 5)
+            return false;
+        
+        // if review is empty
+        if (createReviewDTO.review.equals(""))
+            return false;
 
         return reviewRepository.createReview(username, createReviewDTO.review,
             createReviewDTO.stars, reviewed_client_id);

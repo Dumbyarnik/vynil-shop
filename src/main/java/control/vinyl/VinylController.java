@@ -1,5 +1,6 @@
 package control.vinyl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.enterprise.context.Dependent;
@@ -33,6 +34,12 @@ public class VinylController implements VinylBoundary {
     @Override
     public boolean createVinyl(String username, CreateVinylDTO createVinylDTO) {
         // TODO: check for the genre constant
+        // if title or price are empty
+        if (createVinylDTO.title.length() == 0 || createVinylDTO.price == null)
+            return false;
+
+        if (!Genre.contains(createVinylDTO.genre))
+            return false;
 
         return vinylRepository.createVinyl(username, createVinylDTO.title,
             createVinylDTO.artist, createVinylDTO.description, 
@@ -49,6 +56,13 @@ public class VinylController implements VinylBoundary {
 
     @Override
     public boolean updateVinyl(String username, Long id, VinylDTO vinylDTO) {
+
+        if (vinylDTO.title.length() == 0 || vinylDTO.price == null)
+            return false;
+
+        if (!Genre.contains(vinylDTO.genre))
+            return false;
+
         return vinylRepository.updateVinyl(username, id, vinylDTO.title,
             vinylDTO.artist, vinylDTO.description, 
             vinylDTO.price, Genre.valueOf(vinylDTO.genre));
@@ -71,6 +85,10 @@ public class VinylController implements VinylBoundary {
 
     @Override
     public Collection<VinylDTO> getVinylGenre(String genre) {
+
+        if (!Genre.contains(genre))
+            return new ArrayList<VinylDTO>();
+
         return entityConverter.vinylCollectionToVinylDTCollection(
             vinylRepository.getVinylGenre(genre.toUpperCase())
         );
