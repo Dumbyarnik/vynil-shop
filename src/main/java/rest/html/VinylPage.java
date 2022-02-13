@@ -1,5 +1,8 @@
 package rest.html;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -37,10 +40,16 @@ public class VinylPage {
     @Path("/{id}")
     public TemplateInstance getVinylHTML(@PathParam("id") Long id) {
         VinylDTO vinylDTO = vinylController.getVinyl(id);
+        Collection<VinylDTO> recommendations = vinylController.getVinylReccomedations(id);
+       ArrayList<VinylDTO> vinyls= new ArrayList<>();
 
+        for (VinylDTO vinylDTO2 : recommendations) {
+          vinyls.add(vinylDTO2);
+        }
+    
         if (vinylDTO != null){
             ClientDTO clientDTO = clientController.getClient(vinylDTO.creator_id);
-            return vinyl.data("vinyl", vinylDTO).data("user", clientDTO);
+            return vinyl.data("vinyl", vinylDTO).data("user", clientDTO).data("recommendation",vinyls);
         }
             
         return error.instance();

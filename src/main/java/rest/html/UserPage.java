@@ -20,7 +20,7 @@ import io.quarkus.qute.*;
 
 // http://localhost:8080/template/client
 @ApplicationScoped
-@Path("template/client")
+@Path("template/client/")
 
 public class UserPage {
 
@@ -38,6 +38,22 @@ public class UserPage {
 
     @Inject
     ClientBoundry clientController = new ClientController();
+
+
+    @GET
+    @Path("/{id}")
+    @PathParam("/{id}")
+    public TemplateInstance getUserlHTML(@PathParam("id") Long id) {
+        ClientDTO clientDTO = clientController.getClient(id);
+        if (clientDTO != null)
+            return user.data("user", clientDTO);
+
+        return null;
+    }
+
+
+
+
 
     @GET
     @Path("/create")
@@ -60,14 +76,5 @@ public class UserPage {
         return this.notAllowed.instance();
     }
 
-    @GET
-    @PathParam("/{id}")
-    public TemplateInstance getUserlHTML(@PathParam("id") Long id) {
-        ClientDTO clientDTO = clientController.getClient(id);
-        if (clientDTO != null)
-            return user.data("user", clientDTO);
-
-        return null;
-    }
-
+  
 }

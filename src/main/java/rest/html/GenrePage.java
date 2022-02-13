@@ -34,7 +34,11 @@ public class GenrePage {
 
     @GET
     public TemplateInstance getGenresHTML(){      
-        return this.genres.instance();
+        ClientDTO clientDTO = clientController.getClient(1l);
+        if (clientDTO != null)  
+        return this.genres.data("user",clientDTO);
+
+        return null;
     }
 
     @GET
