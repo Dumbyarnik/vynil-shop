@@ -43,13 +43,14 @@ public class VinylPage {
         Collection<VinylDTO> recommendations = vinylController.getVinylReccomedations(id);
        ArrayList<VinylDTO> vinyls= new ArrayList<>();
 
+       /*
         for (VinylDTO vinylDTO2 : recommendations) {
           vinyls.add(vinylDTO2);
         }
-    
+    */
         if (vinylDTO != null){
             ClientDTO clientDTO = clientController.getClient(vinylDTO.creator_id);
-            return vinyl.data("vinyl", vinylDTO).data("user", clientDTO).data("recommendation",vinyls);
+            return vinyl.data("vinyl", vinylDTO).data("user", clientDTO).data("recommendation",recommendations);
         }
             
         return error.instance();
