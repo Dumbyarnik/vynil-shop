@@ -79,5 +79,10 @@ public class ClientController implements ClientBoundry {
             return true;
         return false;
     }
+
+    @Override
+    public ClientDTO getClientByUsername(String username) {
+        return this.entityConverter.clientToClientDTO(clientRepository.getClientByUsername(username));
+    }
     
 }

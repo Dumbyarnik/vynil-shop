@@ -24,4 +24,7 @@ public interface ClientGateway extends Serializable{
     public boolean createContact(String username, String email, String phone);
     public boolean updateContact(String username,  String email, String phone);
     public boolean deleteContact(String username);    
+
+    // additional for frontend
+    public Client getClientByUsername(String username);
 }

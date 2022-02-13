@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="/style.css">
-  <title> {genre} </title>
+  <title> Merkliste </title>
 </head>
 
 <body>
@@ -23,21 +23,25 @@
 
   </nav>
 
-  <h1 class="title"> {genre} </h1>
+  <h1 class="title"> Merkliste </h1>
   <ul>
-    {#for vinyl in vinyls}
+    {#for favourite in favourites}
         <div class="vinyl_component" style="margin-top: 6%">
           <div class="row">
             <div class="col-sm">
-              <img class="album" src="/album{vinyl.id}.jpg" width="150" 
+              <img class="album" src="/album{favourite.id}.jpg" width="150" 
               height="150">
             </div>
             <div class="col-md">
       
-              <h1> {vinyl.title} </h1>
+              <h1> {favourite.title} </h1>
       
-              <a href="/template/vinyl/{vinyl.id}" class="btn btn-primary">
-                Mehr erfahren</a>
+              <a href="/template/vinyl/{favourite.id}" class="btn btn-primary">
+                Zum Eintrag</a>
+                <form action="/template/favourite/{favourite.id}/delete" method="POST"> 
+                <button type="submit" class="btn btn-danger">
+                  Aus Merkliste entfernen</button>
+                  <form>
             </div>
           </div>
         </div>

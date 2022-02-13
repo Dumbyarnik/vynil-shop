@@ -19,7 +19,7 @@
 <body>
   <!-- Image and text -->
   <nav class="navbar" style="background-color: #1C00CE">
-    <a class="navbar-brand" href="vinyl.html">
+    <a class="navbar-brand" href="/template/genre">
       <img src="/vinyl.svg" width="50" height="50" class="d-inline-block align-top" alt="">
       <p class="vinylshop" style="color:whitesmoke"> Vinyl Shop </p>
     </a>
@@ -86,6 +86,30 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"></script>
-</body>
+      
+
+
+
+    <!--https://stackoverflow.com/questions/6160415/reload-an-html-page-just-once-using-javascript -->
+      <script type="text/javascript">
+        $(document).ready(function(){
+      
+            //Check if the current URL contains '#' 
+            if(document.URL.indexOf("#")==-1)
+            {
+                // Set the URL to whatever it was plus "#".
+                url = document.URL+"#";
+                location = "#";
+      
+                //Reload the page
+                location.reload(true);
+      
+            }
+        });
+      </script>
+
+
+    </body>
+
 
 </html>

@@ -41,7 +41,7 @@ public class VinylPage {
     public TemplateInstance getVinylHTML(@PathParam("id") Long id) {
         VinylDTO vinylDTO = vinylController.getVinyl(id);
         Collection<VinylDTO> recommendations = vinylController.getVinylReccomedations(id);
-       ArrayList<VinylDTO> vinyls= new ArrayList<>();
+   
 
        /*
         for (VinylDTO vinylDTO2 : recommendations) {

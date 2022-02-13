@@ -137,4 +137,9 @@ public class ClientRepository implements ClientGateway {
 
         return user;
     }
+
+    @Override
+    public Client getClientByUsername(String username) {
+       return this.databaseService.getClientByName(username);
+    }
 }

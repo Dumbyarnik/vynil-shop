@@ -54,9 +54,9 @@ public class FavouritesIdResource {
             content = @Content(mediaType = "text/plain"))
         }
     )
-    @Retry(maxRetries = 3)
-    @Timeout(250)
-    @Fallback(fallbackMethod = "notAvailable")
+    //@Retry(maxRetries = 3)
+    //@Timeout(100000)
+    //@Fallback(fallbackMethod = "notAvailable")
     public Response createFavourite(@Context SecurityContext sec,
         @PathParam("vinyl_id") Long vinyl_id) {
         Principal user = sec.getUserPrincipal();

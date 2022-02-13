@@ -25,6 +25,7 @@ public class GenrePage {
 
     @Inject
     Template genres;
+    
 
     @Inject
     VinylBoundary vinylController = new VinylController();

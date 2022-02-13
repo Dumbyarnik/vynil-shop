@@ -24,5 +24,8 @@ public interface ClientBoundry {
     public boolean createContact(String username, ContactDTO contactDTO);
     public boolean updateContact(String username,  ContactDTO contactDTO);
     public boolean deleteContact(String username);
+
+    // additional for frontend
+    public ClientDTO getClientByUsername(String username);
     
 }
