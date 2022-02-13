@@ -41,7 +41,7 @@ public class VinylResourceTest {
     }
 
     @Test
-    @TestSecurity(user = "testUser", roles = {"Client"})
+    @TestSecurity(user = "ringo", roles = {"Client"})
     public void testCreateVinylAsUser() {
         CreateVinylDTO createVinylDTO = new CreateVinylDTO();
         createVinylDTO.title = "Good Vinyl";
@@ -55,6 +55,21 @@ public class VinylResourceTest {
             .body(createVinylDTO)
             .when().post("/vinyl")
             .then()
-                .statusCode(401);
+                .statusCode(200);
     }
+
+    @Test
+    @TestSecurity(user = "ringo", roles = {"Client"})
+    public void testDeleteVinylAsUser() {
+        given()
+            .when().delete("/vinyl/1")
+            .then()
+                .statusCode(200);
+
+        given()
+            .when().delete("/vinyl/1")
+            .then()
+                .statusCode(406);
+    }
+
 }

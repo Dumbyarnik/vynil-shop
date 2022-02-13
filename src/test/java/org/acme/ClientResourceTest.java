@@ -2,13 +2,11 @@ package org.acme;
 
 import org.junit.jupiter.api.Test;
 
-import control.DTO.ClientDTO;
 import control.DTO.CreateClientDTO;
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.security.TestSecurity;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
 
 @QuarkusTest
 public class ClientResourceTest {
@@ -85,6 +83,5 @@ public class ClientResourceTest {
             .then()
             .statusCode(406);
     }
-    
-    // TODO: Contact tests
+
 }
