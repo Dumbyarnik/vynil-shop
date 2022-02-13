@@ -75,6 +75,7 @@
 
   <div class="container" style="margin-top: 5%">
     <div class="row">
+
       <div class="col-md">
         <div class="suggestion" style="width: 18rem;">
           <img class="card-img-top" src="/album{recommendation[0].id}.jpg" alt="Card image cap">
@@ -88,21 +89,22 @@
 
       <div class="col-md">
         <div class="suggestion" style="width: 18rem;">
-          <img class="card-img-top" src="/album3.jpg" alt="Card image cap">
+          <img class="card-img-top" src="/album{recommendation[1].id}.jpg" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">Abbey Road</h5>
+            <h5 class="card-title">{recommendation[1].title}</h5>
             <p class="card-text"></p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <a href="/template/vinyl/{recommendation[1].id}" class="btn btn-primary">Go somewhere</a>
           </div>
         </div>
       </div>
+      
       <div class="col-md">
         <div class="suggestion" style="width: 18rem;">
-          <img class="card-img-top" src="/album4.jpg" alt="Card image cap">
+          <img class="card-img-top" src="/album{recommendation[2].id}.jpg" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">Abbey Road</h5>
+            <h5 class="card-title">{recommendation[2].title}</h5>
             <p class="card-text"></p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <a href="/template/vinyl/{recommendation[1].id}" class="btn btn-primary">Go somewhere</a>
           </div>
         </div>
       </div>
