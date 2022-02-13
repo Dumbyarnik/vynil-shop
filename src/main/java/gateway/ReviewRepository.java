@@ -41,7 +41,9 @@ public class ReviewRepository implements ReviewGateway {
         review_obj.setReview(review);
         review_obj.setStars(stars);
 
-        em.persist(review);
+        System.out.println(review_obj.toString());
+
+        em.persist(review_obj);
 
         return true;
     }

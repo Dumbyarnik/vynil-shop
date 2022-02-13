@@ -27,6 +27,10 @@ public class ReviewController implements ReviewBoundary {
     public boolean createReview(String username, 
         CreateReviewDTO createReviewDTO, Long reviewed_client_id) {
 
+        System.out.println("review: " + createReviewDTO.review);
+        System.out.println("username: " + username);
+        System.out.println("id: " + reviewed_client_id);
+
         return reviewRepository.createReview(username, createReviewDTO.review,
             createReviewDTO.stars, reviewed_client_id);
     }

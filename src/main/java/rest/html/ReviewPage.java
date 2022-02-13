@@ -2,6 +2,7 @@ package rest.html;
 
 import java.security.Principal;
 
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.FormParam;
@@ -25,9 +26,9 @@ import control.vinyl.VinylController;
 import io.quarkus.qute.*;
 
 
-// http://localhost:8080/genrepage/{id}
+// http://localhost:8080/template/review/{id}
 @ApplicationScoped
-@Path("/reviewpage/{id}")
+@Path("template/review/{id}")
 
 
 
@@ -48,6 +49,7 @@ public class ReviewPage {
     ReviewBoundary reviewController = new ReviewController();
  
     @GET
+    @RolesAllowed("Client")
     public TemplateInstance getReviewHTML(@PathParam("id") Long id){
        ClientDTO clientDTO = clientController.getClient(id);
      if (clientDTO != null)  
@@ -58,14 +60,21 @@ public class ReviewPage {
     
     @POST
     @Path("/edit")
-    public Response postReview (@Context SecurityContext sec,@PathParam("id") Long id , @FormParam("review") String review){
-    ReviewDTO reviewDTO =new ReviewDTO();
-      reviewDTO.review=review;
-      reviewDTO.stars=4;
-      Principal user = sec.getUserPrincipal();
-      String username = user.getName();
-     reviewController.createReview(username, reviewDTO, id);
-      return Response.ok().build();
+    @RolesAllowed("Client")
+    public Response postReview (@Context SecurityContext sec,
+        @PathParam("id") Long id , 
+        @FormParam("review") String review,
+        @FormParam("stars") String stars){
+            
+        Principal user = sec.getUserPrincipal();
+        String username = user.getName();
+
+        ReviewDTO reviewDTO = new ReviewDTO();
+        reviewDTO.review = review;
+        reviewDTO.stars = Integer.parseInt(stars);
+      
+        reviewController.createReview(username, reviewDTO, id);
+        return Response.ok().build();
     }
 
 }

@@ -1,5 +1,8 @@
 package rest.html;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -17,9 +20,7 @@ import io.quarkus.qute.*;
 
 // http://localhost:8080/vinylpage/{id}
 @ApplicationScoped
-@Path("/vinylpage/{id}")
-
-
+@Path("/template/vinyl")
 
 public class VinylPage {
 
@@ -35,18 +36,23 @@ public class VinylPage {
     @Inject
     ClientBoundry clientController = new ClientController();
 
-
-
-
     @GET
-    public TemplateInstance getVinylHTML(@PathParam("id") Long id){
-     VinylDTO vinylDTO = vinylController.getVinyl(id);
-     ClientDTO clientDTO = clientController.getClient(id);
-     if (vinylDTO != null)  
-      return vinyl.data("vinyl",vinylDTO).data("user",clientDTO);
-      
-      return error.data(null);
+    @Path("/{id}")
+    public TemplateInstance getVinylHTML(@PathParam("id") Long id) {
+        VinylDTO vinylDTO = vinylController.getVinyl(id);
+        Collection<VinylDTO> recommendations = vinylController.getVinylReccomedations(id);
+       ArrayList<VinylDTO> vinyls= new ArrayList<>();
+
+        for (VinylDTO vinylDTO2 : recommendations) {
+          vinyls.add(vinylDTO2);
+        }
+    
+        if (vinylDTO != null){
+            ClientDTO clientDTO = clientController.getClient(vinylDTO.creator_id);
+            return vinyl.data("vinyl", vinylDTO).data("user", clientDTO).data("recommendation",vinyls);
+        }
+            
+        return error.instance();
     }
- 
 
 }

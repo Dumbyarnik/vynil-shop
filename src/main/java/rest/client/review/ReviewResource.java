@@ -54,9 +54,9 @@ public class ReviewResource {
             content = @Content(mediaType = "text/plain"))
         }
     )
-    @Retry(maxRetries = 1)
-    @Timeout(250)
-    @Fallback(fallbackMethod = "notAvailable")
+    //@Retry(maxRetries = 3)
+    //@Timeout(3000)
+    //@Fallback(fallbackMethod = "notAvailable")
     public Response createReview(@PathParam("id") Long id,
         CreateReviewDTO createReviewDTO, @Context SecurityContext sec) {
         // the customer who creates the review
