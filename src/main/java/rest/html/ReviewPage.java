@@ -37,6 +37,9 @@ public class ReviewPage {
     @Inject
     Template review;
 
+    @Inject
+    Template user;
+
     
     @Inject
     VinylBoundary vinylController = new VinylController();
@@ -61,20 +64,21 @@ public class ReviewPage {
     @POST
     @Path("/edit")
     @RolesAllowed("Client")
-    public Response postReview (@Context SecurityContext sec,
+    public TemplateInstance postReview (@Context SecurityContext sec,
         @PathParam("id") Long id , 
         @FormParam("review") String review,
         @FormParam("stars") String stars){
             
-        Principal user = sec.getUserPrincipal();
-        String username = user.getName();
+        Principal userTMP = sec.getUserPrincipal();
+        String username = userTMP.getName();
+        ClientDTO clientDTO=clientController.getClient(id);
 
         ReviewDTO reviewDTO = new ReviewDTO();
         reviewDTO.review = review;
         reviewDTO.stars = Integer.parseInt(stars);
       
         reviewController.createReview(username, reviewDTO, id);
-        return Response.ok().build();
+        return user.data("user",clientDTO);
     }
 
 }

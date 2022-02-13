@@ -11,9 +11,11 @@ import javax.ws.rs.PathParam;
 import control.DTO.ClientDTO;
 import control.DTO.CreateClientDTO;
 import control.DTO.CreateReviewDTO;
+import control.DTO.ReviewDTO;
 import control.DTO.VinylDTO;
 import control.client.ClientBoundry;
 import control.client.ClientController;
+import control.client.review.ReviewController;
 import control.vinyl.VinylBoundary;
 import control.vinyl.VinylController;
 import io.quarkus.qute.*;
@@ -45,6 +47,7 @@ public class UserPage {
     @PathParam("/{id}")
     public TemplateInstance getUserlHTML(@PathParam("id") Long id) {
         ClientDTO clientDTO = clientController.getClient(id);
+        
         if (clientDTO != null)
             return user.data("user", clientDTO);
 
