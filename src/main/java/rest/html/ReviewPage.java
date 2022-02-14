@@ -31,18 +31,21 @@ import io.quarkus.qute.*;
 
 public class ReviewPage {
 
+    // Review HTMLs
     @Inject
     Template review;
 
     @Inject
     Template user;
 
+    // Error HTMLs
     @Inject
     Template noAccess;
 
     @Inject
     Template notAllowed;
 
+    // Controllers
     @Inject
     VinylBoundary vinylController = new VinylController();
 
@@ -52,6 +55,7 @@ public class ReviewPage {
     @Inject
     ReviewBoundary reviewController = new ReviewController();
 
+    // Gets review form
     @GET
     @RolesAllowed("Client")
     public TemplateInstance getReviewHTML(@Context SecurityContext sec, 
@@ -65,9 +69,10 @@ public class ReviewPage {
         if (clientDTO != null)
             return review.data("user", clientDTO);
 
-        return notAllowed.instance();
+        return notAllowed.data("error", "You can't review yourself  or the same person twice");
     }
 
+    // Creates a review
     @POST
     @Path("/edit")
     @RolesAllowed("Client")
