@@ -1,56 +1,20 @@
-# code-with-quarkus Project
+1) Starten des Programmes Docker Desktop
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+2) Den Befehl "./mvnw package " ausführen
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+3) Dann den Befehl: " docker build -f src/main/docker/Dockerfile.jvm -t quarkus code-with-quarkus-jvm ." ausführen
 
-## Running the application in dev mode
+4) Dann den Befehl: " ./mvnw compile quarkus:dev" ausführen
 
-You can run your application in dev mode that enables live coding using:
-```shell script
-./mvnw compile quarkus:dev
-```
+Das Testen der API ist möglich mit Swagger UI
+Der Security Teil wurde umgesetzt mit: HTTP basic authentication
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+Zwei Nutzer zum Einloggen vorgefertigt:
+1) Als normaler Nutzer - username: frank, password: frank
+1) Als Admin - username: admin, password: admin
 
-## Packaging and running the application
+Web Applikation erreichbar über die Startseite
+localhost:8080/template/genre
+Von dieser Startseite sollten alle anderen Pages navigierbar sein.
 
-The application can be packaged using:
-```shell script
-./mvnw package
-```
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
-
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
-
-If you want to build an _über-jar_, execute the following command:
-```shell script
-./mvnw package -Dquarkus.package.type=uber-jar
-```
-
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
-
-## Creating a native executable
-
-You can create a native executable using: 
-```shell script
-./mvnw package -Pnative
-```
-
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
-```shell script
-./mvnw package -Pnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/code-with-quarkus-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
-
-## Provided Code
-
-### RESTEasy JAX-RS
-
-Easily start your RESTful Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started#the-jax-rs-resources)
+Das Testen ist möglich mit dem Befehl: "mvn verify"

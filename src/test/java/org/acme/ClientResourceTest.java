@@ -82,7 +82,7 @@ public class ClientResourceTest {
                 .statusCode(200);
 
         given()
-            .when().get("/client/6")
+            .when().get("/client/3")
             .then()
             .statusCode(406);
     }
