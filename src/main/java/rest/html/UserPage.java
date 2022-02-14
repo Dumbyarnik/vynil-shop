@@ -1,12 +1,17 @@
 package rest.html;
 
+import java.security.Principal;
+
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Context;
 
 import control.DTO.ClientDTO;
 import control.DTO.CreateClientDTO;
@@ -22,7 +27,7 @@ import io.quarkus.qute.*;
 
 // http://localhost:8080/template/client
 @ApplicationScoped
-@Path("template/client/")
+@Path("template/client")
 
 public class UserPage {
 
@@ -39,19 +44,40 @@ public class UserPage {
     Template genres;
 
     @Inject
+    Template noAccess;
+
+    @Inject
+    Template error;
+
+    @Inject
     ClientBoundry clientController = new ClientController();
 
+    @GET
+    @RolesAllowed("Client")
+    public TemplateInstance getUserHimseldlHTML(@Context SecurityContext sec) {
+        Principal userTMP = sec.getUserPrincipal();
+        if (userTMP == null)
+            return noAccess.instance();
+        
+        String username = userTMP.getName();
+            
+        ClientDTO clientDTO = clientController.getClientByUsername(username);
+        
+        if (clientDTO != null)
+            return user.data("user", clientDTO);
+
+        return error.instance();
+    }
 
     @GET
     @Path("/{id}")
-    @PathParam("/{id}")
     public TemplateInstance getUserlHTML(@PathParam("id") Long id) {
         ClientDTO clientDTO = clientController.getClient(id);
         
         if (clientDTO != null)
             return user.data("user", clientDTO);
 
-        return null;
+        return error.instance();
     }
 
     @GET
