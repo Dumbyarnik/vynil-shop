@@ -1,3 +1,6 @@
+/*
+    @author: Dennis Dreier
+*/
 package rest.client.favourites;
 
 import java.security.Principal;

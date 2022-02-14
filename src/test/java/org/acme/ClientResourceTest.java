@@ -1,3 +1,6 @@
+/*
+    @author: Daniil Vorobyev
+*/
 package org.acme;
 
 import org.junit.jupiter.api.Test;

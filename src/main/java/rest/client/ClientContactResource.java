@@ -1,3 +1,6 @@
+/*
+    @author: Daniil Vorobyev
+*/
 package rest.client;
 
 import java.security.Principal;

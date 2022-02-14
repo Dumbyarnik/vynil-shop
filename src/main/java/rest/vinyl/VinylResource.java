@@ -1,3 +1,6 @@
+/*
+    @author: Daniil Vorobyev
+*/
 package rest.vinyl;
 
 import java.security.Principal;

@@ -1,3 +1,6 @@
+/*
+    @author: Dennis Dreier
+*/
 package rest.html;
 
 import java.security.Principal;

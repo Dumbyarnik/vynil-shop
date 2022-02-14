@@ -1,3 +1,6 @@
+/*
+    @author: Daniil Vorobyev
+*/
 package control.DTO;
 
 import java.io.Serializable;

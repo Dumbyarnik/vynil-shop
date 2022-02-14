@@ -1,3 +1,6 @@
+/*
+    @author: Dennis Dreier
+*/
 package control.DTO;
 
 import java.io.Serializable;

@@ -1,3 +1,6 @@
+/*
+    @author: Daniil Vorobyev
+*/
 package rest.html;
 
 import java.security.Principal;
