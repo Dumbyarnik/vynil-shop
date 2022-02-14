@@ -19,6 +19,7 @@ import control.DTO.ReviewDTO;
 import control.DTO.VinylDTO;
 import control.client.ClientBoundry;
 import control.client.ClientController;
+import control.client.ClientIdBoundary;
 import control.client.review.ReviewBoundary;
 import control.client.review.ReviewController;
 import control.vinyl.VinylBoundary;
@@ -50,7 +51,7 @@ public class ReviewPage {
     VinylBoundary vinylController = new VinylController();
 
     @Inject
-    ClientBoundry clientController = new ClientController();
+    ClientIdBoundary clientController = new ClientController();
 
     @Inject
     ReviewBoundary reviewController = new ReviewController();

@@ -11,13 +11,15 @@ import control.EntityConverter;
 import control.DTO.ClientDTO;
 import control.DTO.ContactDTO;
 import control.DTO.CreateClientDTO;
+import control.client.review.ClientContactBoundary;
 import entities.ClientGateway;
 import entities.basic.Client;
 import gateway.ClientRepository;
 
 @Model
 @Dependent
-public class ClientController implements ClientBoundry {
+public class ClientController implements ClientBoundry, ClientIdBoundary,
+    ClientContactBoundary {
 
     @Inject
     ClientGateway clientRepository = new ClientRepository();

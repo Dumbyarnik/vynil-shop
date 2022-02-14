@@ -21,6 +21,7 @@ import control.DTO.CreateVinylDTO;
 import control.DTO.VinylDTO;
 import control.client.ClientBoundry;
 import control.client.ClientController;
+import control.client.ClientIdBoundary;
 import control.vinyl.VinylBoundary;
 import control.vinyl.VinylController;
 import control.vinyl.VinylIdBoundary;
@@ -61,10 +62,13 @@ public class VinylPage {
     VinylReccomendationsBoundary vinylReccomendationsController = new VinylController();
 
     @Inject
-    ClientBoundry clientController = new ClientController();
+    VinylBoundary vinylController = new VinylController();
 
     @Inject
-    VinylBoundary vinylController = new VinylController();
+    ClientIdBoundary clientIdController = new ClientController();
+
+    @Inject
+    ClientBoundry clientController = new ClientController();
 
     // Gets vinyl HTML page
     @GET
@@ -74,7 +78,7 @@ public class VinylPage {
         Collection<VinylDTO> recommendations = vinylReccomendationsController.getVinylReccomedations(id);
 
         if (vinylDTO != null) {
-            ClientDTO clientDTO = clientController.getClient(vinylDTO.creator_id);
+            ClientDTO clientDTO = clientIdController.getClient(vinylDTO.creator_id);
             return vinyl.data("vinyl", vinylDTO).data("user", clientDTO).data("recommendation", recommendations);
         }
 

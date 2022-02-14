@@ -26,6 +26,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
 import control.DTO.ContactDTO;
 import control.client.ClientBoundry;
 import control.client.ClientController;
+import control.client.review.ClientContactBoundary;
 
 import javax.ws.rs.core.Context;
 
@@ -35,7 +36,7 @@ import javax.ws.rs.core.Context;
 public class ClientContactResource {
 
     @Inject
-    ClientBoundry clientController = new ClientController();
+    ClientContactBoundary clientController = new ClientController();
 
     @PostConstruct
     public void init() {  

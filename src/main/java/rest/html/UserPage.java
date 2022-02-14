@@ -21,6 +21,8 @@ import control.DTO.ReviewDTO;
 import control.DTO.VinylDTO;
 import control.client.ClientBoundry;
 import control.client.ClientController;
+import control.client.ClientIdBoundary;
+import control.client.review.ClientContactBoundary;
 import control.client.review.ReviewController;
 import control.vinyl.VinylBoundary;
 import control.vinyl.VinylController;
@@ -60,6 +62,12 @@ public class UserPage {
 
     // Controllers
     @Inject
+    ClientIdBoundary clientIdController = new ClientController();
+
+    @Inject
+    ClientContactBoundary clientContactController = new ClientController();
+
+    @Inject
     ClientBoundry clientController = new ClientController();
 
     // Returns HTML of the account
@@ -82,7 +90,7 @@ public class UserPage {
     @GET
     @Path("/{id}")
     public TemplateInstance getUserlHTML(@PathParam("id") Long id) {
-        ClientDTO clientDTO = clientController.getClient(id);
+        ClientDTO clientDTO = clientIdController.getClient(id);
         if (clientDTO != null)
             return user.data("user", clientDTO);
         return error.instance();
@@ -146,7 +154,7 @@ public class UserPage {
         contactDTO.email = email;
         contactDTO.phone = phone;
 
-        if (clientController.createContact(username, contactDTO))
+        if (clientContactController.createContact(username, contactDTO))
             return this.getUserHimselflHTML(sec);
         
         return notAllowed.data("error", "You can't create contact");
@@ -163,7 +171,7 @@ public class UserPage {
         
         String username = userTMP.getName();
 
-        if (clientController.deleteContact(username))
+        if (clientContactController.deleteContact(username))
             return this.getUserHimselflHTML(sec);
         
         return notAllowed.data("error", "You don't have a contact");
