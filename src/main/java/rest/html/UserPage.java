@@ -14,6 +14,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 
 import control.DTO.ClientDTO;
+import control.DTO.ContactDTO;
 import control.DTO.CreateClientDTO;
 import control.DTO.CreateReviewDTO;
 import control.DTO.ReviewDTO;
@@ -33,6 +34,9 @@ public class UserPage {
 
     @Inject
     Template user;
+
+    @Inject
+    Template userAccount;
 
     @Inject
     Template createUser;
@@ -67,7 +71,7 @@ public class UserPage {
         ClientDTO clientDTO = clientController.getClientByUsername(username);
         
         if (clientDTO != null)
-            return user.data("user", clientDTO);
+            return userAccount.data("user", clientDTO);
 
         return error.instance();
     }
@@ -118,6 +122,45 @@ public class UserPage {
             return notAllowed.instance();
         
         return this.createContact.instance();
+    }
+
+    @POST
+    @Path("/create/contact")
+    public TemplateInstance createContactHTML(@Context SecurityContext sec,
+        @FormParam("email") String email,
+        @FormParam("phone") String phone) {
+
+        Principal userTMP = sec.getUserPrincipal();
+        if (userTMP == null)
+            return noAccess.instance();
+        
+        String username = userTMP.getName();
+        ClientDTO clientDTO = clientController.getClientByUsername(username);
+
+        ContactDTO contactDTO = new ContactDTO();
+        contactDTO.email = email;
+        contactDTO.phone = phone;
+
+        if (clientController.createContact(username, contactDTO))
+            return this.getUserHimselflHTML(sec);
+        
+        return notAllowed.instance();
+    }
+
+    @POST
+    @Path("/delete/contact")
+    public TemplateInstance deleteContactHTML(@Context SecurityContext sec) {
+
+        Principal userTMP = sec.getUserPrincipal();
+        if (userTMP == null)
+            return noAccess.instance();
+        
+        String username = userTMP.getName();
+
+        if (clientController.deleteContact(username))
+            return this.getUserHimselflHTML(sec);
+        
+        return notAllowed.instance();
     }
 
   

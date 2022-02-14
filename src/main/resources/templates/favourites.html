@@ -20,7 +20,7 @@
       <img src="/vinyl.svg" width="50" height="50" class="d-inline-block align-top">
       <h1 class="vinylshop" style="color:whitesmoke"> Vinyl Shop </h1>
     </a>
-    
+
     <div class="dropdown" style="float: right">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
@@ -36,26 +36,24 @@
   <h1 class="title"> Merkliste </h1>
   <ul>
     {#for favourite in favourites}
-        <div class="vinyl_component" style="margin-top: 6%">
-          <div class="row">
-            <div class="col-sm">
-              <img class="album" src="/album{favourite.id}.jpg" width="150" 
-              height="150">
-            </div>
-            <div class="col-md">
-      
-              <h1> {favourite.title} </h1>
-      
-              <a href="/template/vinyl/{favourite.id}" class="btn btn-primary">
-                Zum Eintrag</a>
-                <form action="/template/favourite/{favourite.id}/delete" 
-                  method="POST"> 
-                <button type="submit" class="btn btn-danger">
-                  Aus Merkliste entfernen</button>
-                  <form>
-            </div>
-          </div>
+    <div class="vinyl_component" style="margin-top: 6%">
+      <div class="row">
+        <div class="col-sm">
+          <img class="album" src="/album{favourite.id}.jpg" width="150" height="150">
         </div>
+        <div class="col-md">
+
+          <h1> {favourite.title} </h1>
+
+          <a href="/template/vinyl/{favourite.id}" class="btn btn-primary">
+            Zum Eintrag</a>
+          <form action="/template/favourite/{favourite.id}/delete" method="POST">
+            <button type="submit" class="btn btn-danger">
+              Aus Merkliste entfernen</button>
+          </form>
+        </div>
+      </div>
+    </div>
     {/}
   </ul>
 
