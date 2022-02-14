@@ -1,3 +1,6 @@
+/*
+    @author: Dennis Dreier
+*/
 package gateway;
 
 import java.util.ArrayList;
@@ -67,11 +70,11 @@ public class FavouritesRepository implements FavouritesGateway {
         if (client == null || vinyl == null)
             return false;
 
+        // if client doesn't have vinyls
         if (!client.getFavourites().contains(vinyl))
             return false;
 
         client.getFavourites().remove(vinyl);
-
         em.merge(client);
 
         return true;

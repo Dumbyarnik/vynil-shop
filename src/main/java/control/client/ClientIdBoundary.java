@@ -1,3 +1,6 @@
+/*
+    @author: Daniil Vorobyev
+*/
 package control.client;
 
 import java.util.Collection;

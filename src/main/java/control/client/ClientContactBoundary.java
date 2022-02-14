@@ -1,4 +1,7 @@
-package control.client.review;
+/*
+    @author: Daniil Vorobyev
+*/
+package control.client;
 
 import java.util.Collection;
 

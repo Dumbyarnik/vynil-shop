@@ -1,3 +1,6 @@
+/*
+    @author: Daniil Vorobyev
+*/
 package gateway;
 
 import javax.enterprise.context.Dependent;

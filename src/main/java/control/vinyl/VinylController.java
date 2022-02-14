@@ -1,3 +1,6 @@
+/*
+    @author: Daniil Vorobyev
+*/
 package control.vinyl;
 
 import java.util.ArrayList;

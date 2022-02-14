@@ -1,3 +1,6 @@
+/*
+    @author: Daniil Vorobyev
+*/
 package gateway;
 
 import java.util.ArrayList;
@@ -73,7 +76,8 @@ public class VinylRepository implements VinylGateway {
         Client client = em.find(Client.class, vinyl.getClient().getId());
         if (client == null)
             return false;
-        if (client.getUsername().equals(username))
+        // if the client didn't create the vinyl
+        if (!client.getUsername().equals(username))
             return false;
             
         // going through all the vinyls and find the one we
@@ -103,7 +107,7 @@ public class VinylRepository implements VinylGateway {
         Client client = vinyl.getClient();
         if (client == null)
             return false;
-            
+        // if client didn't create vinyl
         if (!client.getUsername().equals(username))
             return false;
             

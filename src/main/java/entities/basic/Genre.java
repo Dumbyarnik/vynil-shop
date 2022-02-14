@@ -1,3 +1,6 @@
+/*
+    @author: Dennis Dreier
+*/
 package entities.basic;
 
 public enum Genre {

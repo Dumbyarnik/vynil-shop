@@ -1,3 +1,6 @@
+/*
+    @author: Dennis Dreier
+*/
 package gateway;
 
 import javax.enterprise.context.Dependent;
