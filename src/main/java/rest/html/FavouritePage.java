@@ -36,12 +36,14 @@ import io.quarkus.qute.*;
 
 public class FavouritePage {
 
+    // Favourite templates
     @Inject
     Template favourites;
 
     @Inject
     Template vinyl;
 
+    // Error templates
     @Inject
     Template error;
 
@@ -51,6 +53,7 @@ public class FavouritePage {
     @Inject 
     Template noAccess;
 
+    // Controllers
     @Inject
     FavouritesBoundary favouriteContoller = new FavouritesController();
 
@@ -66,9 +69,7 @@ public class FavouritePage {
     @Inject
     VinylReccomendationsBoundary vinylReccomendationsContoller = new VinylController();
 
-    @Inject
-    DatabaseService databaseService = new DatabaseService();
-
+    // Returns favourtes of the user
     @GET
     @RolesAllowed("Client")
     public TemplateInstance getFavouritesofUser(@Context SecurityContext sec) {
@@ -85,15 +86,7 @@ public class FavouritePage {
         return this.notAllowed.instance();
     }
 
-    @GET
-    public TemplateInstance getGenresHTML() {
-        ClientDTO clientDTO = clientController.getClient(1l);
-        if (clientDTO != null)
-            return this.favourites.data("user", clientDTO);
-
-        return this.error.instance();
-    }
-
+    // Creates favourite
     @POST
     @Path("{id}/edit")
     @RolesAllowed("Client")
@@ -112,9 +105,10 @@ public class FavouritePage {
                     .data("recommendation", recommendations);
         }
 
-        return this.notAllowed.instance();
+        return this.notAllowed.data("error", "You have it in your favourites or it is your vinyl");
     }
 
+    // Deletes from favourites
     @POST
     @Path("{id}/delete")
     @RolesAllowed("Client")
@@ -128,7 +122,7 @@ public class FavouritePage {
             return getFavouritesofUser(sec);
         }
 
-        return this.notAllowed.instance();
+        return this.notAllowed.data("error", "You don't have it in your favourites");
     }
 
 }

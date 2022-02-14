@@ -6,24 +6,38 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-    <META HTTP-EQUIV="Expires" CONTENT="-1">
+  <META HTTP-EQUIV="Expires" CONTENT="-1">
 
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="/style.css">
-  <title>Hello, world!</title>
+  <title>{user.username}'s Page</title>
 </head>
 
 <body>
   <!-- Image and text -->
   <nav class="navbar" style="background-color: #1C00CE">
     <a class="navbar-brand" href="/template/genre">
-      <img src="/vinyl.svg" width="50" height="50" class="d-inline-block align-top" alt="">
-      <p class="vinylshop" style="color:whitesmoke"> Vinyl Shop </p>
+      <img src="/vinyl.svg"" width=" 50" height="50" class="d-inline-block align-top">
+      <h1 class="vinylshop" style="color:whitesmoke;"> Vinyl Shop </h1>
     </a>
 
+    <div class="dropdown" style="float: right">
+      <a href="/template/client/create" class="btn btn-primary">
+        Create Account
+      </a>
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Menu
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="/template/client">User Profile</a>
+        <a class="dropdown-item" href="/template/vinyl/create">Create Vinyl</a>
+        <a class="dropdown-item" href="/template/favourite">Favourites</a>
+      </div>
+    </div>
   </nav>
 
   <div class="container" style="margin-top: 6%">
@@ -64,8 +78,8 @@
       <div class="row">
         <div class="col-sm">
           <h1> {#if review.stars is 5}
-           One of the best seller ever !
-          {#else if review.stars is 4}
+            One of the best seller ever !
+            {#else if review.stars is 4}
             Very Good
             {#else if review.stars is 3}
             Good but flawed
@@ -73,7 +87,7 @@
             Not satisfied!
             {#else if review.stars is 1}
             Stay away!
-           {/if}
+            {/if}
           </h1>
 
         </div>
@@ -85,8 +99,7 @@
       </div>
       <div class="row">
         <div class="col-sm">
-          <b>by AnotherUser</b> <img class="album" src="/paul.jpg" width="40" height="40"
-            style="display: inline-block">
+          <b>by AnotherUser</b> <img class="album" src="/paul.jpg" width="40" height="40" style="display: inline-block">
         </div>
         <div class="col-sm">
           <p>{review.review}</p>
@@ -98,58 +111,60 @@
 
   <ul>
     {#for vinyl in user.vinyls}
-        <div class="vinyl_component" style="margin-top: 4%">
-          <div class="row">
-            <div class="col-sm">
-              <img class="album" src="/album{vinyl.id}.jpg" width="150" 
-              height="150">
-            </div>
-            <div class="col-md">
-              <h1> {vinyl.title} </h1>
-              <a href="/template/vinyl/{vinyl.id}" class="btn btn-primary">
-                Mehr erfahren</a>
-            </div>
-          </div>
+    <div class="vinyl_component" style="margin-top: 4%">
+      <div class="row">
+        <div class="col-sm">
+          {#if vinyl.id > 13}
+          <img class="album" src="/album14.jpg" width="150" height="150">
+          {#else}
+          <img class="album" src="/album{vinyl.id}.jpg" width="150" height="150">
+          {/if}
         </div>
+        <div class="col-md">
+          <h1> {vinyl.title} </h1>
+          <a href="/template/vinyl/{vinyl.id}" class="btn btn-primary">
+            Mehr erfahren</a>
+        </div>
+      </div>
+    </div>
     {/}
   </ul>
 
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"></script>
-      
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
 
 
-     <!-- Method so the page refreshes only once Onload (found on stackoverflow)-->
-    <!--https://stackoverflow.com/questions/6160415/reload-an-html-page-just-once-using-javascript -->
-     <script type="text/javascript">
-        $(document).ready(function(){
-      
-            //Check if the current URL contains '#' 
-            if(document.URL.indexOf("#")==-1)
-            {
-                // Set the URL to whatever it was plus "#".
-                url = document.URL+"#";
-                location = "#";
-      
-                //Reload the page
-                location.reload(true);
-      
-            }
-        });
-      </script>
+
+  <!-- Method so the page refreshes only once Onload (found on stackoverflow)-->
+  <!--https://stackoverflow.com/questions/6160415/reload-an-html-page-just-once-using-javascript -->
+  <script type="text/javascript">
+    $(document).ready(function () {
+
+      //Check if the current URL contains '#' 
+      if (document.URL.indexOf("#") == -1) {
+        // Set the URL to whatever it was plus "#".
+        url = document.URL + "#";
+        location = "#";
+
+        //Reload the page
+        location.reload(true);
+
+      }
+    });
+  </script>
 
 
-    </body>
+</body>
 
 
 </html>

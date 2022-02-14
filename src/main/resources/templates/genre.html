@@ -17,21 +17,22 @@
   <!-- Image and text -->
   <nav class="navbar" style="background-color: #1C00CE">
     <a class="navbar-brand" href="/template/genre">
-      <img src="/vinyl.svg" " width="50" height="50" class="d-inline-block align-top">
+      <img src="/vinyl.svg"" width="50" height="50" class="d-inline-block align-top">
       <h1 class="vinylshop" style="color:whitesmoke;"> Vinyl Shop </h1>
     </a>
     
     <div class="dropdown" style="float: right">
-      <a href="/template/genre/electro" class="btn btn-primary">
+      <a href="/template/client/create" class="btn btn-primary">
         Create Account
       </a>
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
-        Username
+        Menu
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="/template/client">UserProfil</a>
-        <a class="dropdown-item" href="/template/genre">Genres</a>
+        <a class="dropdown-item" href="/template/client">User Profile</a>
+        <a class="dropdown-item" href="/template/vinyl/create">Create Vinyl</a>
+        <a class="dropdown-item" href="/template/favourite">Favourites</a>
       </div>
     </div>
   </nav>
@@ -39,24 +40,24 @@
   <h1 class="title"> {genre} </h1>
   <ul>
     {#for vinyl in vinyls}
-        <div class="vinyl_component" style="margin-top: 4%">
-          <div class="row">
-            <div class="col-sm">
-              <img class="album" src="/album{vinyl.id}.jpg" width="150" 
-              height="150">
-            </div>
-            <div class="col-md">
-      
-              <h1> {vinyl.title} </h1>
-      
-              <a href="/template/vinyl/{vinyl.id}" class="btn btn-primary">
-                Mehr erfahren</a>
-            </div>
-          </div>
+    <div class="vinyl_component" style="margin-top: 4%">
+      <div class="row">
+        <div class="col-sm">
+          {#if vinyl.id > 13}
+          <img class="album" src="/album14.jpg" width="150" height="150">
+          {#else}
+          <img class="album" src="/album{vinyl.id}.jpg" width="150" height="150">
+          {/if}
         </div>
+        <div class="col-md">
+          <h1> {vinyl.title} </h1>
+          <a href="/template/vinyl/{vinyl.id}" class="btn btn-primary">
+            Mehr erfahren</a>
+        </div>
+      </div>
+    </div>
     {/}
   </ul>
-
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->

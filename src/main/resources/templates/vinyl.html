@@ -20,20 +20,36 @@
   <!-- Image and text -->
   <nav class="navbar" style="background-color: #1C00CE">
     <a class="navbar-brand" href="/template/genre">
-      <img src="/vinyl.svg" width="50" height="50" class="d-inline-block align-top">
-      <h1 class="vinylshop" style="color:whitesmoke"> Vinyl Shop </h1>
+      <img src="/vinyl.svg"" width=" 50" height="50" class="d-inline-block align-top">
+      <h1 class="vinylshop" style="color:whitesmoke;"> Vinyl Shop </h1>
     </a>
 
+    <div class="dropdown" style="float: right">
+      <a href="/template/client/create" class="btn btn-primary">
+        Create Account
+      </a>
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Menu
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="/template/client">User Profile</a>
+        <a class="dropdown-item" href="/template/vinyl/create">Create Vinyl</a>
+        <a class="dropdown-item" href="/template/favourite">Favourites</a>
+      </div>
+    </div>
   </nav>
-
 
   <div class="container" style="margin-top: 6%">
     <div class="row">
       <div class="col-sm">
-        <img class="album" src="/album{vinyl.id}.jpg" width="300" height="300">
+          {#if vinyl.id > 13}
+          <img class="album" src="/album14.jpg" width="150" height="150">
+          {#else}
+          <img class="album" src="/album{vinyl.id}.jpg" width="150" height="150">
+          {/if}
       </div>
       <div class="col-md">
-
         <h1 style="display: inline-block"> {vinyl.title} </h1>
         <a href="/template/genre/{vinyl.genre}" style="margin-left: 2%;" class="btn btn-primary">{vinyl.genre}</a>
         <b>{vinyl.price} $ </b>
@@ -41,7 +57,6 @@
         <p>
           {vinyl.description}
         </p>
-
 
         <form action="/template/favourite/{vinyl.id}/edit" method="POST">
           <button type="submit" class="btn btn-primary btn-lg">
@@ -62,7 +77,6 @@
     </div>
   </div>
 
-
   <h1 style="margin-top: 8%; text-align: center">
     Interested in {user.username}'s' offer ?
   </h1>
@@ -80,12 +94,10 @@
   </div>
   {/if}
 
-
   <h1 style="margin-top: 8%; text-align: center"> Similar Titles </h1>
 
   <div class="container" style="margin-top: 5%">
     <div class="row">
-
       <div class="col-md">
         <div class="suggestion" style="width: 18rem;">
           <img class="card-img-top" src="/album{recommendation[0].id}.jpg" alt="Card image cap">
@@ -118,20 +130,8 @@
           </div>
         </div>
       </div>
-
-
     </div>
   </div>
-
-
-
-
-
-
-
-
-
-
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -33,12 +33,17 @@ import io.quarkus.qute.*;
 
 public class VinylPage {
 
+    // Vinyl HTMLs
     @Inject
     Template vinyl;
 
     @Inject
     Template createVinyl;
 
+    @Inject
+    Template user;
+
+    // Error HTMLs
     @Inject
     Template error;
 
@@ -48,9 +53,7 @@ public class VinylPage {
     @Inject
     Template notAllowed;
 
-    @Inject
-    Template user;
-
+    // Controllers
     @Inject
     VinylIdBoundary vinylIdController = new VinylController();
 
@@ -63,6 +66,7 @@ public class VinylPage {
     @Inject
     VinylBoundary vinylController = new VinylController();
 
+    // Gets vinyl HTML page
     @GET
     @Path("/{id}")
     public TemplateInstance getVinylHTML(@PathParam("id") Long id) {
@@ -77,6 +81,7 @@ public class VinylPage {
         return error.instance();
     }
 
+    // Gets the create vinyl form
     @GET
     @RolesAllowed("Client")
     @Path("/create")
@@ -88,6 +93,7 @@ public class VinylPage {
         return createVinyl.instance();
     }
 
+    // Creates the new vinyl
     @POST
     @RolesAllowed("Client")
     @Path("/create")
