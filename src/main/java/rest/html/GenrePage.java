@@ -5,6 +5,8 @@ import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.SecurityContext;
 
 import control.DTO.ClientDTO;
 import control.DTO.VinylDTO;
@@ -25,7 +27,6 @@ public class GenrePage {
 
     @Inject
     Template genres;
-    
 
     @Inject
     VinylBoundary vinylController = new VinylController();
@@ -34,19 +35,19 @@ public class GenrePage {
     ClientBoundry clientController = new ClientController();
 
     @GET
-    public TemplateInstance getGenresHTML(){      
+    public TemplateInstance getGenresHTML(@Context SecurityContext sec) {
         ClientDTO clientDTO = clientController.getClient(1l);
-        if (clientDTO != null)  
-        return this.genres.data("user",clientDTO);
+        if (clientDTO != null)
+            return this.genres.data("user", clientDTO);
 
         return null;
     }
 
     @GET
     @Path("/{genre}")
-    public TemplateInstance getGenreHTML(@PathParam("genre") String genre){  
-        genre = genre.toUpperCase();    
+    public TemplateInstance getGenreHTML(@PathParam("genre") String genre) {
+        genre = genre.toUpperCase();
         return this.genre.data("vinyls", vinylController.getVinylGenre(genre),
-            "genre", genre);
+                "genre", genre);
     }
 }

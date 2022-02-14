@@ -53,9 +53,9 @@ public class VinylResource {
             description = "Success",
             content = @Content(mediaType = "application/json", 
             schema = @Schema(implementation = VinylDTO.class))))
-    @Retry(maxRetries = 3)
-    @Timeout(250)
-    @Fallback(fallbackMethod = "fallbackVinyls")
+    //@Retry(maxRetries = 3)
+    //@Timeout(250)
+    //@Fallback(fallbackMethod = "fallbackVinyls")
     public Response getVinyls() {
         return Response.ok(vinylController.getVinyls()).build();
     }
@@ -104,7 +104,7 @@ public class VinylResource {
     }
 
     // Fallback methods
-    public Response fallbackVinyls(){
+    public Response fallbackVinyls(@Context SecurityContext sec){
         VinylDTO vinylDTO = new VinylDTO();
         vinylDTO.id = 0L;
         vinylDTO.title = "Example Vinyl";

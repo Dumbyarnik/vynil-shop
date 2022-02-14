@@ -33,9 +33,9 @@ public class VinylController implements VinylBoundary {
 
     @Override
     public boolean createVinyl(String username, CreateVinylDTO createVinylDTO) {
-        // TODO: check for the genre constant
-        // if title or price are empty
-        if (createVinylDTO.title.length() == 0 || createVinylDTO.price == null)
+        
+        if (createVinylDTO.title.length() == 0 || createVinylDTO.price == null 
+            || createVinylDTO.price < 0)
             return false;
 
         if (!Genre.contains(createVinylDTO.genre))
