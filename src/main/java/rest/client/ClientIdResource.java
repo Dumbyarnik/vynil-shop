@@ -27,6 +27,7 @@ import control.DTO.ContactDTO;
 import control.DTO.ReviewDTO;
 import control.client.ClientBoundry;
 import control.client.ClientController;
+import control.client.ClientIdBoundary;
 
 // http://localhost:8080/client/{id}
 @ApplicationScoped
@@ -34,7 +35,7 @@ import control.client.ClientController;
 public class ClientIdResource {
 
     @Inject
-    ClientBoundry clientController = new ClientController();
+    ClientIdBoundary clientController = new ClientController();
 
     @PostConstruct
     public void init() {  
