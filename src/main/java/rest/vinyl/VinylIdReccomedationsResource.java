@@ -27,6 +27,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import control.DTO.VinylDTO;
 import control.vinyl.VinylBoundary;
 import control.vinyl.VinylController;
+import control.vinyl.VinylReccomendationsBoundary;
 
 // http://localhost:8080/vinyl/{id}/reccomedations
 @ApplicationScoped
@@ -34,7 +35,7 @@ import control.vinyl.VinylController;
 public class VinylIdReccomedationsResource {
 
     @Inject
-    VinylBoundary vinylController = new VinylController();
+    VinylReccomendationsBoundary vinylController = new VinylController();
 
     @PostConstruct
     public void init() {  

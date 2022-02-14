@@ -16,6 +16,8 @@ import control.client.ClientBoundry;
 import control.client.ClientController;
 import control.vinyl.VinylBoundary;
 import control.vinyl.VinylController;
+import control.vinyl.VinylIdBoundary;
+import control.vinyl.VinylReccomendationsBoundary;
 import io.quarkus.qute.*;
 
 // http://localhost:8080/vinylpage/{id}
@@ -31,7 +33,10 @@ public class VinylPage {
     Template error;
 
     @Inject
-    VinylBoundary vinylController = new VinylController();
+    VinylIdBoundary vinylIdController = new VinylController();
+
+    @Inject
+    VinylReccomendationsBoundary vinylReccomendationsController = new VinylController();
 
     @Inject
     ClientBoundry clientController = new ClientController();
@@ -39,8 +44,9 @@ public class VinylPage {
     @GET
     @Path("/{id}")
     public TemplateInstance getVinylHTML(@PathParam("id") Long id) {
-        VinylDTO vinylDTO = vinylController.getVinyl(id);
-        Collection<VinylDTO> recommendations = vinylController.getVinylReccomedations(id);
+        VinylDTO vinylDTO = vinylIdController.getVinyl(id);
+        Collection<VinylDTO> recommendations = 
+            vinylReccomendationsController.getVinylReccomedations(id);
    
 
        /*

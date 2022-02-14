@@ -17,7 +17,8 @@ import gateway.VinylRepository;
 
 @Model
 @Dependent
-public class VinylController implements VinylBoundary {
+public class VinylController implements VinylBoundary, VinylIdBoundary,
+    VinylReccomendationsBoundary, VinylGenreBoundary {
 
     @Inject
     VinylGateway vinylRepository = new VinylRepository();
