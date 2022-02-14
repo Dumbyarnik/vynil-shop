@@ -43,7 +43,11 @@
   <div class="container" style="margin-top: 6%">
     <div class="row">
       <div class="col-sm">
-        <img class="album" src="/album{vinyl.id}.jpg" width="300" height="300">
+          {#if vinyl.id > 13}
+          <img class="album" src="/album14.jpg" width="150" height="150">
+          {#else}
+          <img class="album" src="/album{vinyl.id}.jpg" width="150" height="150">
+          {/if}
       </div>
       <div class="col-md">
         <h1 style="display: inline-block"> {vinyl.title} </h1>

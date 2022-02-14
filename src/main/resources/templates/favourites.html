@@ -40,7 +40,11 @@
     <div class="vinyl_component" style="margin-top: 6%">
       <div class="row">
         <div class="col-sm">
-          <img class="album" src="/album{favourite.id}.jpg" width="150" height="150">
+          {#if vinyl.id > 13}
+          <img class="album" src="/album14.jpg" width="150" height="150">
+          {#else}
+          <img class="album" src="/album{vinyl.id}.jpg" width="150" height="150">
+          {/if}
         </div>
         <div class="col-md">
           <h1> {favourite.title} </h1>
