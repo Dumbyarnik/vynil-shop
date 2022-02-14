@@ -26,28 +26,34 @@ import io.quarkus.qute.*;
 
 public class GenrePage {
 
+    // Genre HTMLs
     @Inject
     Template genre;
 
     @Inject
     Template genres;
 
+    // Controllers
     @Inject
     VinylGenreBoundary vinylGenreController = new VinylController();
 
     @Inject
     ClientBoundry clientController = new ClientController();
 
+    // Gets the all genres page - main page
     @GET
     public TemplateInstance getGenresHTML() {
         return this.genres.instance();
     }
 
+    // Gets page of one genre
     @GET
     @Path("/{genre}")
     public TemplateInstance getGenreHTML(@PathParam("genre") String genre) {
         genre = genre.toUpperCase();
-        return this.genre.data("vinyls", vinylGenreController.getVinylGenre(genre),
-                "genre", genre);
+        
+        return this.genre.data("vinyls", 
+            vinylGenreController.getVinylGenre(genre),
+            "genre", genre);
     }
 }
