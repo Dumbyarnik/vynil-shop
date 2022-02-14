@@ -9,38 +9,42 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="style.css">
-  <title>Hello, world!</title>
+  <link rel="stylesheet" href="/style.css">
+  <title>Main Page</title>
 </head>
 
 <body>
   <!-- Image and text -->
   <nav class="navbar" style="background-color: #1C00CE">
     <a class="navbar-brand" href="/template/genre">
-      <img src="/vinyl.svg" width="50" height="50" class="d-inline-block align-top">
-      <h1 class="vinylshop" style="color:whitesmoke"> Vinyl Shop </h1>
+      <img src="/vinyl.svg"" width="50" height="50" class="d-inline-block align-top">
+      <h1 class="vinylshop" style="color:whitesmoke;"> Vinyl Shop </h1>
     </a>
-
+    
     <div class="dropdown" style="float: right">
+      <a href="/template/client/create" class="btn btn-primary">
+        Create Account
+      </a>
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
-        Username
+        Menu
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="/template/client/{user.id}">UserProfil</a>
-        <a class="dropdown-item" href="/template/genre">Genres</a>
+        <a class="dropdown-item" href="/template/client">User Profile</a>
+        <a class="dropdown-item" href="/template/vinyl/create">Create Vinyl</a>
+        <a class="dropdown-item" href="/template/client/create/contact">Create Contact</a>
       </div>
     </div>
-
   </nav>
 
   <div class="container">
     <div class="row">
       <div class="col-xl">
         <div class="card" style="width: 28rem; margin-top: 4%;">
-          <img class="card-img-top"  src="/rock.jpg" alt="Card image cap">
+          <img class="card-img-top" src="/rock.jpg" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">Rock</h5>
+
             <p class="card-text">Hier findest du Vinyl im Bereich Rock.</p>
             <a href="/template/genre/rock" class="btn btn-primary">
               Rock</a>
@@ -77,7 +81,7 @@
           <div class="card-body">
             <h5 class="card-title">Merkliste</h5>
             <p class="card-text">Hier sind deine vorgemerkten Vinyl Einträge.</p>
-            <a href="/template/favourite/{user.id}" class="btn btn-primary">
+            <a href="/template/favourite" class="btn btn-primary">
               Merkliste
             </a>
           </div>

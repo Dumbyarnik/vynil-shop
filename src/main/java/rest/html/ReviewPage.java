@@ -25,12 +25,9 @@ import control.vinyl.VinylBoundary;
 import control.vinyl.VinylController;
 import io.quarkus.qute.*;
 
-
 // http://localhost:8080/template/review/{id}
 @ApplicationScoped
 @Path("template/review/{id}")
-
-
 
 public class ReviewPage {
 
@@ -40,45 +37,60 @@ public class ReviewPage {
     @Inject
     Template user;
 
-    
+    @Inject
+    Template noAccess;
+
+    @Inject
+    Template notAllowed;
+
     @Inject
     VinylBoundary vinylController = new VinylController();
 
     @Inject
     ClientBoundry clientController = new ClientController();
 
-
     @Inject
     ReviewBoundary reviewController = new ReviewController();
- 
+
     @GET
     @RolesAllowed("Client")
-    public TemplateInstance getReviewHTML(@PathParam("id") Long id){
-       ClientDTO clientDTO = clientController.getClient(id);
-     if (clientDTO != null)  
-      return review.data("user",clientDTO);
-      
-      return null;
+    public TemplateInstance getReviewHTML(@Context SecurityContext sec, 
+        @PathParam("id") Long id) {
+        Principal userTMP = sec.getUserPrincipal();
+        if (userTMP == null)
+            return noAccess.instance();
+        
+        ClientDTO clientDTO = clientController.getClient(id);
+
+        if (clientDTO != null)
+            return review.data("user", clientDTO);
+
+        return notAllowed.instance();
     }
-    
+
     @POST
     @Path("/edit")
     @RolesAllowed("Client")
-    public TemplateInstance postReview (@Context SecurityContext sec,
-        @PathParam("id") Long id , 
-        @FormParam("review") String review,
-        @FormParam("stars") String stars){
-            
+    public TemplateInstance postReview(@Context SecurityContext sec,
+            @PathParam("id") Long id,
+            @FormParam("review") String review,
+            @FormParam("stars") String stars) {
+
         Principal userTMP = sec.getUserPrincipal();
+        if (userTMP == null)
+            return noAccess.instance();
+
         String username = userTMP.getName();
-        ClientDTO clientDTO=clientController.getClient(id);
+        ClientDTO clientDTO = clientController.getClient(id);
 
         ReviewDTO reviewDTO = new ReviewDTO();
         reviewDTO.review = review;
         reviewDTO.stars = Integer.parseInt(stars);
-      
-        reviewController.createReview(username, reviewDTO, id);
-        return user.data("user",clientDTO);
+
+        if (reviewController.createReview(username, reviewDTO, id))
+            return user.data("user", clientDTO);
+        
+        return notAllowed.instance();
     }
 
 }

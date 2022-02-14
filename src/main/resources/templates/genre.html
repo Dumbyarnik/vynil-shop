@@ -17,10 +17,23 @@
   <!-- Image and text -->
   <nav class="navbar" style="background-color: #1C00CE">
     <a class="navbar-brand" href="/template/genre">
-      <img src="/vinyl.svg" width="50" height="50" class="d-inline-block align-top" alt="">
-      <h1 class="vinylshop" style="color:whitesmoke"> Vinyl Shop </h1>
+      <img src="/vinyl.svg" " width="50" height="50" class="d-inline-block align-top">
+      <h1 class="vinylshop" style="color:whitesmoke;"> Vinyl Shop </h1>
     </a>
-
+    
+    <div class="dropdown" style="float: right">
+      <a href="/template/genre/electro" class="btn btn-primary">
+        Create Account
+      </a>
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Username
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="/template/client">UserProfil</a>
+        <a class="dropdown-item" href="/template/genre">Genres</a>
+      </div>
+    </div>
   </nav>
 
   <h1 class="title"> {genre} </h1>
@@ -43,13 +56,6 @@
         </div>
     {/}
   </ul>
-
-  
-
-
-
-
-
 
 
   <!-- Optional JavaScript -->

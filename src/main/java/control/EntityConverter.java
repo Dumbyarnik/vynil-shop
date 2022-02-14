@@ -34,7 +34,18 @@ public class EntityConverter {
             ReviewDTO tmp = this.reviewToReviewDTO(review);
             reviews.add(tmp);
         }
+
         clientDTO.reviews = reviews;
+
+        // putting clients into DTO
+        Collection<VinylDTO> vinyls = new ArrayList<>();
+
+        for (Vinyl vinyl : client.getVinyls()){
+            VinylDTO tmp = this.vinylToVinylDTO(vinyl);
+            vinyls.add(tmp);
+        }
+
+        clientDTO.vinyls = vinyls;
 
         return clientDTO;
     }

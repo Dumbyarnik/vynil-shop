@@ -1,5 +1,8 @@
 package rest.html;
 
+import java.security.Principal;
+
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -36,12 +39,8 @@ public class GenrePage {
     ClientBoundry clientController = new ClientController();
 
     @GET
-    public TemplateInstance getGenresHTML(@Context SecurityContext sec) {
-        ClientDTO clientDTO = clientController.getClient(1l);
-        if (clientDTO != null)
-            return this.genres.data("user", clientDTO);
-
-        return null;
+    public TemplateInstance getGenresHTML() {
+        return this.genres.instance();
     }
 
     @GET

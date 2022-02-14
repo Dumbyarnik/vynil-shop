@@ -32,13 +32,23 @@
         <img class="album" src="/ringo.jpg" width="300" height="300">
       </div>
       <div class="col-md">
-
         <h1 style="display: inline-block"> {user.username} </h1>
         <p>
           Auf dieser Seite werden Vinyls verkauft.
         </p>
-
       </div>
+      {#if user.contact}
+      <div class="contact_details" style="text-align: center; margin-top: 3%">
+        <h2>Contact Information</h2>
+        <p>
+          Email: <a
+            href="mailto:{user.contact.email}?subject=VinylOrderNr#1234&body=Hey bezüglich deines Vinyls 'Abbey Road' auf Vinl Shop">
+            {user.contact.email}</a>
+          <br>
+          Phone: {user.contact.phone}
+        </p>
+      </div>
+      {/if}
     </div>
 
 
@@ -46,7 +56,7 @@
   </div>
 
   <h1 style="margin-top: 5%; margin-left: 5%;display:inline-block">Reviews</h1>
-  <a href="/template/review/{user.id}" class="btn btn-primary" style="margin-left: 5%; width=110%;">Write a review</a>
+  <a href="/template/review/{user.id}" class="btn btn-primary" style="margin-left: 5%; width: 110%;">Write a review</a>
 
   <ul>
     {#for review in user.reviews}
@@ -68,7 +78,6 @@
 
         </div>
         <div class="col-sm">
-
           {#for star in review.stars}
           <img style="display:inline-block; width:1.2rem;height: 1.2rem;" src="/star.png"></img>
           {/}
@@ -84,6 +93,24 @@
         </div>
       </div>
     </div>
+    {/}
+  </ul>
+
+  <ul>
+    {#for vinyl in user.vinyls}
+        <div class="vinyl_component" style="margin-top: 4%">
+          <div class="row">
+            <div class="col-sm">
+              <img class="album" src="/album{vinyl.id}.jpg" width="150" 
+              height="150">
+            </div>
+            <div class="col-md">
+              <h1> {vinyl.title} </h1>
+              <a href="/template/vinyl/{vinyl.id}" class="btn btn-primary">
+                Mehr erfahren</a>
+            </div>
+          </div>
+        </div>
     {/}
   </ul>
 

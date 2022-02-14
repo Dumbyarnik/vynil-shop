@@ -10,7 +10,6 @@ public class ClientDTO {
     public String description;
     public ContactDTO contact;
     public Collection<ReviewDTO> reviews;
-
-    public ClientDTO(){}
+    public Collection<VinylDTO> vinyls;
     
 }

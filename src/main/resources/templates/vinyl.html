@@ -34,19 +34,19 @@
       </div>
       <div class="col-md">
 
-        <h1 style="display: inline-block"> {vinyl.title} </h1> 
-          <a href="/template/genre/{vinyl.genre}" style="margin-left: 2%;"
-          class="btn btn-primary">{vinyl.genre}</a> <b>{vinyl.price} $ </b>
+        <h1 style="display: inline-block"> {vinyl.title} </h1>
+        <a href="/template/genre/{vinyl.genre}" style="margin-left: 2%;" class="btn btn-primary">{vinyl.genre}</a>
+        <b>{vinyl.price} $ </b>
         <p class="artist"> {vinyl.artist}</p>
         <p>
           {vinyl.description}
         </p>
 
-       
-        <form action="/template/favourite/{vinyl.id}/edit" method="POST">  
-     <button  type="submit"  class="btn btn-primary btn-lg">
-      <i class="bi bi-plus"></i>
-       Zur Merkliste hinzufügen</button>
+
+        <form action="/template/favourite/{vinyl.id}/edit" method="POST">
+          <button type="submit" class="btn btn-primary btn-lg">
+            <i class="bi bi-plus"></i>
+            Zur Merkliste hinzufügen</button>
         </form>
       </div>
     </div>
@@ -57,17 +57,17 @@
         </div>
         <div class="col-sm">
           <h1>{user.username}</h1>
-        </div>  
+        </div>
       </a>
     </div>
   </div>
 
 
-  <h1 style="margin-top: 8%; text-align: center"> 
-    Interested in {user.username}'s' offer ? 
+  <h1 style="margin-top: 8%; text-align: center">
+    Interested in {user.username}'s' offer ?
   </h1>
 
-
+  {#if user.contact}
   <div class="contact_details" style="text-align: center; margin-top: 3%">
     <h2>Contact Information</h2>
     <p>
@@ -77,9 +77,9 @@
       <br>
       Phone: {user.contact.phone}
     </p>
-    
   </div>
-  
+  {/if}
+
 
   <h1 style="margin-top: 8%; text-align: center"> Similar Titles </h1>
 
@@ -107,7 +107,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="col-md">
         <div class="suggestion" style="width: 18rem;">
           <img class="card-img-top" src="/album{recommendation[2].id}.jpg" alt="Card image cap">

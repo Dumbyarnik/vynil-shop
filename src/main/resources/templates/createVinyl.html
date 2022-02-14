@@ -10,54 +10,53 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="/style.css">
-  <title> Merkliste </title>
+  <title>Create Your Vinyl</title>
 </head>
 
 <body>
   <!-- Image and text -->
   <nav class="navbar" style="background-color: #1C00CE">
     <a class="navbar-brand" href="/template/genre">
-      <img src="/vinyl.svg" width="50" height="50" class="d-inline-block align-top">
-      <h1 class="vinylshop" style="color:whitesmoke"> Vinyl Shop </h1>
+      <img src="/vinyl.svg"" width=" 50" height="50" class="d-inline-block align-top">
+      <h1 class="vinylshop" style="color:whitesmoke;"> Vinyl Shop </h1>
     </a>
-    
+
     <div class="dropdown" style="float: right">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
-        Username
+        Menu
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="/template/client">UserProfil</a>
-        <a class="dropdown-item" href="/template/genre">Genres</a>
+        <a class="dropdown-item" href="/template/client">User Profile</a>
+        <a class="dropdown-item" href="/template/vinyl/create">Create Vinyl</a>
       </div>
     </div>
   </nav>
 
-  <h1 class="title"> Merkliste </h1>
-  <ul>
-    {#for favourite in favourites}
-        <div class="vinyl_component" style="margin-top: 6%">
-          <div class="row">
-            <div class="col-sm">
-              <img class="album" src="/album{favourite.id}.jpg" width="150" 
-              height="150">
-            </div>
-            <div class="col-md">
-      
-              <h1> {favourite.title} </h1>
-      
-              <a href="/template/vinyl/{favourite.id}" class="btn btn-primary">
-                Zum Eintrag</a>
-                <form action="/template/favourite/{favourite.id}/delete" 
-                  method="POST"> 
-                <button type="submit" class="btn btn-danger">
-                  Aus Merkliste entfernen</button>
-                  <form>
-            </div>
-          </div>
-        </div>
-    {/}
-  </ul>
+  <h1 style="margin-top: 5%; text-align: center;"> Create vinyl </h1>
+
+
+
+  <form action="/template/vinyl/create" method="POST" style="margin-left: 4%; margin-right: 4%">
+    <div class="form-group">
+      <label for="review">Vinyl</label>
+      <input type="text" maxlength="600" size="4" 
+        class="form-control" id="title" name="title" placeholder="Title">
+      <input type="text" maxlength="600" size="4" 
+        class="form-control" id="artist" name="artist" placeholder="Artist">
+      <input type="text" maxlength="600" size="4" 
+        class="form-control" id="description" name="description" placeholder="Description">
+      <select name="genre" id="genre">
+          <option value="ELECTRO">Electro</option>
+          <option value="ROCK">Rock</option>
+          <option value="HIPHOP">Hip-Hop</option>
+          <option value="CLASSIC">Classic</option>
+        </select>
+      <input type="number" maxlength="600" size="4" 
+        class="form-control" id="price" name="price" placeholder="Price">
+    </div>
+    <button style="display: inline-block" type="submit" class="btn btn-primary">Create Vinyl</button>
+  </form>
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -70,6 +69,9 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
+
+
+
 </body>
 
 </html>
