@@ -23,6 +23,9 @@ import control.client.favourites.FavouritesBoundary;
 import control.client.favourites.FavouritesController;
 import control.vinyl.VinylBoundary;
 import control.vinyl.VinylController;
+import control.vinyl.VinylGenreBoundary;
+import control.vinyl.VinylIdBoundary;
+import control.vinyl.VinylReccomendationsBoundary;
 import entities.basic.Vinyl;
 import gateway.DatabaseService;
 import io.quarkus.qute.*;
@@ -54,7 +57,13 @@ public class FavouritePage {
     ClientBoundry clientController = new ClientController();
 
     @Inject
-    VinylBoundary vinylContoller = new VinylController();
+    VinylIdBoundary vinylIdContoller = new VinylController();
+
+    @Inject
+    VinylGenreBoundary vinylGenreContoller = new VinylController();
+
+    @Inject
+    VinylReccomendationsBoundary vinylReccomendationsContoller = new VinylController();
 
     @Inject 
     DatabaseService databaseService =new DatabaseService();
@@ -93,15 +102,17 @@ public class FavouritePage {
         String username = userTMP.getName();
        
 
-        VinylDTO vinylDTO= vinylContoller.getVinyl(id);
+        VinylDTO vinylDTO= vinylIdContoller.getVinyl(id);
         ClientDTO clientDTO=clientController.getClientByUsername(username);
-        Collection<VinylDTO> recommendations = vinylContoller.getVinylReccomedations(id);
+        Collection<VinylDTO> recommendations = 
+            vinylReccomendationsContoller.getVinylReccomedations(id);
 
      
 
 
         if(favouriteContoller.createFavourite(username, id)){
-        return vinyl.data("vinyl",vinylDTO).data("user",clientDTO).data("recommendation",recommendations);
+        return vinyl.data("vinyl",vinylDTO).data("user",clientDTO)
+            .data("recommendation",recommendations);
         }
 
         return this.notAllowed.instance();
@@ -118,7 +129,7 @@ public class FavouritePage {
         Principal userTMP = sec.getUserPrincipal();
         String username = userTMP.getName();
         ClientDTO clientDTO=clientController.getClientByUsername(username);
-        VinylDTO vinylDTO= vinylContoller.getVinyl(id);  
+        VinylDTO vinylDTO = vinylIdContoller.getVinyl(id);  
 
       
      

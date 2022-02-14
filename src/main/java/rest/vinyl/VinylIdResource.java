@@ -30,6 +30,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import control.DTO.VinylDTO;
 import control.vinyl.VinylBoundary;
 import control.vinyl.VinylController;
+import control.vinyl.VinylIdBoundary;
 
 // http://localhost:8080/vinyl/{id}
 @ApplicationScoped
@@ -37,7 +38,7 @@ import control.vinyl.VinylController;
 public class VinylIdResource {
 
     @Inject
-    VinylBoundary vinylController = new VinylController();
+    VinylIdBoundary vinylController = new VinylController();
 
     @PostConstruct
     public void init() {  

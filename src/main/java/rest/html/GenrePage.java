@@ -14,6 +14,7 @@ import control.client.ClientBoundry;
 import control.client.ClientController;
 import control.vinyl.VinylBoundary;
 import control.vinyl.VinylController;
+import control.vinyl.VinylGenreBoundary;
 import io.quarkus.qute.*;
 
 // http://localhost:8080/genrepage/{id}
@@ -29,7 +30,7 @@ public class GenrePage {
     Template genres;
 
     @Inject
-    VinylBoundary vinylController = new VinylController();
+    VinylGenreBoundary vinylGenreController = new VinylController();
 
     @Inject
     ClientBoundry clientController = new ClientController();
@@ -47,7 +48,7 @@ public class GenrePage {
     @Path("/{genre}")
     public TemplateInstance getGenreHTML(@PathParam("genre") String genre) {
         genre = genre.toUpperCase();
-        return this.genre.data("vinyls", vinylController.getVinylGenre(genre),
+        return this.genre.data("vinyls", vinylGenreController.getVinylGenre(genre),
                 "genre", genre);
     }
 }

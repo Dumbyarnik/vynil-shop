@@ -16,13 +16,13 @@ public interface VinylBoundary {
     public boolean createVinyl(String username, CreateVinylDTO createVinylDTO);
 
     // vinyl/{id}
-    public VinylDTO getVinyl(Long id);
-    public boolean updateVinyl(String username, Long id, VinylDTO vinylDTO);
-    public boolean deleteVinyl(String username, Long id);
+    //public VinylDTO getVinyl(Long id);
+    //public boolean updateVinyl(String username, Long id, VinylDTO vinylDTO);
+    //public boolean deleteVinyl(String username, Long id);
 
     // vinyl/{id}/reccomendations
-    public Collection<VinylDTO> getVinylReccomedations(Long id);
+    //public Collection<VinylDTO> getVinylReccomedations(Long id);
 
     // vinyl/{genre}/search
-    public Collection<VinylDTO> getVinylGenre(String genre);
+    //public Collection<VinylDTO> getVinylGenre(String genre);
 }
