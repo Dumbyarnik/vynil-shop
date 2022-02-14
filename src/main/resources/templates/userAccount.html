@@ -13,17 +13,28 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="/style.css">
-  <title>Account</title>
+  <title>Your Account</title>
 </head>
 
 <body>
   <!-- Image and text -->
   <nav class="navbar" style="background-color: #1C00CE">
     <a class="navbar-brand" href="/template/genre">
-      <img src="/vinyl.svg" width="50" height="50" class="d-inline-block align-top" alt="">
-      <p class="vinylshop" style="color:whitesmoke"> Vinyl Shop </p>
+      <img src="/vinyl.svg"" width=" 50" height="50" class="d-inline-block align-top">
+      <h1 class="vinylshop" style="color:whitesmoke;"> Vinyl Shop </h1>
     </a>
 
+    <div class="dropdown" style="float: right">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Menu
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="/template/client">User Profile</a>
+        <a class="dropdown-item" href="/template/vinyl/create">Create Vinyl</a>
+        <a class="dropdown-item" href="/template/favourite">Favourites</a>
+      </div>
+    </div>
   </nav>
 
   <div class="container" style="margin-top: 6%">
@@ -53,9 +64,11 @@
         </form>
       </div>
       {#else}
-      <a href="/template/client/create/contact" class="btn btn-primary">
-        Create Contact
-      </a>
+      <div>
+        <a href="/template/client/create/contact" class="btn btn-primary">
+          Create Contact
+        </a>
+      </div>
       {/if}
     </div>
   </div>

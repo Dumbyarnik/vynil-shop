@@ -90,7 +90,7 @@ public class ReviewPage {
         if (reviewController.createReview(username, reviewDTO, id))
             return user.data("user", clientDTO);
         
-        return notAllowed.instance();
+        return notAllowed.data("error", "You can't review yourself or post a review without a text");
     }
 
 }
