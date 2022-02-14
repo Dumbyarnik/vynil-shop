@@ -57,7 +57,6 @@ public class ClientContactResource {
         }
     )
     @Retry(maxRetries = 3)
-    @Timeout(250)
     @Fallback(fallbackMethod = "notAvailable")
     public Response createContact(@Context SecurityContext sec,
         ContactDTO contactDTO) {
@@ -82,7 +81,6 @@ public class ClientContactResource {
         }
     )
     @Retry(maxRetries = 3)
-    @Timeout(250)
     @Fallback(fallbackMethod = "notAvailable")
     public Response updateAdresse(@Context SecurityContext sec,
         ContactDTO contactDTO) {
@@ -107,7 +105,6 @@ public class ClientContactResource {
         }
     )
     @Retry(maxRetries = 3)
-    @Timeout(250)
     @Fallback(fallbackMethod = "notAvailable")
     public Response deleteContact(@Context SecurityContext sec) {
         Principal user = sec.getUserPrincipal();

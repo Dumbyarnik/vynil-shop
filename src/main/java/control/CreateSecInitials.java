@@ -22,9 +22,9 @@ public class CreateSecInitials {
     public void loadUsers(@Observes StartupEvent event){
         UserLogin.deleteAll();
         // clients
+        UserLogin.add("frank", "frank", "Client");
+        UserLogin.add("peter", "peter", "Client");
         UserLogin.add("ringo", "ringo", "Client");
-        UserLogin.add("bingo", "bingo", "Client");
-        UserLogin.add("shmingo", "shmingo", "Client");
         // admin
         UserLogin.add("admin", "admin", "Admin");
     }

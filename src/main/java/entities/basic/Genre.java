@@ -11,7 +11,7 @@ public enum Genre {
 
     public static boolean contains(String s) {
         for (Genre choice : values())
-            if (choice.name().equals(s))
+            if (choice.name().equals(s.toUpperCase()))
                 return true;
         return false;
     }

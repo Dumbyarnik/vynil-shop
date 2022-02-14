@@ -40,7 +40,7 @@ public class VinylResourceTest {
     }
 
     @Test
-    @TestSecurity(user = "ringo", roles = {"Client"})
+    @TestSecurity(user = "john", roles = {"Client"})
     public void testCreateVinylAsUser() {
         CreateVinylDTO createVinylDTO = new CreateVinylDTO();
         createVinylDTO.title = "Good Vinyl";
@@ -58,7 +58,7 @@ public class VinylResourceTest {
     }
 
     @Test
-    @TestSecurity(user = "ringo", roles = {"Client"})
+    @TestSecurity(user = "frank", roles = {"Client"})
     public void testDeleteVinylAsUser() {
         given()
             .when().delete("/vinyl/1")

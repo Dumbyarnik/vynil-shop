@@ -50,7 +50,7 @@ public class ClientResource {
             content = @Content(mediaType = "application/json", 
             schema = @Schema(implementation = ClientDTO.class))))
     @Retry(maxRetries = 3)
-    @Timeout(250)
+    @Timeout(1000)
     @Fallback(fallbackMethod = "fallbackClients")
     public Response getClients() {
         return Response.ok(clientController.getClients()).build();
@@ -68,9 +68,6 @@ public class ClientResource {
             content = @Content(mediaType = "text/plain"))
         }
     )
-    @Retry(maxRetries = 1)
-    @Timeout(250)
-    @Fallback(fallbackMethod = "notAvailable")
     public Response createClient(CreateClientDTO createClientDTO) {
         if (clientController.createClient(createClientDTO))
             return Response.ok().build();

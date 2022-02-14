@@ -1,17 +1,15 @@
 /* users */
+insert into client(username) values ('frank');
+insert into client(username) values ('peter');
 insert into client(username) values ('ringo');
-insert into client(username) values ('bingo');
-insert into client(username) values ('shmingo');
 /* admin */
 insert into client(username) values ('admin');
 
 /* contacts */
 insert into contact(email, phone, client_id) 
-    values ('ringo@cool', '897654321', '1');
+    values ('frank@mail', '897654321', '1');
 insert into contact(email, phone, client_id) 
-    values ('bingo@cool', '897654321', '2');
-insert into contact(email, phone, client_id) 
-    values ('bingo@cool', '897654321', '3');    
+    values ('peter@mail', '897654321', '2');   
 
 /* vinyls */
 insert into vinyl(title, artist, genre, description, price, client_id) 
@@ -31,13 +29,10 @@ insert into vinyl(title, artist, genre, description, price, client_id)
 insert into vinyl(title, artist, genre, description, price, client_id) 
     values ('Homework', 'Daft Punk', 'ELECTRO', 'Cool', 5, 2);   
 insert into vinyl(title, artist, genre, description, price, client_id) 
-    values ('Graduation', 'Kanye West', 'HIPHOP', 'Cool', 12, 3);
+    values ('Graduation', 'Kanye West', 'HIPHOP', 'Cool', 12, 2);
 insert into vinyl(title, artist, genre, description, price, client_id) 
-    values ('The Blueprint', 'Jay Z', 'HIPHOP', 'Cool', 12, 3);
+    values ('The Blueprint', 'Jay Z', 'HIPHOP', 'Cool', 12, 2);
 insert into vinyl(title, artist, genre, description, price, client_id) 
-    values ('The Eminem Show', 'Eminem', 'HIPHOP', 'Cool', 12, 3);
+    values ('The Eminem Show', 'Eminem', 'HIPHOP', 'Cool', 12, 2);
 insert into vinyl(title, artist, genre, description, price, client_id) 
-    values ('Lincense to Ill', 'The Beastie Boys', 'HIPHOP', 'Cool', 12, 3);        
-
-insert into vinyl(title, artist, genre, description, price, client_id) 
-    values ('4 Seasons', 'Vivaldi', 'CLASSIC', 'Great', 12, 2);
+    values ('Lincense to Ill', 'The Beastie Boys', 'HIPHOP', 'Cool', 12, 2);        
