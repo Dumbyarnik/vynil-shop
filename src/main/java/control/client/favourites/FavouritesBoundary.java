@@ -1,3 +1,6 @@
+/*
+    @author: Dennis Dreier
+*/
 package control.client.favourites;
 
 import java.io.Serializable;

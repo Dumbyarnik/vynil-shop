@@ -1,21 +1,16 @@
+/*
+    @author: Daniil Vorobyev
+*/
 package rest.html;
 
-import java.security.Principal;
-
-import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.SecurityContext;
 
-import control.DTO.ClientDTO;
-import control.DTO.VinylDTO;
 import control.client.ClientBoundry;
 import control.client.ClientController;
-import control.vinyl.VinylBoundary;
 import control.vinyl.VinylController;
 import control.vinyl.VinylGenreBoundary;
 import io.quarkus.qute.*;

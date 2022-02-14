@@ -1,3 +1,6 @@
+/*
+    @author: Daniil Vorobyev
+*/
 package org.acme;
 
 import org.junit.jupiter.api.Test;
@@ -22,8 +25,8 @@ public class ClientResourceTest {
     @Test
     public void testCreateClient() {
         CreateClientDTO createClientDTO = new CreateClientDTO();
-        createClientDTO.username = "frank";
-        createClientDTO.password = "frank";
+        createClientDTO.username = "john";
+        createClientDTO.password = "john";
 
         given()
             .contentType("application/json")

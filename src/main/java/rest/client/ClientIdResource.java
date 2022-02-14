@@ -1,3 +1,6 @@
+/*
+    @author: Daniil Vorobyev
+*/
 package rest.client;
 
 import javax.annotation.PostConstruct;
@@ -25,7 +28,6 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import control.DTO.ClientDTO;
 import control.DTO.ContactDTO;
 import control.DTO.ReviewDTO;
-import control.client.ClientBoundry;
 import control.client.ClientController;
 import control.client.ClientIdBoundary;
 
@@ -55,7 +57,7 @@ public class ClientIdResource {
         }
     )
     @Retry(maxRetries = 3)
-    @Timeout(250)
+    @Timeout(500)
     @Fallback(fallbackMethod = "fallbackClient")
     public Response getClient(@PathParam("id") Long id) {
         ClientDTO clientDTO = clientController.getClient(id);
@@ -76,9 +78,6 @@ public class ClientIdResource {
             content = @Content(mediaType = "text/plain"))
         }
     )
-    @Retry(maxRetries = 1)
-    @Timeout(250)
-    @Fallback(fallbackMethod = "notAvailable")
     public Response deleteClient(@PathParam("id") Long id) {
         if (clientController.deleteClient(id))
             return Response.ok().build();

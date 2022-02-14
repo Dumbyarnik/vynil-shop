@@ -1,3 +1,6 @@
+/*
+    @author: Daniil Vorobyev
+*/
 package entities.security;
 
 import javax.persistence.Column;

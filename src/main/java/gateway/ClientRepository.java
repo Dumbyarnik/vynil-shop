@@ -1,3 +1,6 @@
+/*
+    @author: Daniil Vorobyev
+*/
 package gateway;
 
 import java.util.Collection;
@@ -129,6 +132,7 @@ public class ClientRepository implements ClientGateway {
         return false;
     }
 
+    // returns encrypted password
     private UserLogin createSecurityIdentityClient(String username, String password){
         UserLogin user = new UserLogin();
         user.username = username;
@@ -138,6 +142,7 @@ public class ClientRepository implements ClientGateway {
         return user;
     }
 
+    // For frontend
     @Override
     public Client getClientByUsername(String username) {
        return this.databaseService.getClientByName(username);

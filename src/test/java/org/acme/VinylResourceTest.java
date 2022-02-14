@@ -1,17 +1,16 @@
+/*
+    @author: Daniil Vorobyev
+*/
 package org.acme;
 
 import io.quarkus.test.junit.QuarkusTest;
 
 import org.junit.jupiter.api.Test;
 
-import control.DTO.ClientDTO;
-import control.DTO.CreateClientDTO;
 import control.DTO.CreateVinylDTO;
-import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.security.TestSecurity;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
 
 @QuarkusTest
 public class VinylResourceTest {
@@ -41,7 +40,7 @@ public class VinylResourceTest {
     }
 
     @Test
-    @TestSecurity(user = "ringo", roles = {"Client"})
+    @TestSecurity(user = "john", roles = {"Client"})
     public void testCreateVinylAsUser() {
         CreateVinylDTO createVinylDTO = new CreateVinylDTO();
         createVinylDTO.title = "Good Vinyl";
@@ -59,7 +58,7 @@ public class VinylResourceTest {
     }
 
     @Test
-    @TestSecurity(user = "ringo", roles = {"Client"})
+    @TestSecurity(user = "frank", roles = {"Client"})
     public void testDeleteVinylAsUser() {
         given()
             .when().delete("/vinyl/1")

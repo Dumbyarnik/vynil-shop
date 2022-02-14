@@ -1,13 +1,12 @@
-package control.client.review;
-
-import java.util.Collection;
+/*
+    @author: Daniil Vorobyev
+*/
+package control.client;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Model;
 
-import control.DTO.ClientDTO;
 import control.DTO.ContactDTO;
-import control.DTO.CreateClientDTO;
 
 @Model
 @Dependent

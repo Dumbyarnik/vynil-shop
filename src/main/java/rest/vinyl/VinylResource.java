@@ -1,3 +1,6 @@
+/*
+    @author: Daniil Vorobyev
+*/
 package rest.vinyl;
 
 import java.security.Principal;
@@ -24,7 +27,6 @@ import control.DTO.CreateVinylDTO;
 import control.DTO.VinylDTO;
 import control.vinyl.VinylBoundary;
 import control.vinyl.VinylController;
-import entities.VinylGateway;
 
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;

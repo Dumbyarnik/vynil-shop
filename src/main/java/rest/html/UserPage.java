@@ -1,3 +1,6 @@
+/*
+    @author: Dennis Dreier
+*/
 package rest.html;
 
 import java.security.Principal;
@@ -16,16 +19,10 @@ import javax.ws.rs.core.Context;
 import control.DTO.ClientDTO;
 import control.DTO.ContactDTO;
 import control.DTO.CreateClientDTO;
-import control.DTO.CreateReviewDTO;
-import control.DTO.ReviewDTO;
-import control.DTO.VinylDTO;
 import control.client.ClientBoundry;
+import control.client.ClientContactBoundary;
 import control.client.ClientController;
 import control.client.ClientIdBoundary;
-import control.client.review.ClientContactBoundary;
-import control.client.review.ReviewController;
-import control.vinyl.VinylBoundary;
-import control.vinyl.VinylController;
 import io.quarkus.qute.*;
 
 // http://localhost:8080/template/client

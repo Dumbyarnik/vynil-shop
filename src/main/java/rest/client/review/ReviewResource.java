@@ -1,3 +1,6 @@
+/*
+    @author: Dennis Dreier
+*/
 package rest.client.review;
 
 import java.security.Principal;

@@ -1,3 +1,6 @@
+/*
+    @author: Daniil Vorobyev
+*/
 package entities;
 
 import java.io.Serializable;

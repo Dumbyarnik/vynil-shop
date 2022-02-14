@@ -1,3 +1,6 @@
+/*
+    @author: Daniil Vorobyev
+*/
 package rest.client;
 
 import java.security.Principal;
@@ -24,9 +27,8 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 
 import control.DTO.ContactDTO;
-import control.client.ClientBoundry;
+import control.client.ClientContactBoundary;
 import control.client.ClientController;
-import control.client.review.ClientContactBoundary;
 
 import javax.ws.rs.core.Context;
 
@@ -55,7 +57,6 @@ public class ClientContactResource {
         }
     )
     @Retry(maxRetries = 3)
-    @Timeout(250)
     @Fallback(fallbackMethod = "notAvailable")
     public Response createContact(@Context SecurityContext sec,
         ContactDTO contactDTO) {
@@ -80,7 +81,6 @@ public class ClientContactResource {
         }
     )
     @Retry(maxRetries = 3)
-    @Timeout(250)
     @Fallback(fallbackMethod = "notAvailable")
     public Response updateAdresse(@Context SecurityContext sec,
         ContactDTO contactDTO) {
@@ -105,7 +105,6 @@ public class ClientContactResource {
         }
     )
     @Retry(maxRetries = 3)
-    @Timeout(250)
     @Fallback(fallbackMethod = "notAvailable")
     public Response deleteContact(@Context SecurityContext sec) {
         Principal user = sec.getUserPrincipal();

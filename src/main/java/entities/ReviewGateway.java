@@ -1,3 +1,6 @@
+/*
+    @author: Dennis Dreier
+*/
 package entities;
 
 import java.io.Serializable;

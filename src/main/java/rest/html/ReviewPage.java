@@ -1,3 +1,6 @@
+/*
+    @author: Dennis Dreier
+*/
 package rest.html;
 
 import java.security.Principal;
@@ -11,13 +14,10 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
 import control.DTO.ClientDTO;
 import control.DTO.ReviewDTO;
-import control.DTO.VinylDTO;
-import control.client.ClientBoundry;
 import control.client.ClientController;
 import control.client.ClientIdBoundary;
 import control.client.review.ReviewBoundary;
