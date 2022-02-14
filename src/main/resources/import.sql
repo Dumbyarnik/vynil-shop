@@ -15,7 +15,7 @@ insert into contact(email, phone, client_id)
 
 /* vinyls */
 insert into vinyl(title, artist, genre, description, price, client_id) 
-    values ('Abbey Road', 'The Beatles', 'ROCK', 'Cool', 12, 1);
+    values ('Abbey Road', 'The Beatles', 'ROCK', 'Abbey Road is the eleventh studio album by the English rock band the Beatles, released on 26 September 1969 by Apple Records.', 12, 1);
 insert into vinyl(title, artist, genre, description, price, client_id) 
     values ('Pet Sounds', 'The Beach Boys', 'ROCK', 'Cool', 20, 1); 
 insert into vinyl(title, artist, genre, description, price, client_id) 
@@ -38,6 +38,3 @@ insert into vinyl(title, artist, genre, description, price, client_id)
     values ('The Eminem Show', 'Eminem', 'HIPHOP', 'Cool', 12, 3);
 insert into vinyl(title, artist, genre, description, price, client_id) 
     values ('Lincense to Ill', 'The Beastie Boys', 'HIPHOP', 'Cool', 12, 3);        
-
-insert into vinyl(title, artist, genre, description, price, client_id) 
-    values ('4 Seasons', 'Vivaldi', 'CLASSIC', 'Great', 12, 2);

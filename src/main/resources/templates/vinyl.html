@@ -44,9 +44,9 @@
     <div class="row">
       <div class="col-sm">
           {#if vinyl.id > 13}
-          <img class="album" src="/album14.jpg" width="150" height="150">
+          <img class="album" src="/album14.jpg" width="350" height="350">
           {#else}
-          <img class="album" src="/album{vinyl.id}.jpg" width="150" height="150">
+          <img class="album" src="/album{vinyl.id}.jpg" width="350" height="350">
           {/if}
       </div>
       <div class="col-md">
@@ -104,7 +104,7 @@
           <div class="card-body">
             <h5 class="card-title">{recommendation[0].title}</h5>
             <p class="card-text"></p>
-            <a href="/template/vinyl/{recommendation[0].id}" class="btn btn-primary">Go somewhere</a>
+            <a href="/template/vinyl/{recommendation[0].id}" class="btn btn-primary">Go to Vinyl</a>
           </div>
         </div>
       </div>
@@ -115,7 +115,7 @@
           <div class="card-body">
             <h5 class="card-title">{recommendation[1].title}</h5>
             <p class="card-text"></p>
-            <a href="/template/vinyl/{recommendation[1].id}" class="btn btn-primary">Go somewhere</a>
+            <a href="/template/vinyl/{recommendation[1].id}" class="btn btn-primary">Go to Vinyl</a>
           </div>
         </div>
       </div>
@@ -126,7 +126,7 @@
           <div class="card-body">
             <h5 class="card-title">{recommendation[2].title}</h5>
             <p class="card-text"></p>
-            <a href="/template/vinyl/{recommendation[1].id}" class="btn btn-primary">Go somewhere</a>
+            <a href="/template/vinyl/{recommendation[1].id}" class="btn btn-primary">Go to Vinyl</a>
           </div>
         </div>
       </div>
