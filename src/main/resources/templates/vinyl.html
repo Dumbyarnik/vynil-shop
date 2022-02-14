@@ -67,7 +67,7 @@
     Interested in {user.username}'s' offer ?
   </h1>
 
-
+  {#if user.contact}
   <div class="contact_details" style="text-align: center; margin-top: 3%">
     <h2>Contact Information</h2>
     <p>
@@ -77,8 +77,8 @@
       <br>
       Phone: {user.contact.phone}
     </p>
-
   </div>
+  {/if}
 
 
   <h1 style="margin-top: 8%; text-align: center"> Similar Titles </h1>
