@@ -10,6 +10,8 @@ insert into contact(email, phone, client_id)
     values ('ringo@cool', '897654321', '1');
 insert into contact(email, phone, client_id) 
     values ('bingo@cool', '897654321', '2');
+insert into contact(email, phone, client_id) 
+    values ('bingo@cool', '897654321', '3');    
 
 /* vinyls */
 insert into vinyl(title, artist, genre, description, price, client_id) 

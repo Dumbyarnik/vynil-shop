@@ -53,17 +53,30 @@
     <div class="user_review_component" style="margin-top: 6%; margin-left: 5%">
       <div class="row">
         <div class="col-sm">
-          <h1> Review Title </h1>
+          <h1> {#if review.stars is 5}
+           One of the best seller ever !
+          {#else if review.stars is 4}
+            Very Good
+            {#else if review.stars is 3}
+            Good but flawed
+            {#else if review.stars is 2}
+            Not satisfied!
+            {#else if review.stars is 1}
+            Stay away!
+           {/if}
+          </h1>
 
         </div>
         <div class="col-sm">
-          <b> {review.stars}</b>
 
+          {#for star in review.stars}
+          <img style="display:inline-block; width:1.2rem;height: 1.2rem;" src="/star.png"></img>
+          {/}
         </div>
       </div>
       <div class="row">
         <div class="col-sm">
-          <b>by Billy Sheers</b> <img class="album" src="/paul.jpg" width="40" height="40"
+          <b>by AnotherUser</b> <img class="album" src="/paul.jpg" width="40" height="40"
             style="display: inline-block">
         </div>
         <div class="col-sm">
@@ -89,9 +102,9 @@
       
 
 
-
+     <!-- Method so the page refreshes only once Onload (found on stackoverflow)-->
     <!--https://stackoverflow.com/questions/6160415/reload-an-html-page-just-once-using-javascript -->
-      <script type="text/javascript">
+     <script type="text/javascript">
         $(document).ready(function(){
       
             //Check if the current URL contains '#' 
