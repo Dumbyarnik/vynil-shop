@@ -54,10 +54,6 @@ public class UserPage {
         return null;
     }
 
-
-
-
-
     @GET
     @Path("/create")
     public TemplateInstance getCreateUserHTML() {

@@ -17,10 +17,20 @@
   <!-- Image and text -->
   <nav class="navbar" style="background-color: #1C00CE">
     <a class="navbar-brand" href="/template/genre">
-      <img src="/vinyl.svg" width="50" height="50" class="d-inline-block align-top" alt="">
+      <img src="/vinyl.svg" width="50" height="50" class="d-inline-block align-top">
       <h1 class="vinylshop" style="color:whitesmoke"> Vinyl Shop </h1>
     </a>
-
+    
+    <div class="dropdown" style="float: right">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Username
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="/template/client">UserProfil</a>
+        <a class="dropdown-item" href="/template/genre">Genres</a>
+      </div>
+    </div>
   </nav>
 
   <h1 class="title"> Merkliste </h1>
@@ -38,7 +48,8 @@
       
               <a href="/template/vinyl/{favourite.id}" class="btn btn-primary">
                 Zum Eintrag</a>
-                <form action="/template/favourite/{favourite.id}/delete" method="POST"> 
+                <form action="/template/favourite/{favourite.id}/delete" 
+                  method="POST"> 
                 <button type="submit" class="btn btn-danger">
                   Aus Merkliste entfernen</button>
                   <form>
@@ -47,14 +58,6 @@
         </div>
     {/}
   </ul>
-
-  
-
-
-
-
-
-
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -36,19 +36,20 @@ import io.quarkus.qute.*;
 
 public class FavouritePage {
 
-
-
     @Inject
     Template favourites;
 
     @Inject
     Template vinyl;
-     
-    @Inject 
+
+    @Inject
     Template error;
 
-    @Inject 
+    @Inject
     Template notAllowed;
+
+    @Inject 
+    Template noAccess;
 
     @Inject
     FavouritesBoundary favouriteContoller = new FavouritesController();
@@ -65,82 +66,69 @@ public class FavouritePage {
     @Inject
     VinylReccomendationsBoundary vinylReccomendationsContoller = new VinylController();
 
-    @Inject 
-    DatabaseService databaseService =new DatabaseService();
+    @Inject
+    DatabaseService databaseService = new DatabaseService();
 
     @GET
-    public TemplateInstance getGenresHTML(){      
-        ClientDTO clientDTO = clientController.getClient(1l);
-        if (clientDTO != null)  
-        return this.favourites.data("user",clientDTO);
-
-        return this.error.instance();
-    }
-
-    @GET
-    @Path("/{id}")
-    public TemplateInstance getFavouritesofUser(@PathParam("id") Long id){  
-        ClientDTO clientDTO = clientController.getClient(id);
-        String username= clientDTO.username;
-        Collection<VinylDTO> favouriteDTO=favouriteContoller.getFavourites(username);
-        
-        
-        if (favouriteDTO != null)  
-        return this.favourites.data("favourites",favouriteDTO);
-
-        return this.error.instance();
-    }
-
-
- 
-    @POST
-    @Path("{id}/edit")
     @RolesAllowed("Client")
-    public TemplateInstance postFavourite (@Context SecurityContext sec,@PathParam("id") Long id){
-            
-        Principal userTMP = sec.getUserPrincipal();
-        String username = userTMP.getName();
-       
+    public TemplateInstance getFavouritesofUser(@Context SecurityContext sec) {
+        Principal user = sec.getUserPrincipal();
+        if (user == null)
+            return this.noAccess.instance();
 
-        VinylDTO vinylDTO= vinylIdContoller.getVinyl(id);
-        ClientDTO clientDTO=clientController.getClientByUsername(username);
-        Collection<VinylDTO> recommendations = 
-            vinylReccomendationsContoller.getVinylReccomedations(id);
+        String username = user.getName();
+        Collection<VinylDTO> favouriteDTO = favouriteContoller.getFavourites(username);
 
-     
-
-
-        if(favouriteContoller.createFavourite(username, id)){
-        return vinyl.data("vinyl",vinylDTO).data("user",clientDTO)
-            .data("recommendation",recommendations);
-        }
+        if (favouriteDTO != null)
+            return this.favourites.data("favourites", favouriteDTO);
 
         return this.notAllowed.instance();
     }
 
+    @GET
+    public TemplateInstance getGenresHTML() {
+        ClientDTO clientDTO = clientController.getClient(1l);
+        if (clientDTO != null)
+            return this.favourites.data("user", clientDTO);
 
+        return this.error.instance();
+    }
 
+    @POST
+    @Path("{id}/edit")
+    @RolesAllowed("Client")
+    public TemplateInstance postFavourite(@Context SecurityContext sec, 
+        @PathParam("id") Long id) {
+
+        Principal userTMP = sec.getUserPrincipal();
+        String username = userTMP.getName();
+
+        VinylDTO vinylDTO = vinylIdContoller.getVinyl(id);
+        ClientDTO clientDTO = clientController.getClientByUsername(username);
+        Collection<VinylDTO> recommendations = vinylReccomendationsContoller.getVinylReccomedations(id);
+
+        if (favouriteContoller.createFavourite(username, id)) {
+            return vinyl.data("vinyl", vinylDTO).data("user", clientDTO)
+                    .data("recommendation", recommendations);
+        }
+
+        return this.notAllowed.instance();
+    }
 
     @POST
     @Path("{id}/delete")
     @RolesAllowed("Client")
-    public TemplateInstance deleteFavourite (@Context SecurityContext sec,@PathParam("id") Long id){
-            
-        Principal userTMP = sec.getUserPrincipal();
-        String username = userTMP.getName();
-        ClientDTO clientDTO=clientController.getClientByUsername(username);
-        VinylDTO vinylDTO = vinylIdContoller.getVinyl(id);  
+    public TemplateInstance deleteFavourite(@Context SecurityContext sec, 
+        @PathParam("id") Long id) {
 
-      
-     
+        Principal user = sec.getUserPrincipal();
+        String username = user.getName();
 
-        if(vinylDTO!=null){
-            favouriteContoller.deleteFavourite(username, id);
-        return getFavouritesofUser(clientDTO.id);
+        if (favouriteContoller.deleteFavourite(username, id)) {
+            return getFavouritesofUser(sec);
         }
 
         return this.notAllowed.instance();
     }
-
 
 }
