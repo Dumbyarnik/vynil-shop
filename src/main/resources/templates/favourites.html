@@ -17,23 +17,24 @@
   <!-- Image and text -->
   <nav class="navbar" style="background-color: #1C00CE">
     <a class="navbar-brand" href="/template/genre">
-      <img src="/vinyl.svg" width="50" height="50" class="d-inline-block align-top">
-      <h1 class="vinylshop" style="color:whitesmoke"> Vinyl Shop </h1>
+      <img src="/vinyl.svg"" width=" 50" height="50" class="d-inline-block align-top">
+      <h1 class="vinylshop" style="color:whitesmoke;"> Vinyl Shop </h1>
     </a>
 
     <div class="dropdown" style="float: right">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
-        Username
+        Menu
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="/template/client">UserProfil</a>
-        <a class="dropdown-item" href="/template/genre">Genres</a>
+        <a class="dropdown-item" href="/template/client">User Profile</a>
+        <a class="dropdown-item" href="/template/vinyl/create">Create Vinyl</a>
+        <a class="dropdown-item" href="/template/favourite">Favourites</a>
       </div>
     </div>
   </nav>
 
-  <h1 class="title"> Merkliste </h1>
+  <h1 class="title"> Favourites </h1>
   <ul>
     {#for favourite in favourites}
     <div class="vinyl_component" style="margin-top: 6%">
@@ -42,9 +43,7 @@
           <img class="album" src="/album{favourite.id}.jpg" width="150" height="150">
         </div>
         <div class="col-md">
-
           <h1> {favourite.title} </h1>
-
           <a href="/template/vinyl/{favourite.id}" class="btn btn-primary">
             Zum Eintrag</a>
           <form action="/template/favourite/{favourite.id}/delete" method="POST">
