@@ -38,6 +38,9 @@ public class UserPage {
     Template createUser;
 
     @Inject
+    Template createContact;
+
+    @Inject
     Template notAllowed;
 
     @Inject
@@ -54,7 +57,7 @@ public class UserPage {
 
     @GET
     @RolesAllowed("Client")
-    public TemplateInstance getUserHimseldlHTML(@Context SecurityContext sec) {
+    public TemplateInstance getUserHimselflHTML(@Context SecurityContext sec) {
         Principal userTMP = sec.getUserPrincipal();
         if (userTMP == null)
             return noAccess.instance();
@@ -99,6 +102,22 @@ public class UserPage {
         if (clientController.createClient(createClientDTO))
             return this.genres.instance();
         return this.notAllowed.instance();
+    }
+
+    @GET
+    @Path("/create/contact")
+    public TemplateInstance getCreateContactHTML(@Context SecurityContext sec) {
+        Principal userTMP = sec.getUserPrincipal();
+        if (userTMP == null)
+            return noAccess.instance();
+        
+        String username = userTMP.getName();
+        ClientDTO clientDTO = clientController.getClientByUsername(username);
+
+        if (clientDTO.contact != null)
+            return notAllowed.instance();
+        
+        return this.createContact.instance();
     }
 
   
