@@ -26,7 +26,6 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 import control.DTO.VinylDTO;
-import control.vinyl.VinylBoundary;
 import control.vinyl.VinylController;
 import control.vinyl.VinylGenreBoundary;
 

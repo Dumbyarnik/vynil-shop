@@ -4,7 +4,6 @@
 package rest.html;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.annotation.security.RolesAllowed;
@@ -16,7 +15,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
 import control.DTO.ClientDTO;

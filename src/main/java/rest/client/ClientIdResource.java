@@ -28,7 +28,6 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import control.DTO.ClientDTO;
 import control.DTO.ContactDTO;
 import control.DTO.ReviewDTO;
-import control.client.ClientBoundry;
 import control.client.ClientController;
 import control.client.ClientIdBoundary;
 

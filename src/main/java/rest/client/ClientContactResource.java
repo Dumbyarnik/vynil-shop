@@ -27,7 +27,6 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 
 import control.DTO.ContactDTO;
-import control.client.ClientBoundry;
 import control.client.ClientContactBoundary;
 import control.client.ClientController;
 

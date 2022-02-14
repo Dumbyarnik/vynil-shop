@@ -7,7 +7,6 @@ import java.util.Collection;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Model;
 
-import control.DTO.CreateVinylDTO;
 import control.DTO.VinylDTO;
 
 @Model

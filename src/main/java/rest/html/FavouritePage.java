@@ -9,7 +9,6 @@ import java.util.Collection;
 import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -18,19 +17,15 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.SecurityContext;
 
 import control.DTO.ClientDTO;
-import control.DTO.ReviewDTO;
 import control.DTO.VinylDTO;
 import control.client.ClientBoundry;
 import control.client.ClientController;
 import control.client.favourites.FavouritesBoundary;
 import control.client.favourites.FavouritesController;
-import control.vinyl.VinylBoundary;
 import control.vinyl.VinylController;
 import control.vinyl.VinylGenreBoundary;
 import control.vinyl.VinylIdBoundary;
 import control.vinyl.VinylReccomendationsBoundary;
-import entities.basic.Vinyl;
-import gateway.DatabaseService;
 import io.quarkus.qute.*;
 
 // http://localhost:8080/favourite/{id}
